@@ -1654,6 +1654,9 @@ function renderTraining(){
       const nom = d.ex[ex].n;
       const was = ds.sets[nom][si];
       ds.sets[nom][si] = !was;
+      // Marcar una serie ya es haber entrenado ese dia: el panel de recuperacion no puede
+      // esperar a "Terminar sesion", que exige hasta la ultima serie. Calentamiento y caminata no cuentan.
+      if(!was && !d.ex[ex].x) app.training.lastDone[d.id] = todayStr();
       await saveApp();
       renderTraining();
       renderWeekProgress();
