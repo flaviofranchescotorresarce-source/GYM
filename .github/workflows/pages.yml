@@ -1,0 +1,38 @@
+# Publica la app en GitHub Pages cada vez que cambia rutina_arnold.html.
+# Solo se publica la app (como index.html): ni las copias de seguridad ni el script.
+name: Publicar app
+
+on:
+  push:
+    branches: [mainbkb]
+    paths: ['rutina_arnold.html', '.github/workflows/pages.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Preparar la pagina
+        run: |
+          mkdir _site
+          cp rutina_arnold.html _site/index.html
+          touch _site/.nojekyll
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deploy
+        uses: actions/deploy-pages@v4

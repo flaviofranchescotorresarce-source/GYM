@@ -3,6 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Rutina Arnold">
+<meta name="theme-color" content="#111213">
 <title>Rutina Arnold X - Entrenador Personal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -811,7 +816,9 @@ const APP_KEY = 'arnold-app-v4';
 const APP_VERSION = 5.7; // 5.7: rutina del control 09.09.2026 (los pesos siguen guardados por NOMBRE)
 const CLOUD_URL = 'https:/'+'/script.google.com/macros/s/AKfycbzeTAA8tWMMTQy__gEaP7bscG6ZJG-XDHmdZg-mJcsN50gWdUEIEv0HkYL-aScSwRqZ-A/exec';
 const CLOUD_TOKEN = 'arnold-2026-fxt-7391';
-const GEMINI_KEY = 'AQ.Ab8RN6ICl-1rHWKtLYPgjrm4_qibcX45P4NYfIDYLoaHEoAQ8Q';
+// Vacia a proposito: este HTML es publico (GitHub), y una clave escrita aqui la puede usar
+// cualquiera. La app la pide una vez por dispositivo y la guarda solo en ese dispositivo.
+const GEMINI_KEY = '';
 
 let app = {
   training: { days:{}, lastDone:{} },
@@ -1915,7 +1922,7 @@ async function buscarAlimentoIA(texto){
   const res = await fetch('https:/'+'/generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key='+encodeURIComponent(key), {
     method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) });
   if(!res.ok){
-    if(res.status===400 || res.status===403){ try{ localStorage.removeItem('gemini-key'); }catch(e){} throw new Error('key-invalida'); }
+    if(res.status===400 || res.status===401 || res.status===403){ try{ localStorage.removeItem('gemini-key'); }catch(e){} throw new Error('key-invalida'); }
     throw new Error('api-'+res.status);
   }
   const data = await res.json();
@@ -1981,7 +1988,7 @@ async function analizarDiaIA(texto){
   const res = await fetch('https:/'+'/generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key='+encodeURIComponent(key), {
     method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) });
   if(!res.ok){
-    if(res.status===400 || res.status===403){ try{ localStorage.removeItem('gemini-key'); }catch(e){} throw new Error('key-invalida'); }
+    if(res.status===400 || res.status===401 || res.status===403){ try{ localStorage.removeItem('gemini-key'); }catch(e){} throw new Error('key-invalida'); }
     throw new Error('api-'+res.status);
   }
   const data = await res.json();
@@ -2116,7 +2123,7 @@ async function fotoAnalizar(base64){
     method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)
   });
   if(!res.ok){
-    if(res.status===400 || res.status===403){ try{ localStorage.removeItem('gemini-key'); }catch(e){} throw new Error('key-invalida'); }
+    if(res.status===400 || res.status===401 || res.status===403){ try{ localStorage.removeItem('gemini-key'); }catch(e){} throw new Error('key-invalida'); }
     throw new Error('api-'+res.status);
   }
   const data = await res.json();

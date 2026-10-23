@@ -2,7 +2,24 @@
 
 Con este método, Google Apps Script hace **dos cosas a la vez**: guarda tu progreso en una hoja de cálculo **y** sirve la app. Así tienes una sola URL `https://script.google.com/.../exec` que abres en el PC o en el iPhone (se puede añadir a la pantalla de inicio como si fuera una app). No necesitas ningún otro servicio.
 
-Sigue estos pasos **una sola vez**:
+## Abrir la app con un link de GitHub (recomendado)
+
+La app también se publica sola en GitHub Pages cada vez que cambia `rutina_arnold.html` en la rama `mainbkb`. Así ya no hace falta pegar el HTML en Apps Script para cada cambio, ni sale el aviso de Google arriba de la app.
+
+**Una sola vez:**
+1. En GitHub, repo **GYM** → **Settings → Pages** → en **Source** elige **GitHub Actions**.
+2. Pestaña **Actions** → **Publicar app** → **Run workflow**.
+3. Cuando termine (1 minuto), la app queda en:
+
+   `https://flaviofranchescotorresarce-source.github.io/GYM/`
+
+4. En el iPhone: abre ese link en **Safari** → **Compartir** → **Añadir a pantalla de inicio**. Borra el ícono viejo (el de `script.google.com`) para no usar los dos.
+
+**Tus datos no cambian de sitio:** siguen en la misma hoja de Google, a través de la misma URL `/exec`. Por eso la parte de Apps Script de abajo sigue siendo necesaria (es donde se guarda todo) y el Atajo del Apple Watch sigue igual. La primera vez que abras el link de GitHub tardará unos segundos en traer tus datos de la nube, porque ese dispositivo aún no los tiene guardados.
+
+> El repo tiene que ser **público** para que GitHub Pages sea gratis. Todo lo que subas al repo (incluidas las copias de seguridad de `copias-de-seguridad/`) lo puede ver cualquiera.
+
+Sigue estos pasos **una sola vez** para el guardado en la nube:
 
 ## 1. Crear la hoja de cálculo
 1. Entra a [sheets.new](https://sheets.new) con tu cuenta de Google **personal** (Gmail). Una cuenta corporativa puede bloquear el paso 4.
@@ -56,7 +73,15 @@ Todos los dispositivos ven el mismo progreso porque todos usan la misma hoja de 
 ---
 
 ## Análisis de comida por foto (IA gratis)
-La pestaña Nutrición tiene un botón **"📷 Analizar foto de comida"** que usa la API gratuita de Google Gemini. La clave ya está puesta dentro del HTML (`const GEMINI_KEY = '...'`), así que funciona sin configurar nada. Si algún día quieres cambiarla, créala en [aistudio.google.com/apikey](https://aistudio.google.com/apikey) y pégala en esa línea.
+La pestaña Nutrición tiene un botón **"📷 Analizar foto de comida"** que usa la API gratuita de Google Gemini (también la búsqueda de alimentos por nombre y "contar el día en una frase").
+
+**La clave ya no va dentro del HTML:** el HTML es público y cualquiera podría usarla (la que estaba escrita ahí era inválida: Google respondía `API key not valid`). Ahora la app te la pide **la primera vez** que usas una función de IA en cada dispositivo y la guarda solo en ese dispositivo.
+
+1. Entra a [aistudio.google.com/apikey](https://aistudio.google.com/apikey) con tu cuenta de Google → **Create API key**.
+2. Copia la clave: **empieza por `AIza`**. Si lo que copias empieza por otra cosa (por ejemplo `AQ.`), no es la clave correcta.
+3. En la app, pulsa "📷 Analizar foto de comida" y pégala cuando te la pida. Repite en el PC y en el iPhone.
+
+Si la app dice *"API key invalida"*, vuelve a intentarlo y te la pedirá de nuevo.
 
 Las estimaciones de la IA son aproximadas: revisa los alimentos detectados (puedes quitar los que no correspondan con ✕) antes de pulsar "Agregar al dia".
 
