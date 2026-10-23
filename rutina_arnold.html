@@ -71,15 +71,13 @@
   .extip b{color:var(--chalk);font-weight:600;}
   .exchev{color:var(--text-dim);font-size:11px;margin-left:6px;vertical-align:1px;}
   .exdemo{display:none;margin-top:9px;padding:12px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:9px;}
-  .exdemolabel{font-size:12px;color:var(--text-muted);margin-bottom:9px;line-height:1.4;}
-  .exdemobtn{width:100%;background:var(--steel-dim);border:1px solid var(--steel);color:#9ecdea;font-weight:600;padding:11px 14px;border-radius:8px;cursor:pointer;font-size:13.5px;display:flex;align-items:center;justify-content:center;gap:8px;}
-  .exdemobtn:hover{color:#c3e2f4;border-color:#5aa3cf;}
+  .exgif{display:block;max-width:100%;max-height:240px;margin:0 auto;border-radius:8px;background:#fff;}
   .excasa{margin-top:12px;padding-top:12px;border-top:1px dashed var(--border-strong);}
+  .exdemo > .excasa:first-child{margin-top:0;padding-top:0;border-top:none;}
   .excasatit{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--chalk);margin-bottom:5px;}
   .excasanom{font-size:14px;font-weight:600;margin-bottom:3px;}
   .excasas{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--amber);font-weight:500;}
   .excasatip{font-size:12px;color:var(--text-muted);line-height:1.45;margin-bottom:9px;}
-  .exdemobtn.casa{background:var(--chalk-dim);border-color:var(--chalk);color:var(--chalk);}
   .dayhint{font-size:11.5px;color:var(--text-dim);margin:-8px 0 12px;line-height:1.4;}
   .dayzonas{font-size:12px;color:var(--text-muted);margin:-4px 0 12px;line-height:1.6;}
   .dayzonas b{color:var(--amber);font-weight:600;}
@@ -747,6 +745,51 @@ const CASA = {
   'Movilidad y estiramiento': { n:'Igual en casa', t:'Los mismos estiramientos: pecho en el marco de la puerta, isquios, cuadriceps y cadera. 30-45 seg por posicion.' },
 };
 CASA['Jalon frontal en polea (agarre prono) 12-15'] = CASA['Jalon frontal en polea (agarre prono)'];
+
+// Animacion de cada ejercicio, por nombre: carpeta gifs/ (fotos de free-exercise-db,
+// dominio publico). Los calentamientos y la movilidad no llevan: son una lista de cosas.
+const GIFS = {
+  'Press horizontal con barra libre': 'barbell-bench-press-medium-grip.gif',
+  'Aperturas en maquina': 'butterfly.gif',
+  'Remo agarre supino en barra T': 't-bar-row-with-handle.gif',
+  'Jalon frontal en polea (agarre prono)': 'wide-grip-lat-pulldown.gif',
+  'Extension vertical de codo en polea (agarre neutro)': 'cable-rope-overhead-triceps-extension.gif',
+  'Flexion de codo con mancuernas (agarre supino)': 'dumbbell-alternate-bicep-curl.gif',
+  'Predicador en maquina (agarre supino)': 'machine-preacher-curls.gif',
+  'Abduccion de hombros con mancuernas': 'side-lateral-raise.gif',
+  'Plank isometrico libre': 'plank.gif',
+  'Caminata inclinada final': 'walking-treadmill.gif',
+  'Sentadilla libre con barra': 'barbell-squat.gif',
+  'Prensa inclinada 45 grados': 'leg-press.gif',
+  'Extension de cuadriceps en maquina': 'leg-extensions.gif',
+  'Peso muerto con barra': 'barbell-deadlift.gif',
+  'Flexion de isquiotibiales sentado': 'seated-leg-curl.gif',
+  'Elevacion de talones en maquina parado': 'smith-machine-calf-raise.gif',
+  'Remo agarre neutro con mancuerna': 'one-arm-dumbbell-row.gif',
+  'Extension para dorsales con barra': 'straight-arm-pulldown.gif',
+  'Press inclinado con mancuernas': 'incline-dumbbell-press.gif',
+  'Cruce de poleas de arriba hacia abajo': 'cable-crossover.gif',
+  'Jalon de triceps en polea alta (cuerda)': 'triceps-pushdown-rope-attachment.gif',
+  'Flexion de codo en banco inclinado (mancuernas)': 'incline-dumbbell-curl.gif',
+  'Abduccion de hombros en polea': 'standing-low-pulley-deltoid-raise.gif',
+  'Face pull en polea alta (cuerda)': 'face-pull.gif',
+  'Flexion de tronco en colchoneta': 'crunches.gif',
+  'Press vertical de hombros con mancuernas': 'dumbbell-shoulder-press.gif',
+  'Extension horizontal de codo con barra (press frances)': 'ez-bar-skullcrusher.gif',
+  'Flexion de codo en supino con barra Z': 'ez-bar-curl.gif',
+  'Extension vertical de codo en polea (agarre supino)': 'reverse-grip-triceps-pushdown.gif',
+  'Flexion de codo con agarre neutro alternado': 'alternate-hammer-curl.gif',
+  'Fondos para triceps en maquina': 'dip-machine.gif',
+  'Extension lumbar en banco inclinado': 'hyperextensions-back-extensions.gif',
+  'Peso muerto rumano con barra': 'romanian-deadlift.gif',
+  'Zancada con desplazamiento con barra': 'barbell-walking-lunge.gif',
+  'Extension de cadera en rack libre': 'barbell-hip-thrust.gif',
+  'Sentadilla bulgara libre': 'split-squat-with-dumbbells.gif',
+  'Abduccion de cadera en maquina sentado': 'thigh-abductor.gif',
+  'Elevacion de talones en maquina sentado': 'seated-calf-raise.gif',
+};
+GIFS['Jalon frontal en polea (agarre prono) 12-15'] = GIFS['Jalon frontal en polea (agarre prono)'];
+GIFS['Cardio (caminata inclinada o HIIT)'] = GIFS['Caminata inclinada final'];
 
 // Parte exacta del musculo que trabaja cada ejercicio, por nombre. Formato 'Zona: explicacion':
 // lo que va antes de los dos puntos sale en el resumen del dia. Dentro de un mismo dia
@@ -1595,8 +1638,9 @@ function exRow(e, i, ds, ssFirst){
   // Barra pesada (nf): sin fallo, porque ahi el fallo es la espalda redondeada
   const falloHtml = e.sets > 1 ? (e.nf ? ` &middot; <span>1-2 reps en reserva</span>` : ` &middot; <span class="fallo">ultima al fallo</span>`) : '';
   const dots = ds.sets[e.n].map((v,si)=>`<button class="setdot ${v?'done':''}" data-ex="${i}" data-set="${si}">${v?'v':si+1}</button>`).join('');
-  const q = encodeURIComponent(e.n + ' tecnica ejercicio gimnasio');
   const casa = CASA[e.n];
+  // data-src: el gif se descarga solo al abrir el ejercicio, no al pintar el dia
+  const gifHtml = GIFS[e.n] ? `<img class="exgif" data-src="gifs/${GIFS[e.n]}" alt="Como se hace: ${e.n}">` : '';
   const zona = ZONAS[e.n];
   const zonaHtml = zona ? `<div class="exzona">&#127919; ${zona.split(': ')[0]}<span> &middot; ${zona.split(': ').slice(1).join(': ')}</span></div>` : '';
   const casaHtml = casa ? `
@@ -1604,7 +1648,6 @@ function exRow(e, i, ds, ssFirst){
           <div class="excasatit">&#127968; En casa, sin equipo</div>
           <div class="excasanom">${casa.n}${casa.s ? ` <span class="excasas">${casa.s}</span>` : ''}</div>
           <div class="excasatip">${casa.t}</div>
-          <button class="exdemobtn casa" data-q="${encodeURIComponent(casa.n + ' ejercicio en casa sin equipo')}">&#9654; Ver como se hace en casa</button>
         </div>` : '';
   return `
     <div class="ex">
@@ -1612,10 +1655,7 @@ function exRow(e, i, ds, ssFirst){
       <div class="exsub"><b>${e.s}</b>${falloHtml}${ssFirst?` &middot; sin pausa &rarr; sigue el par`:(e.r?` &middot; descanso ${restLabel(e.r)}`:'')} ${prHtml}</div>
       ${zonaHtml}
       ${e.t?`<div class="extip"><b>Tecnica:</b> ${e.t}</div>`:''}
-      <div class="exdemo" id="exdemo-${i}">
-        <div class="exdemolabel">Mira a una persona haciendo este ejercicio, paso a paso.</div>
-        <button class="exdemobtn" data-q="${q}">&#9654; Ver ejemplo en video</button>${casaHtml}
-      </div>
+      <div class="exdemo" id="exdemo-${i}">${gifHtml}${casaHtml}</div>
       <div class="exrow">
         <div class="setdots">${dots}</div>
         ${e.r === 0 ? '' : `<div class="wraplabel">${sugHtml}${prevHtml}<span>kg</span><input class="kginput" type="text" inputmode="decimal" placeholder="--" data-wi="${i}" value="${cur||''}"></div>`}
@@ -1662,7 +1702,7 @@ function renderTraining(){
       </div>
       ${d.note?`<div class="daynote">${d.note}</div>`:''}
       ${d.ex.length?`<div class="dayzonas">Hoy trabajas: <b>${[...new Set(d.ex.map(e=>ZONAS[e.n]).filter(Boolean).map(z=>z.split(':')[0]))].join('</b> &middot; <b>')}</b></div>`:''}
-      ${d.ex.length?`<div class="dayhint">Toca el nombre de un ejercicio para ver el video y su reemplazo en casa. Sin equipo: mismas series, reps hasta quedar a 1-2 del fallo y bajadas de 3 seg.</div>`:''}
+      ${d.ex.length?`<div class="dayhint">Toca el nombre de un ejercicio para ver como se hace y su reemplazo en casa. Sin equipo: mismas series, reps hasta quedar a 1-2 del fallo y bajadas de 3 seg.</div>`:''}
       ${bodyHtml}
       ${totalSets ? `<div class="finishrow">${ds.finished
         ? `<span class="finishdone">v Sesion terminada${app.training.lastDone[d.id]?' &middot; '+prettyDate(app.training.lastDone[d.id]):''}</span>`
@@ -1703,11 +1743,8 @@ function renderTraining(){
       const open = p.style.display === 'block';
       p.style.display = open ? 'none' : 'block';
       if(chev) chev.innerHTML = open ? '&#9656;' : '&#9662;';
-    });
-  });
-  document.querySelectorAll('.exdemobtn').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      window.open('https:/'+'/www.youtube.com/results?search_query='+btn.dataset.q, '_blank');
+      const gif = p.querySelector('img[data-src]');
+      if(!open && gif && !gif.getAttribute('src')) gif.src = gif.dataset.src;
     });
   });
   document.querySelectorAll('.sugchip').forEach(btn=>{
