@@ -1,0 +1,1238 @@
+{
+  "formato": 2,
+  "app": {
+    "updatedAt": 1792632548526,
+    "training": {
+      "days": {
+        "d1": {
+          "sets": {
+            "Calentamiento superior (pecho y espalda)": [
+              false
+            ],
+            "Press horizontal con barra libre": [
+              false,
+              false,
+              false
+            ],
+            "Aperturas en maquina": [
+              false,
+              false,
+              false
+            ],
+            "Remo agarre supino en barra T": [
+              true,
+              true,
+              true
+            ],
+            "Jalon frontal en polea (agarre prono)": [
+              true,
+              true,
+              true
+            ],
+            "Extension vertical de codo en polea (agarre neutro)": [
+              true,
+              true,
+              true
+            ],
+            "Flexion de codo con mancuernas (agarre supino)": [
+              true,
+              true,
+              true
+            ],
+            "Predicador en maquina (agarre supino)": [
+              false,
+              false,
+              false
+            ],
+            "Plank isometrico libre": [
+              false,
+              false,
+              false
+            ],
+            "Caminata inclinada final": [
+              false
+            ]
+          },
+          "weights": {
+            "Calentamiento superior (pecho y espalda)": "",
+            "Press horizontal con barra libre": "",
+            "Aperturas en maquina": "",
+            "Remo agarre supino en barra T": "17",
+            "Jalon frontal en polea (agarre prono)": "45",
+            "Extension vertical de codo en polea (agarre neutro)": "18",
+            "Flexion de codo con mancuernas (agarre supino)": "12",
+            "Predicador en maquina (agarre supino)": "",
+            "Plank isometrico libre": "",
+            "Caminata inclinada final": ""
+          },
+          "finished": false
+        },
+        "d2": {
+          "sets": {
+            "Calentamiento de pierna (sentadilla)": [
+              false
+            ],
+            "Sentadilla libre con barra": [
+              false,
+              false,
+              false
+            ],
+            "Prensa inclinada 45 grados": [
+              false,
+              false,
+              false
+            ],
+            "Extension de cuadriceps en maquina": [
+              false,
+              false,
+              false
+            ],
+            "Peso muerto con barra": [
+              false,
+              false,
+              false
+            ],
+            "Flexion de isquiotibiales sentado": [
+              false,
+              false,
+              false
+            ],
+            "Elevacion de talones en maquina sentado": [
+              false,
+              false,
+              false
+            ]
+          },
+          "weights": {
+            "Calentamiento de pierna (sentadilla)": "",
+            "Sentadilla libre con barra": "",
+            "Prensa inclinada 45 grados": "",
+            "Extension de cuadriceps en maquina": "",
+            "Peso muerto con barra": "",
+            "Flexion de isquiotibiales sentado": "",
+            "Elevacion de talones en maquina sentado": ""
+          },
+          "finished": false
+        },
+        "d3": {
+          "sets": {
+            "Calentamiento superior (espalda y pecho)": [
+              false
+            ],
+            "Jalon frontal en polea (agarre prono) 12-15": [
+              true,
+              true,
+              true
+            ],
+            "Remo agarre neutro con mancuerna": [
+              true,
+              true,
+              true
+            ],
+            "Extension para dorsales con barra": [
+              true,
+              true,
+              true
+            ],
+            "Press inclinado con mancuernas": [
+              false,
+              false,
+              false
+            ],
+            "Cruce de poleas de arriba hacia abajo": [
+              false,
+              false,
+              false
+            ],
+            "Jalon de triceps en polea alta (cuerda)": [
+              true,
+              true,
+              true
+            ],
+            "Flexion de codo en banco inclinado (mancuernas)": [
+              true,
+              true,
+              true
+            ],
+            "Flexion de tronco en colchoneta": [
+              false,
+              false,
+              false
+            ],
+            "Caminata inclinada final": [
+              false
+            ]
+          },
+          "weights": {
+            "Calentamiento superior (espalda y pecho)": "",
+            "Jalon frontal en polea (agarre prono) 12-15": "50",
+            "Remo agarre neutro con mancuerna": "18",
+            "Extension para dorsales con barra": "90",
+            "Press inclinado con mancuernas": "",
+            "Cruce de poleas de arriba hacia abajo": "",
+            "Jalon de triceps en polea alta (cuerda)": "30.5",
+            "Flexion de codo en banco inclinado (mancuernas)": "",
+            "Flexion de tronco en colchoneta": "",
+            "Caminata inclinada final": ""
+          },
+          "finished": false
+        },
+        "d4": {
+          "sets": {
+            "Calentamiento de hombros y codos": [
+              false
+            ],
+            "Press vertical de hombros con mancuernas": [
+              false,
+              false,
+              false
+            ],
+            "Abduccion de hombros con mancuernas": [
+              false,
+              false,
+              false
+            ],
+            "Extension horizontal de codo con barra (press frances)": [
+              false,
+              false,
+              false
+            ],
+            "Flexion de codo en supino con barra Z": [
+              false,
+              false,
+              false
+            ],
+            "Extension vertical de codo en polea (agarre supino)": [
+              false,
+              false,
+              false
+            ],
+            "Flexion de codo con agarre neutro alternado": [
+              false,
+              false,
+              false
+            ],
+            "Fondos para triceps en maquina": [
+              false,
+              false,
+              false
+            ],
+            "Extension lumbar en banco inclinado": [
+              false,
+              false,
+              false
+            ],
+            "Caminata inclinada final": [
+              false
+            ]
+          },
+          "weights": {
+            "Calentamiento de hombros y codos": "",
+            "Press vertical de hombros con mancuernas": "",
+            "Abduccion de hombros con mancuernas": "",
+            "Extension horizontal de codo con barra (press frances)": "",
+            "Flexion de codo en supino con barra Z": "",
+            "Extension vertical de codo en polea (agarre supino)": "",
+            "Flexion de codo con agarre neutro alternado": "",
+            "Fondos para triceps en maquina": "",
+            "Extension lumbar en banco inclinado": "",
+            "Caminata inclinada final": ""
+          },
+          "finished": false
+        },
+        "d5": {
+          "sets": {
+            "Calentamiento de pierna (peso muerto)": [
+              false
+            ],
+            "Flexion de isquiotibiales sentado": [
+              false,
+              false,
+              false
+            ],
+            "Peso muerto con barra": [
+              false,
+              false,
+              false
+            ],
+            "Zancada con desplazamiento con barra": [
+              false,
+              false,
+              false
+            ],
+            "Extension de cadera en rack libre": [
+              false,
+              false,
+              false
+            ],
+            "Extension de cadera con patada en maquina": [
+              false,
+              false,
+              false
+            ],
+            "Abduccion de cadera en maquina sentado": [
+              false,
+              false,
+              false
+            ],
+            "Elevacion de talones en maquina sentado": [
+              false,
+              false,
+              false
+            ]
+          },
+          "weights": {
+            "Calentamiento de pierna (peso muerto)": "",
+            "Flexion de isquiotibiales sentado": "",
+            "Peso muerto con barra": "",
+            "Zancada con desplazamiento con barra": "",
+            "Extension de cadera en rack libre": "",
+            "Extension de cadera con patada en maquina": "",
+            "Abduccion de cadera en maquina sentado": "",
+            "Elevacion de talones en maquina sentado": ""
+          },
+          "finished": false
+        },
+        "d6": {
+          "sets": {
+            "Cardio (caminata inclinada o HIIT)": [
+              false
+            ],
+            "Movilidad y estiramiento": [
+              false
+            ]
+          },
+          "weights": {
+            "Cardio (caminata inclinada o HIIT)": "",
+            "Movilidad y estiramiento": ""
+          },
+          "finished": false
+        },
+        "d7": {
+          "sets": {},
+          "weights": {},
+          "finished": false
+        }
+      },
+      "lastDone": {
+        "d1": "2026-10-12",
+        "d3": "2026-09-30"
+      }
+    },
+    "nutrition": {
+      "date": "2026-10-23",
+      "water": 0,
+      "foods": [],
+      "favorites": [],
+      "history": [
+        {
+          "date": "2026-07-27",
+          "kcal": 734,
+          "p": 17.7,
+          "c": 137.9,
+          "g": 9.5
+        }
+      ]
+    },
+    "prevWeights": {
+      "Press inclinado con mancuernas": "18",
+      "Press horizontal con barra libre": "15",
+      "Aperturas de pectoral en polea media": "35",
+      "Extension vertical de codo en polea (agarre neutro)": "16",
+      "Jalon de triceps en polea alta (cuerda)": "30.5",
+      "Extension horizontal de codo con barra (press frances)": "25",
+      "Jalon frontal en polea (agarre prono)": "40",
+      "Remo agarre supino con barra libre": "22.5",
+      "Remo agarre neutro con mancuerna": "18",
+      "Flexion de codo en supino con barra Z": "22.5",
+      "Flexion de codo con mancuernas (agarre neutro)": "12",
+      "Predicador en maquina (agarre supino)": "19",
+      "Flexion de codo en banco inclinado (mancuernas)": "9",
+      "Press vertical de hombros libre con barra": "15",
+      "Abduccion de hombros en polea": "17",
+      "Face pull en polea alta (cuerda)": "60",
+      "Abduccion de hombros con mancuernas": "9",
+      "Pajaros con mancuernas (deltoide posterior)": "6",
+      "Encogimiento de hombros con mancuernas": "20",
+      "Extension de cuadriceps en maquina": "22",
+      "Extension para dorsales con barra": "85",
+      "Dominadas libres (agarre neutro)": "27",
+      "Remo agarre supino en barra T": "15",
+      "Jalon frontal en polea (agarre prono) 12-15": "45",
+      "Aperturas en maquina": "30",
+      "Flexion de codo con mancuernas (agarre supino)": "12",
+      "Cruce de poleas de arriba hacia abajo": "32.5",
+      "Press vertical de hombros con mancuernas": "10",
+      "Extension vertical de codo en polea (agarre supino)": "13",
+      "Flexion de codo con agarre neutro alternado": "12"
+    },
+    "version": 5.7,
+    "prs": {
+      "Jalon frontal en polea (agarre prono)": {
+        "kg": 50,
+        "date": "2025-03-02"
+      },
+      "Extension vertical de codo en polea (agarre neutro)": {
+        "kg": 25,
+        "date": "2025-02-28"
+      },
+      "Aperturas en maquina": {
+        "kg": 30,
+        "date": "2026-09-30"
+      },
+      "Abduccion de hombros con mancuernas": {
+        "kg": 10,
+        "date": "2025-03-13"
+      },
+      "Encogimiento de hombros con mancuernas": {
+        "kg": 25,
+        "date": "2025-03-13"
+      },
+      "Press inclinado con mancuernas": {
+        "kg": 18,
+        "date": "2026-10-19"
+      },
+      "Press horizontal con barra libre": {
+        "kg": 15,
+        "date": "2026-09-30"
+      },
+      "Aperturas de pectoral en polea media": {
+        "kg": 35,
+        "date": "2026-09-13"
+      },
+      "Jalon de triceps en polea alta (cuerda)": {
+        "kg": 30.5,
+        "date": "2026-10-19"
+      },
+      "Extension horizontal de codo con barra (press frances)": {
+        "kg": 25,
+        "date": "2026-09-13"
+      },
+      "Remo agarre supino con barra libre": {
+        "kg": 22.5,
+        "date": "2026-08-21"
+      },
+      "Remo agarre neutro con mancuerna": {
+        "kg": 18,
+        "date": "2026-10-19"
+      },
+      "Flexion de codo en supino con barra Z": {
+        "kg": 22.5,
+        "date": "2026-08-21"
+      },
+      "Flexion de codo con mancuernas (agarre neutro)": {
+        "kg": 23,
+        "date": "2026-08-07"
+      },
+      "Predicador en maquina (agarre supino)": {
+        "kg": 19,
+        "date": "2026-10-12"
+      },
+      "Flexion de codo en banco inclinado (mancuernas)": {
+        "kg": 9,
+        "date": "2026-08-21"
+      },
+      "Press vertical de hombros libre con barra": {
+        "kg": 15,
+        "date": "2026-08-07"
+      },
+      "Abduccion de hombros en polea": {
+        "kg": 17,
+        "date": "2026-08-21"
+      },
+      "Face pull en polea alta (cuerda)": {
+        "kg": 60,
+        "date": "2026-09-13"
+      },
+      "Pajaros con mancuernas (deltoide posterior)": {
+        "kg": 6,
+        "date": "2026-08-07"
+      },
+      "Extension de cuadriceps en maquina": {
+        "kg": 22,
+        "date": "2026-08-10"
+      },
+      "Extension para dorsales con barra": {
+        "kg": 85,
+        "date": "2026-10-12"
+      },
+      "Dominadas libres (agarre neutro)": {
+        "kg": 27,
+        "date": "2026-08-10"
+      },
+      "Fondos para triceps en maquina": {
+        "kg": 50,
+        "date": "2025-02-28"
+      },
+      "Remo agarre supino en barra T": {
+        "kg": 15,
+        "date": "2026-09-30"
+      },
+      "Jalon frontal en polea (agarre prono) 12-15": {
+        "kg": 45,
+        "date": "2026-10-12"
+      },
+      "Flexion de codo con mancuernas (agarre supino)": {
+        "kg": 12,
+        "date": "2026-10-19"
+      },
+      "Cruce de poleas de arriba hacia abajo": {
+        "kg": 32.5,
+        "date": "2026-10-19"
+      },
+      "Press vertical de hombros con mancuernas": {
+        "kg": 10,
+        "date": "2026-10-12"
+      },
+      "Extension vertical de codo en polea (agarre supino)": {
+        "kg": 13,
+        "date": "2026-10-12"
+      },
+      "Flexion de codo con agarre neutro alternado": {
+        "kg": 12,
+        "date": "2026-10-12"
+      }
+    },
+    "body": {
+      "log": [
+        {
+          "date": "2026-07-07",
+          "kg": 69.8
+        },
+        {
+          "date": "2026-07-27",
+          "kg": 69.5,
+          "origen": "watch"
+        },
+        {
+          "date": "2026-09-09",
+          "kg": 70.3,
+          "origen": "inbody"
+        }
+      ]
+    },
+    "saludManual": {
+      "2026-07-27": {
+        "pasos": 60000,
+        "sueno": 7,
+        "activas": 787
+      }
+    },
+    "histPesos": {
+      "Press inclinado con mancuernas": [
+        {
+          "d": "2026-08-05",
+          "kg": 12,
+          "ok": true
+        },
+        {
+          "d": "2026-08-17",
+          "kg": 12,
+          "ok": true
+        },
+        {
+          "d": "2026-08-19",
+          "kg": 14,
+          "ok": true
+        },
+        {
+          "d": "2026-09-08",
+          "kg": 14,
+          "ok": true
+        },
+        {
+          "d": "2026-09-13",
+          "kg": 14,
+          "ok": true
+        },
+        {
+          "d": "2026-10-05",
+          "kg": 16,
+          "ok": true
+        },
+        {
+          "d": "2026-10-12",
+          "kg": 16,
+          "ok": true
+        },
+        {
+          "d": "2026-10-19",
+          "kg": 18,
+          "ok": true
+        }
+      ],
+      "Press horizontal con barra libre": [
+        {
+          "d": "2026-08-05",
+          "kg": 10,
+          "ok": true
+        },
+        {
+          "d": "2026-08-17",
+          "kg": 10,
+          "ok": true
+        },
+        {
+          "d": "2026-08-19",
+          "kg": 12,
+          "ok": true
+        },
+        {
+          "d": "2026-09-08",
+          "kg": 12,
+          "ok": true
+        },
+        {
+          "d": "2026-09-30",
+          "kg": 15,
+          "ok": true
+        },
+        {
+          "d": "2026-10-12",
+          "kg": 15,
+          "ok": true
+        }
+      ],
+      "Aperturas de pectoral en polea media": [
+        {
+          "d": "2026-08-05",
+          "kg": 30,
+          "ok": true
+        },
+        {
+          "d": "2026-08-17",
+          "kg": 30,
+          "ok": true
+        },
+        {
+          "d": "2026-08-19",
+          "kg": 32.5,
+          "ok": true
+        },
+        {
+          "d": "2026-09-08",
+          "kg": 32.5,
+          "ok": true
+        },
+        {
+          "d": "2026-09-13",
+          "kg": 35,
+          "ok": true
+        }
+      ],
+      "Extension vertical de codo en polea (agarre neutro)": [
+        {
+          "d": "2026-08-05",
+          "kg": 23,
+          "ok": true
+        },
+        {
+          "d": "2026-08-07",
+          "kg": 10,
+          "ok": true
+        },
+        {
+          "d": "2026-08-17",
+          "kg": 10,
+          "ok": true
+        },
+        {
+          "d": "2026-08-19",
+          "kg": 12,
+          "ok": true
+        },
+        {
+          "d": "2026-08-21",
+          "kg": 12,
+          "ok": true
+        },
+        {
+          "d": "2026-09-08",
+          "kg": 14,
+          "ok": true
+        },
+        {
+          "d": "2026-09-30",
+          "kg": 14,
+          "ok": true
+        },
+        {
+          "d": "2026-10-12",
+          "kg": 16,
+          "ok": true
+        },
+        {
+          "d": "2026-10-19",
+          "kg": 16,
+          "ok": true
+        }
+      ],
+      "Jalon de triceps en polea alta (cuerda)": [
+        {
+          "d": "2026-08-05",
+          "kg": 23,
+          "ok": true
+        },
+        {
+          "d": "2026-08-17",
+          "kg": 23,
+          "ok": true
+        },
+        {
+          "d": "2026-08-19",
+          "kg": 25.5,
+          "ok": true
+        },
+        {
+          "d": "2026-09-08",
+          "kg": 25.5,
+          "ok": true
+        },
+        {
+          "d": "2026-10-05",
+          "kg": 28,
+          "ok": true
+        },
+        {
+          "d": "2026-10-12",
+          "kg": 28,
+          "ok": true
+        },
+        {
+          "d": "2026-10-19",
+          "kg": 30.5,
+          "ok": true
+        }
+      ],
+      "Extension horizontal de codo con barra (press frances)": [
+        {
+          "d": "2026-08-05",
+          "kg": 20,
+          "ok": true
+        },
+        {
+          "d": "2026-08-17",
+          "kg": 20,
+          "ok": true
+        },
+        {
+          "d": "2026-08-19",
+          "kg": 22.5,
+          "ok": true
+        },
+        {
+          "d": "2026-09-08",
+          "kg": 22.5,
+          "ok": true
+        },
+        {
+          "d": "2026-09-13",
+          "kg": 25,
+          "ok": false
+        },
+        {
+          "d": "2026-10-12",
+          "kg": 25,
+          "ok": true
+        },
+        {
+          "d": "2026-10-19",
+          "kg": 25,
+          "ok": true
+        }
+      ],
+      "Jalon frontal en polea (agarre prono)": [
+        {
+          "d": "2026-08-07",
+          "kg": 35,
+          "ok": true
+        },
+        {
+          "d": "2026-08-10",
+          "kg": 35,
+          "ok": true
+        },
+        {
+          "d": "2026-08-21",
+          "kg": 37.5,
+          "ok": true
+        },
+        {
+          "d": "2026-09-13",
+          "kg": 37.5,
+          "ok": true
+        },
+        {
+          "d": "2026-09-30",
+          "kg": 40,
+          "ok": true
+        },
+        {
+          "d": "2026-10-12",
+          "kg": 40,
+          "ok": true
+        }
+      ],
+      "Remo agarre supino con barra libre": [
+        {
+          "d": "2026-08-07",
+          "kg": 20,
+          "ok": true
+        },
+        {
+          "d": "2026-08-10",
+          "kg": 20,
+          "ok": true
+        },
+        {
+          "d": "2026-08-21",
+          "kg": 22.5,
+          "ok": true
+        },
+        {
+          "d": "2026-09-13",
+          "kg": 22.5,
+          "ok": true
+        }
+      ],
+      "Remo agarre neutro con mancuerna": [
+        {
+          "d": "2026-08-07",
+          "kg": 12,
+          "ok": true
+        },
+        {
+          "d": "2026-08-10",
+          "kg": 12,
+          "ok": true
+        },
+        {
+          "d": "2026-08-21",
+          "kg": 14,
+          "ok": true
+        },
+        {
+          "d": "2026-09-30",
+          "kg": 14,
+          "ok": true
+        },
+        {
+          "d": "2026-10-05",
+          "kg": 16,
+          "ok": true
+        },
+        {
+          "d": "2026-10-12",
+          "kg": 16,
+          "ok": true
+        },
+        {
+          "d": "2026-10-19",
+          "kg": 18,
+          "ok": true
+        }
+      ],
+      "Flexion de codo en supino con barra Z": [
+        {
+          "d": "2026-08-07",
+          "kg": 20,
+          "ok": true
+        },
+        {
+          "d": "2026-08-10",
+          "kg": 20,
+          "ok": true
+        },
+        {
+          "d": "2026-08-21",
+          "kg": 22.5,
+          "ok": true
+        },
+        {
+          "d": "2026-10-12",
+          "kg": 22.5,
+          "ok": true
+        }
+      ],
+      "Flexion de codo con mancuernas (agarre neutro)": [
+        {
+          "d": "2026-08-07",
+          "kg": 23,
+          "ok": true
+        },
+        {
+          "d": "2026-08-10",
+          "kg": 12,
+          "ok": true
+        },
+        {
+          "d": "2026-08-21",
+          "kg": 14,
+          "ok": true
+        }
+      ],
+      "Predicador en maquina (agarre supino)": [
+        {
+          "d": "2026-08-07",
+          "kg": 15,
+          "ok": true
+        },
+        {
+          "d": "2026-08-10",
+          "kg": 15,
+          "ok": true
+        },
+        {
+          "d": "2026-08-21",
+          "kg": 17,
+          "ok": true
+        },
+        {
+          "d": "2026-09-30",
+          "kg": 17,
+          "ok": true
+        },
+        {
+          "d": "2026-10-12",
+          "kg": 19,
+          "ok": true
+        }
+      ],
+      "Flexion de codo en banco inclinado (mancuernas)": [
+        {
+          "d": "2026-08-07",
+          "kg": 8,
+          "ok": true
+        },
+        {
+          "d": "2026-08-10",
+          "kg": 8,
+          "ok": true
+        },
+        {
+          "d": "2026-08-21",
+          "kg": 9,
+          "ok": true
+        },
+        {
+          "d": "2026-10-12",
+          "kg": 9,
+          "ok": true
+        }
+      ],
+      "Press vertical de hombros libre con barra": [
+        {
+          "d": "2026-08-07",
+          "kg": 15,
+          "ok": true
+        },
+        {
+          "d": "2026-08-21",
+          "kg": 15,
+          "ok": true
+        }
+      ],
+      "Abduccion de hombros en polea": [
+        {
+          "d": "2026-08-07",
+          "kg": 15,
+          "ok": true
+        },
+        {
+          "d": "2026-08-17",
+          "kg": 15,
+          "ok": true
+        },
+        {
+          "d": "2026-08-21",
+          "kg": 17,
+          "ok": true
+        }
+      ],
+      "Face pull en polea alta (cuerda)": [
+        {
+          "d": "2026-08-07",
+          "kg": 45,
+          "ok": true
+        },
+        {
+          "d": "2026-08-17",
+          "kg": 55,
+          "ok": true
+        },
+        {
+          "d": "2026-08-21",
+          "kg": 55,
+          "ok": true
+        },
+        {
+          "d": "2026-09-13",
+          "kg": 60,
+          "ok": true
+        }
+      ],
+      "Abduccion de hombros con mancuernas": [
+        {
+          "d": "2026-08-07",
+          "kg": 7,
+          "ok": true
+        },
+        {
+          "d": "2026-08-17",
+          "kg": 8,
+          "ok": true
+        },
+        {
+          "d": "2026-08-21",
+          "kg": 8,
+          "ok": true
+        },
+        {
+          "d": "2026-09-13",
+          "kg": 9,
+          "ok": true
+        },
+        {
+          "d": "2026-10-19",
+          "kg": 9,
+          "ok": true
+        }
+      ],
+      "Pajaros con mancuernas (deltoide posterior)": [
+        {
+          "d": "2026-08-07",
+          "kg": 6,
+          "ok": true
+        },
+        {
+          "d": "2026-08-21",
+          "kg": 6,
+          "ok": true
+        }
+      ],
+      "Encogimiento de hombros con mancuernas": [
+        {
+          "d": "2026-08-07",
+          "kg": 20,
+          "ok": true
+        },
+        {
+          "d": "2026-08-21",
+          "kg": 20,
+          "ok": true
+        }
+      ],
+      "Extension de cuadriceps en maquina": [
+        {
+          "d": "2026-08-10",
+          "kg": 22,
+          "ok": true
+        }
+      ],
+      "Extension para dorsales con barra": [
+        {
+          "d": "2026-08-10",
+          "kg": 34,
+          "ok": true
+        },
+        {
+          "d": "2026-08-21",
+          "kg": 34,
+          "ok": true
+        },
+        {
+          "d": "2026-09-30",
+          "kg": 80,
+          "ok": true
+        },
+        {
+          "d": "2026-10-05",
+          "kg": 80,
+          "ok": true
+        },
+        {
+          "d": "2026-10-12",
+          "kg": 85,
+          "ok": true
+        },
+        {
+          "d": "2026-10-19",
+          "kg": 85,
+          "ok": true
+        }
+      ],
+      "Dominadas libres (agarre neutro)": [
+        {
+          "d": "2026-08-10",
+          "kg": 27,
+          "ok": true
+        },
+        {
+          "d": "2026-08-21",
+          "kg": 27,
+          "ok": true
+        }
+      ],
+      "Remo agarre supino en barra T": [
+        {
+          "d": "2026-09-30",
+          "kg": 15,
+          "ok": true
+        },
+        {
+          "d": "2026-10-12",
+          "kg": 15,
+          "ok": true
+        }
+      ],
+      "Jalon frontal en polea (agarre prono) 12-15": [
+        {
+          "d": "2026-09-30",
+          "kg": 40,
+          "ok": true
+        },
+        {
+          "d": "2026-10-05",
+          "kg": 40,
+          "ok": true
+        },
+        {
+          "d": "2026-10-12",
+          "kg": 45,
+          "ok": true
+        },
+        {
+          "d": "2026-10-19",
+          "kg": 45,
+          "ok": true
+        }
+      ],
+      "Aperturas en maquina": [
+        {
+          "d": "2026-09-30",
+          "kg": 30,
+          "ok": true
+        },
+        {
+          "d": "2026-10-12",
+          "kg": 30,
+          "ok": true
+        }
+      ],
+      "Flexion de codo con mancuernas (agarre supino)": [
+        {
+          "d": "2026-09-30",
+          "kg": 10,
+          "ok": true
+        },
+        {
+          "d": "2026-10-12",
+          "kg": 10,
+          "ok": true
+        },
+        {
+          "d": "2026-10-19",
+          "kg": 12,
+          "ok": true
+        }
+      ],
+      "Cruce de poleas de arriba hacia abajo": [
+        {
+          "d": "2026-10-05",
+          "kg": 30,
+          "ok": true
+        },
+        {
+          "d": "2026-10-12",
+          "kg": 30,
+          "ok": true
+        },
+        {
+          "d": "2026-10-19",
+          "kg": 32.5,
+          "ok": true
+        }
+      ],
+      "Press vertical de hombros con mancuernas": [
+        {
+          "d": "2026-10-12",
+          "kg": 10,
+          "ok": true
+        },
+        {
+          "d": "2026-10-19",
+          "kg": 10,
+          "ok": true
+        }
+      ],
+      "Extension vertical de codo en polea (agarre supino)": [
+        {
+          "d": "2026-10-12",
+          "kg": 13,
+          "ok": true
+        },
+        {
+          "d": "2026-10-19",
+          "kg": 13,
+          "ok": true
+        }
+      ],
+      "Flexion de codo con agarre neutro alternado": [
+        {
+          "d": "2026-10-12",
+          "kg": 12,
+          "ok": false
+        },
+        {
+          "d": "2026-10-19",
+          "kg": 12,
+          "ok": true
+        }
+      ]
+    },
+    "medidas": [],
+    "brazos": []
+  },
+  "salud": {
+    "2026-08-02": {},
+    "2026-08-04": {},
+    "2026-08-05": {},
+    "2026-08-09": {},
+    "2026-08-11": {},
+    "2026-08-13": {
+      "activas": 5.36
+    },
+    "2026-08-14": {
+      "activas": 1.44
+    },
+    "2026-08-16": {
+      "activas": 1.49
+    },
+    "2026-08-17": {
+      "activas": 1.83
+    },
+    "2026-08-18": {
+      "activas": 1.56
+    },
+    "2026-08-23": {},
+    "2026-09-10": {
+      "activas": 1.23
+    },
+    "2026-09-13": {},
+    "2026-09-15": {},
+    "2026-09-17": {
+      "activas": 1.49
+    },
+    "2026-09-19": {
+      "activas": 1.38
+    },
+    "2026-09-22": {},
+    "2026-09-23": {
+      "activas": 1.73
+    },
+    "2026-10-01": {},
+    "2026-10-02": {
+      "activas": 1.52
+    }
+  }
+}
