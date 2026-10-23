@@ -566,7 +566,7 @@
 
     <div class="histo">
       <h3>Tus PRs &mdash; records personales</h3>
-      <p class="fotohint">La ultima serie de cada ejercicio va al fallo: cuando registras un peso mayor, tu PR se actualiza solo.</p>
+      <p class="fotohint">La ultima serie va al fallo (menos sentadilla, peso muerto y zancada con barra): cuando registras un peso mayor, tu PR se actualiza solo.</p>
       <div id="prList"></div>
     </div>
 
@@ -589,7 +589,8 @@
       <li><b>Brazos, tu prioridad:</b> 3 veces por semana, 15 series de biceps y 15 de triceps (la rutina del entrenador traia 15 y 6). El triceps es 2/3 del tamano del brazo, por eso va primero en las superseries y se trabaja desde tres angulos, incluido sobre la cabeza. Baja cada rep en 2-3 seg, estira del todo y la ultima serie al fallo.</li>
       <li><b>Brazos que se vean:</b> tu InBody marca 1 kg de grasa en cada brazo (184% del estandar). Parte del brazo que "no crece" esta tapado: los brazos si ganaron +0.2 kg de musculo cada uno desde julio, y se notara mas al bajar esa grasa.</li>
       <li><b>Piernas, sin recortes:</b> el volumen extra de brazos no le quita nada a la pierna, que sigue al 91% del estandar y casi igual que en julio (y con muy pocos registros en la app). Los dias 2 y 5 no se saltan.</li>
-      <li><b>PR y fallo:</b> 3 series por ejercicio y la ultima al fallo tecnico &mdash; que no salga ni una rep mas con buena forma. Cuando registras un peso mayor a tu PR, la app lo corona sola.</li>
+      <li><b>PR y fallo:</b> 3 series por ejercicio y la ultima al fallo tecnico &mdash; que no salga ni una rep mas con buena forma. La excepcion son la sentadilla, el peso muerto y la zancada con barra: ahi siempre 1-2 reps en reserva, porque el fallo con barra pesada es la espalda redondeada. Cuando registras un peso mayor a tu PR, la app lo corona sola.</li>
+      <li><b>Hombros:</b> 9 series de laterales a la semana (dias 1, 3 y 4) para la anchura, y face pull el dia 3 para la parte de atras del hombro, que equilibra todo el press.</li>
       <li><b>Doble progresion:</b> con rangos como 8-10 o 12-15, primero sube las reps con el mismo peso; cuando completes las 3 series en el tope del rango, sube 1-2.5 kg. La app te lo sugiere al cerrar dos semanas seguidas con el mismo peso.</li>
       <li><b>Descansos:</b> los del entrenador &mdash; 2 min en compuestos, 1 min en aislamientos cortos y core. En las superseries de brazos no hay pausa entre el par: el descanso (75-90 s) corre al marcar el segundo. Biceps y triceps se turnan, asi que ahorras tiempo sin perder fuerza.</li>
       <li><b>Calentamiento:</b> 8-10 min antes de cada sesion: cardio suave, movilidad y series de aproximacion del primer ejercicio. Nada de estiramientos largos antes de las pesas, que restan fuerza: dejalos para el final o el dia 6.</li>
@@ -614,7 +615,7 @@
 
 <script>
 const DAYS = [
-  { id:'d1', name:'Dia 1', tag:'Pecho + Espalda + Brazos (Superior)', tagClass:'arms', note:'Dia de fuerza: los compuestos van en 8-10 reps, asi que aqui se mueve el peso alto. Press y remo primero, con el cuerpo fresco. Cierra con la primera dosis de brazos de la semana: superserie de triceps y biceps.',
+  { id:'d1', name:'Dia 1', tag:'Pecho + Espalda + Brazos (Superior)', tagClass:'arms', note:'Dia de fuerza: los compuestos van en 8-10 reps, asi que aqui se mueve el peso alto. Press y remo primero, con el cuerpo fresco. Cierra con la primera dosis de brazos de la semana, superserie de triceps y biceps, y con laterales para la anchura de hombros.',
     ex:[
       {n:'Calentamiento superior (pecho y espalda)', s:'8-10 min', sets:1, r:0, x:true, m:'Calentamiento', t:'1) 5 min de remo o eliptica suave. 2) Movilidad de hombros: 10 circulos de brazos hacia adelante y 10 hacia atras, 10 aperturas con banda o palo y 15 rotaciones externas con polea ligera. 3) Series de aproximacion del press con barra: 1x10 solo con la barra y 1x5 con la mitad de tu peso de trabajo. Sin estiramientos largos antes de las pesas: restan fuerza.'},
       {n:'Press horizontal con barra libre', s:'3x8-10', sets:3, r:120, m:'Pectorales', t:'Escapulas juntas y pegadas al banco, pies firmes. Baja la barra al pecho medio en 2 seg y sube sin rebotar. Es tu press mas pesado de la semana: en la ultima serie pide que alguien te asista.'},
@@ -624,20 +625,21 @@ const DAYS = [
       {n:'Extension vertical de codo en polea (agarre neutro)', s:'3x12', sets:3, r:75, m:'Brazos', grp:'g1', t:'Triceps sobre la cabeza: trabaja la cabeza larga, la parte mas grande del triceps y la unica que se estira con el brazo arriba. De espaldas a la polea con la cuerda, codos junto a la cabeza y quietos: baja las manos detras de la nuca hasta sentir el estiramiento y extiende sin mover los codos.'},
       {n:'Flexion de codo con mancuernas (agarre supino)', s:'3x10-12', sets:3, r:75, m:'Brazos', grp:'g1', t:'Empieza con las palmas mirando al cuerpo y gira la muneca al subir hasta que el menique quede arriba: esa rotacion es la que contrae el biceps al maximo. Codos pegados y quietos, baja en 2-3 seg.'},
       {n:'Predicador en maquina (agarre supino)', s:'3x12', sets:3, r:60, m:'Brazos', t:'Axilas bien apoyadas en el pad. Baja controlado casi a extension completa y sube sin despegar los brazos.'},
-      {n:'Plank isometrico libre', s:'3x30 seg', sets:3, r:60, m:'Core', t:'Antebrazos al piso bajo los hombros, cuerpo en linea recta, abdomen y gluteos apretados, sin hundir la cadera. Cuando 30 seg salgan faciles, sube a 45.'},
+      {n:'Abduccion de hombros con mancuernas', s:'3x12', sets:3, r:60, m:'Deltoides', grp:'g2', t:'Inclinate apenas al frente, sube liderando con los codos hasta la altura del hombro y baja en 2-3 seg. Si tienes que impulsarte con el cuerpo, el peso es alto. Va en superserie con la plancha: terminas las laterales y te tiras al piso sin pausa.'},
+      {n:'Plank isometrico libre', s:'3x30 seg', sets:3, r:60, m:'Core', grp:'g2', t:'Antebrazos al piso bajo los hombros, cuerpo en linea recta, abdomen y gluteos apretados, sin hundir la cadera. Cuando 30 seg salgan faciles, sube a 45.'},
       {n:'Caminata inclinada final', s:'15-20 min', sets:1, r:0, x:true, m:'Cardio para la grasa abdominal', t:'Cinta al 10-12% de inclinacion y 5-6 km/h, paso firme sin agarrarte de las barras: debes poder hablar pero no cantar. Despues de las pesas no les roba fuerza, y el cardio moderado es lo que mas reduce la grasa visceral, la del abdomen. Si un dia no hay tiempo, no bloquea cerrar la sesion.'},
     ]},
   { id:'d2', name:'Dia 2', tag:'Cuadriceps + Isquios (Inferior)', tagClass:'legs', note:'La sentadilla abre el dia y se lleva toda tu atencion. Tus piernas son lo que menos avanzo: 91% del estandar en el InBody y casi igual que en julio. Este dia no se salta.',
     ex:[
       {n:'Calentamiento de pierna (sentadilla)', s:'10 min', sets:1, r:0, x:true, m:'Calentamiento', t:'1) 5 min de bicicleta suave. 2) Movilidad: 10 balanceos de pierna adelante y atras y 10 laterales por pierna, 10 sentadillas sin peso con pausa de 2 seg abajo y 10 puentes de gluteo. 3) Aproximacion de la sentadilla: 1x10 con la barra sola, 1x5 al 50% y 1x3 al 75% de tu peso de trabajo.'},
-      {n:'Sentadilla libre con barra', s:'3x8-10', sets:3, r:120, m:'Cuadriceps', t:'Barra sobre los trapecios, pies al ancho de hombros con las puntas algo afuera. Baja con la espalda neutra hasta que el muslo quede paralelo al piso, rodillas en la linea de los pies, y sube empujando el piso. Primero la tecnica, luego el peso.'},
+      {n:'Sentadilla libre con barra', s:'3x8-10', sets:3, r:120, m:'Cuadriceps', nf:true, t:'Barra sobre los trapecios, pies al ancho de hombros con las puntas algo afuera. Baja con la espalda neutra hasta que el muslo quede paralelo al piso, rodillas en la linea de los pies, y sube empujando el piso. Primero la tecnica, luego el peso. Termina cada serie con 1-2 reps en reserva: al fallo con barra pesada la espalda se redondea.'},
       {n:'Prensa inclinada 45 grados', s:'3x12', sets:3, r:120, m:'Cuadriceps', t:'Pies al ancho de hombros en la plataforma. Baja controlado hasta 90 grados sin despegar la lumbar y empuja con toda la planta. No bloquees las rodillas de golpe.'},
       {n:'Extension de cuadriceps en maquina', s:'3x12-15', sets:3, r:120, m:'Cuadriceps', t:'Extiende hasta arriba y aprieta el cuadriceps 1 seg. Baja lento, sin dejar caer la placa.'},
-      {n:'Peso muerto con barra', s:'3x10', sets:3, r:120, m:'Isquiotibiales', t:'Barra rozando las piernas y espalda neutra siempre. Empuja el piso con las piernas y cierra con la cadera. Si la espalda baja se redondea, ese peso es demasiado.'},
+      {n:'Peso muerto con barra', s:'3x10', sets:3, r:120, m:'Isquiotibiales', nf:true, t:'Barra rozando las piernas y espalda neutra siempre. Empuja el piso con las piernas y cierra con la cadera. Si la espalda baja se redondea, ese peso es demasiado. Deja 1-2 reps en reserva: el peso muerto nunca va al fallo.'},
       {n:'Flexion de isquiotibiales sentado', s:'3x12', sets:3, r:120, m:'Isquiotibiales', t:'Espalda pegada al respaldo y pad ajustado sobre los tobillos. Flexiona llevando los talones abajo y atras, regresa lento.'},
-      {n:'Elevacion de talones en maquina sentado', s:'3x15', sets:3, r:60, m:'Pantorrillas', t:'Rango completo: estira abajo 1 seg y sube al maximo apretando la pantorrilla.'},
+      {n:'Elevacion de talones en maquina parado', s:'3x12-15', sets:3, r:60, m:'Pantorrillas', t:'De pie y con las rodillas rectas: asi trabaja el gemelo, la parte de la pantorrilla que se ve. Baja el talon hasta estirar 1 seg y sube al maximo con pausa arriba. El dia 5 la haces sentado para el soleo.'},
     ]},
-  { id:'d3', name:'Dia 3', tag:'Espalda + Pecho + Brazos (Superior)', tagClass:'arms', note:'Mismos musculos que el dia 1, pero con mas reps y menos peso: aqui manda el control. Bajadas de 2-3 seg y aprieta cada repeticion. Antes del abdomen va la segunda dosis de brazos, en superserie.',
+  { id:'d3', name:'Dia 3', tag:'Espalda + Pecho + Brazos (Superior)', tagClass:'arms', note:'Mismos musculos que el dia 1, pero con mas reps y menos peso: aqui manda el control. Bajadas de 2-3 seg y aprieta cada repeticion. Antes del abdomen van la segunda dosis de brazos y el par de hombros (laterales y face pull), los dos en superserie.',
     ex:[
       {n:'Calentamiento superior (espalda y pecho)', s:'8-10 min', sets:1, r:0, x:true, m:'Calentamiento', t:'1) 5 min de remo o eliptica suave. 2) Colgado de la barra 2x20 seg con los hombros activos, 10 dislocaciones con banda o palo y 15 retracciones de escapulas en la polea con poco peso. 3) Aproximacion del jalon: 1x12 con la mitad de tu peso de trabajo.'},
       {n:'Jalon frontal en polea (agarre prono) 12-15', s:'3x12-15', sets:3, r:120, m:'Dorsales', t:'El jalon del dia 1 con menos peso y mas reps: pecho arriba, barra a la clavicula tirando con los codos y 1 seg de pausa abajo apretando la espalda. La app lo guarda aparte del de 10 reps.'},
@@ -647,6 +649,8 @@ const DAYS = [
       {n:'Cruce de poleas de arriba hacia abajo', s:'3x12', sets:3, r:120, m:'Pectorales', t:'Poleas altas y un paso al frente con el torso algo inclinado. Baja las manos en arco hasta cruzarlas frente a la cadera apretando el pecho 1 seg, y sube controlado hasta sentir el estiramiento. Codos apenas flexionados y fijos.'},
       {n:'Jalon de triceps en polea alta (cuerda)', s:'3x12-15', sets:3, r:75, m:'Brazos', grp:'g1', t:'Cabeza lateral, la que da forma de herradura al brazo. Codos pegados al costado y quietos; empuja hacia abajo y al final separa las puntas de la cuerda apretando 1 seg. No te inclines para ayudarte con el peso del cuerpo.'},
       {n:'Flexion de codo en banco inclinado (mancuernas)', s:'3x12', sets:3, r:75, m:'Brazos', grp:'g1', t:'Cabeza larga del biceps, la unica que se estira con el brazo detras del cuerpo. Banco a 45-60 grados, deja los brazos colgando atras y sube sin adelantar el codo. Baja hasta estirar del todo: ahi esta el estimulo.'},
+      {n:'Abduccion de hombros en polea', s:'3x15', sets:3, r:60, m:'Deltoides', grp:'g2', t:'Polea baja del lado contrario, con el cable cruzando por delante del cuerpo. Sube el brazo de lado hasta la altura del hombro liderando con el codo y baja en 2-3 seg. El cable mantiene la tension abajo, donde la mancuerna no hace nada. Las 15 son por brazo.'},
+      {n:'Face pull en polea alta (cuerda)', s:'3x15', sets:3, r:75, m:'Deltoides', grp:'g2', t:'Polea a la altura de la cara con la cuerda. Tira hacia la frente separando las manos, codos altos y hacia atras, hasta que los punos queden junto a las orejas; aprieta 1 seg. Peso moderado: es para el hombro de atras y la postura, no para cargar.'},
       {n:'Flexion de tronco en colchoneta', s:'3x15', sets:3, r:60, m:'Core', t:'Lumbar pegada al piso, sube enrollando el tronco y exhala arriba. No tires del cuello con las manos.'},
       {n:'Caminata inclinada final', s:'15-20 min', sets:1, r:0, x:true, m:'Cardio para la grasa abdominal', t:'Cinta al 10-12% de inclinacion y 5-6 km/h, paso firme sin agarrarte de las barras: debes poder hablar pero no cantar. Despues de las pesas no les roba fuerza, y el cardio moderado es lo que mas reduce la grasa visceral, la del abdomen. Si un dia no hay tiempo, no bloquea cerrar la sesion.'},
     ]},
@@ -663,14 +667,14 @@ const DAYS = [
       {n:'Extension lumbar en banco inclinado', s:'3x12', sets:3, r:60, m:'Core', t:'Cadera apoyada en el pad y brazos cruzados al pecho. Baja con la espalda neutra y sube hasta dejar el cuerpo en linea recta, sin pasarte hacia atras. Protege tu espalda para el peso muerto y la sentadilla.'},
       {n:'Caminata inclinada final', s:'15-20 min', sets:1, r:0, x:true, m:'Cardio para la grasa abdominal', t:'Cinta al 10-12% de inclinacion y 5-6 km/h, paso firme sin agarrarte de las barras: debes poder hablar pero no cantar. Despues de las pesas no les roba fuerza, y el cardio moderado es lo que mas reduce la grasa visceral, la del abdomen. Si un dia no hay tiempo, no bloquea cerrar la sesion.'},
     ]},
-  { id:'d5', name:'Dia 5', tag:'Isquios + Gluteos (Inferior)', tagClass:'legs', note:'Cadena posterior. La flexion de isquios abre el dia para que el peso muerto llegue con la pierna caliente; gluteo y pantorrilla cierran. Segunda dosis semanal de pierna: tan importante como el dia 2.',
+  { id:'d5', name:'Dia 5', tag:'Isquios + Gluteos + Cuadriceps (Inferior)', tagClass:'legs', note:'Cadena posterior. La flexion de isquios abre el dia para que el peso muerto rumano llegue con la pierna caliente; la bulgara le da al cuadriceps su segunda dosis de la semana, y gluteo y pantorrilla cierran. Tan importante como el dia 2: la pierna es lo que va mas atrasado.',
     ex:[
-      {n:'Calentamiento de pierna (peso muerto)', s:'10 min', sets:1, r:0, x:true, m:'Calentamiento', t:'1) 5 min de bicicleta o caminata inclinada. 2) Movilidad: 10 buenos dias sin peso (bisagra de cadera con la espalda recta), 10 puentes de gluteo con pausa de 2 seg y 10 abducciones de pie por pierna. 3) Aproximacion: 1x12 ligera de flexion de isquios y 1x8 de peso muerto al 50%.'},
+      {n:'Calentamiento de pierna (peso muerto)', s:'10 min', sets:1, r:0, x:true, m:'Calentamiento', t:'1) 5 min de bicicleta o caminata inclinada. 2) Movilidad: 10 buenos dias sin peso (bisagra de cadera con la espalda recta), 10 puentes de gluteo con pausa de 2 seg y 10 abducciones de pie por pierna. 3) Aproximacion: 1x12 ligera de flexion de isquios y 1x8 de peso muerto rumano al 50%.'},
       {n:'Flexion de isquiotibiales sentado', s:'3x12', sets:3, r:120, m:'Isquiotibiales', t:'Espalda pegada al respaldo y pad ajustado sobre los tobillos. Flexiona llevando los talones abajo y atras, regresa lento.'},
-      {n:'Peso muerto con barra', s:'3x12', sets:3, r:120, m:'Isquiotibiales', t:'Aqui van 12 reps (el dia 2 son 10): usa el mismo peso o un poco menos. Barra rozando las piernas, espalda neutra y cierra con la cadera.'},
-      {n:'Zancada con desplazamiento con barra', s:'3x12', sets:3, r:120, m:'Isquiotibiales', t:'Barra sobre los trapecios y pasos largos alternando piernas: la rodilla trasera baja casi al piso con el torso vertical, y empujas con el talon delantero para avanzar. Si pierdes el equilibrio, empieza con mancuernas.'},
+      {n:'Peso muerto rumano con barra', s:'3x12', sets:3, r:120, m:'Isquiotibiales', nf:true, t:'Rodillas apenas flexionadas y fijas, barra pegada a las piernas. Lleva la cadera atras bajando la barra hasta media espinilla, o hasta donde la espalda siga recta, y sube apretando el gluteo: debes sentir el isquio estirado. Empieza mas ligero que el peso muerto del dia 2 y deja 1-2 reps en reserva.'},
+      {n:'Zancada con desplazamiento con barra', s:'3x12', sets:3, r:120, m:'Gluteos', nf:true, t:'Barra sobre los trapecios y pasos largos alternando piernas: la rodilla trasera baja casi al piso con el torso vertical, y empujas con el talon delantero para avanzar. Si pierdes el equilibrio, empieza con mancuernas. Deja 1-2 reps en reserva: con barra y en movimiento, el fallo es caerse.'},
       {n:'Extension de cadera en rack libre', s:'3x12', sets:3, r:120, m:'Gluteos', t:'Hip thrust: espalda alta apoyada en el banco y barra sobre la cadera con almohadilla. Empuja con los talones hasta dejar el tronco paralelo al piso y aprieta el gluteo 1 seg arriba, sin arquear la lumbar.'},
-      {n:'Extension de cadera con patada en maquina', s:'3x12', sets:3, r:120, m:'Gluteos', t:'Pecho y antebrazos apoyados: empuja el talon atras y arriba apretando el gluteo 1 seg. No arquees la lumbar para subir mas.'},
+      {n:'Sentadilla bulgara libre', s:'3x12', sets:3, r:120, m:'Cuadriceps', t:'Empeine trasero sobre el banco y el pie delantero lo bastante adelante para que, al bajar, la rodilla no pase mucho la punta. Baja vertical con el torso recto hasta que el muslo delantero quede paralelo y sube empujando con todo el pie. Las 12 son por pierna: empieza sin peso y luego con mancuernas.'},
       {n:'Abduccion de cadera en maquina sentado', s:'3x15', sets:3, r:60, m:'Gluteos', t:'Gluteo medio: espalda pegada al respaldo, abre las rodillas contra los pads con pausa de 1 seg afuera y regresa lento, sin que la placa golpee.'},
       {n:'Elevacion de talones en maquina sentado', s:'3x15', sets:3, r:60, m:'Pantorrillas', t:'Rango completo: estira abajo 1 seg y sube al maximo apretando la pantorrilla.'},
     ]},
@@ -686,8 +690,8 @@ const DAYS = [
 const GRUPOS_RECUP = [
   {label:'Pecho + Espalda', ids:['d1','d3']},
   {label:'Biceps + Triceps', ids:['d1','d3','d4']},
-  {label:'Hombros', ids:['d4']},
-  {label:'Cuadriceps', ids:['d2']},
+  {label:'Hombros', ids:['d1','d3','d4']},
+  {label:'Cuadriceps', ids:['d2','d5']},
   {label:'Isquios + Gluteos + Pantorrillas', ids:['d2','d5']},
 ];
 
@@ -709,6 +713,11 @@ const CASA = {
   'Peso muerto con barra': { n:'Peso muerto rumano a una pierna', t:'Mochila cargada en la mano contraria a la pierna de apoyo, rodilla apenas flexionada. Lleva la cadera atras bajando el torso con la espalda recta hasta sentir el isquio estirado y sube apretando el gluteo.' },
   'Flexion de isquiotibiales sentado': { n:'Curl femoral deslizante con toalla', s:'3x8-12', t:'Boca arriba en piso liso, talones sobre una toalla y cadera levantada. Desliza los talones hacia el gluteo sin bajar la cadera y estira las piernas lento. Es duro: si no sale, estira con la cadera en el piso y solo recoge subiendola.' },
   'Elevacion de talones en maquina sentado': { n:'Elevacion de talones a una pierna en un escalon', t:'Punta de un pie en el borde de un escalon, apoyando la mano en la pared. Baja el talon hasta estirar 1 seg y sube al maximo con pausa arriba. A una pierna, tu propio peso ya es carga suficiente.' },
+  'Elevacion de talones en maquina parado': { n:'Elevacion de talones a una pierna en un escalon', t:'Punta de un pie en el borde de un escalon y la rodilla recta, apoyando la mano en la pared. Baja el talon hasta estirar 1 seg y sube al maximo con pausa arriba. Si salen mas de 20, sostiene la mochila cargada.' },
+  'Peso muerto rumano con barra': { n:'Peso muerto rumano a una pierna', t:'Mochila cargada en la mano contraria a la pierna de apoyo, rodilla apenas flexionada. Lleva la cadera atras bajando el torso con la espalda recta hasta sentir el isquio estirado y sube apretando el gluteo.' },
+  'Sentadilla bulgara libre': { n:'Sentadilla bulgara con el pie en una silla', t:'Empeine trasero sobre una silla o el sofa. Baja vertical hasta que la rodilla trasera casi toque el piso y empuja con el talon delantero. Si salen mas de 15 por pierna, carga la mochila.' },
+  'Abduccion de hombros en polea': { n:'Elevaciones laterales con botellas de agua', t:'Una botella llena o garrafa en cada mano. Sube liderando con los codos hasta la altura del hombro y baja en 3 seg. Con poco peso basta si no descansas arriba ni abajo.' },
+  'Face pull en polea alta (cuerda)': { n:'Elevaciones Y-T boca abajo', t:'Boca abajo en el piso, la frente sobre una toalla. Levanta los brazos estirados formando una Y, bajalos, y luego en T con los pulgares hacia arriba, apretando las escapulas 2 seg arriba. Sin peso basta; con botellas pequenas, mas dificil.' },
   'Remo agarre neutro con mancuerna': { n:'Remo a una mano con mochila', t:'Una mano y una rodilla apoyadas en una silla, espalda plana. Tira de la mochila cargada hacia la cadera sin girar el torso y baja lento.' },
   'Extension para dorsales con barra': { n:'Pullover en el piso con mochila', t:'Boca arriba con las rodillas flexionadas y la mochila sobre el pecho, sujeta con las dos manos. Llevala detras de la cabeza con los brazos casi rectos hasta sentir el dorsal estirado y regresala tirando con la espalda.' },
   'Cruce de poleas de arriba hacia abajo': { n:'Flexiones con las manos en una silla', t:'Manos en el borde de una silla apoyada contra la pared y cuerpo recto: con el cuerpo inclinado asi trabaja el pecho inferior. Baja en 3 seg hasta tocar la silla con el pecho y llega a 1-2 reps del fallo.' },
@@ -774,6 +783,11 @@ const ZONAS = {
   'Extension de cadera con patada en maquina': 'Gluteo aislado: el gluteo mayor sin que ayuden cuadriceps ni lumbares',
   'Abduccion de cadera en maquina sentado': 'Gluteo medio: la parte alta y lateral de la cadera',
   'Elevacion de talones en maquina sentado': 'Soleo: el musculo bajo el gemelo que da anchura a la pantorrilla',
+  'Elevacion de talones en maquina parado': 'Gemelo: la parte de arriba de la pantorrilla, la que se ve; solo trabaja a fondo con la rodilla recta',
+  'Peso muerto rumano con barra': 'Isquios altos: la parte de arriba del muslo trasero, junto al gluteo, trabajada en estiramiento',
+  'Sentadilla bulgara libre': 'Cuadriceps a una pierna: el muslo de delante, con el torso recto para cargar la rodilla',
+  'Abduccion de hombros en polea': 'Deltoide lateral: la parte de afuera del hombro, con tension tambien abajo gracias al cable',
+  'Face pull en polea alta (cuerda)': 'Deltoide posterior: la parte de atras del hombro y el manguito rotador, que equilibran todo el press de la semana',
   'Plank isometrico libre': 'Transverso abdominal: la faja interna que estabiliza el tronco',
   'Flexion de tronco en colchoneta': 'Recto abdominal: la parte alta del abdomen',
   'Extension lumbar en banco inclinado': 'Lumbares: los erectores que protegen la espalda baja',
@@ -813,7 +827,8 @@ const CONTROL_ACTUAL = '2026-09-09';
 const PESO_CONTROL = 70.3;
 const NEXT_CONTROL = '2026-11-09';   // estimado: dos meses despues, como el ciclo anterior
 const APP_KEY = 'arnold-app-v4';
-const APP_VERSION = 5.7; // 5.7: rutina del control 09.09.2026 (los pesos siguen guardados por NOMBRE)
+const APP_VERSION = 5.8; // 5.7: rutina del control 09.09.2026 (los pesos siguen guardados por NOMBRE)
+                         // 5.8: laterales dias 1 y 3, face pull, rumano y bulgara el dia 5, talones de pie el dia 2
 const CLOUD_URL = 'https:/'+'/script.google.com/macros/s/AKfycbzeTAA8tWMMTQy__gEaP7bscG6ZJG-XDHmdZg-mJcsN50gWdUEIEv0HkYL-aScSwRqZ-A/exec';
 const CLOUD_TOKEN = 'arnold-2026-fxt-7391';
 // Vacia a proposito: este HTML es publico (GitHub), y una clave escrita aqui la puede usar
@@ -1577,7 +1592,8 @@ function exRow(e, i, ds, ssFirst){
   if(sug && !cur){
     sugHtml = `<button class="sugchip ${sug.subir?'sube':''}" data-sug="${sug.kg}" data-wi="${i}" title="${sug.motivo}">${sug.txt}</button>`;
   }
-  const falloHtml = e.sets > 1 ? ` &middot; <span class="fallo">ultima al fallo</span>` : '';
+  // Barra pesada (nf): sin fallo, porque ahi el fallo es la espalda redondeada
+  const falloHtml = e.sets > 1 ? (e.nf ? ` &middot; <span>1-2 reps en reserva</span>` : ` &middot; <span class="fallo">ultima al fallo</span>`) : '';
   const dots = ds.sets[e.n].map((v,si)=>`<button class="setdot ${v?'done':''}" data-ex="${i}" data-set="${si}">${v?'v':si+1}</button>`).join('');
   const q = encodeURIComponent(e.n + ' tecnica ejercicio gimnasio');
   const casa = CASA[e.n];
