@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="Rutina Arnold">
 <meta name="theme-color" content="#111213">
 <title>Rutina Arnold X - Entrenador Personal</title>
@@ -31,12 +31,13 @@
   .goalbar{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px;}
   .goalchip{font-family:'JetBrains Mono',monospace;font-size:11px;padding:6px 10px;border-radius:20px;background:var(--surface1);border:1px solid var(--border);color:var(--text-muted);}
   .goalchip b{color:var(--amber);}
-  .viewtabs{display:flex;gap:8px;margin:0 0 20px;}
+  .viewtabs{display:flex;gap:8px;margin:0 0 16px;position:sticky;top:0;z-index:20;background:var(--bg);padding:8px 0;}
   .viewtab{flex:1;font-family:'Bebas Neue',sans-serif;font-size:19px;letter-spacing:.04em;padding:10px 0;border-radius:10px;border:1px solid var(--border);background:var(--surface1);color:var(--text-dim);cursor:pointer;text-align:center;}
   .viewtab.active{border-color:var(--amber);color:var(--amber);background:var(--amber-dim);}
 
-  .recovery{display:flex;flex-direction:column;gap:6px;margin:0 0 18px;padding:14px 16px;background:var(--surface1);border:1px solid var(--border);border-radius:10px;}
-  .rechead{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-dim);margin-bottom:2px;}
+  .recovery{display:flex;flex-direction:column;gap:6px;margin:0 0 14px;padding:12px 16px;background:var(--surface1);border:1px solid var(--border);border-radius:10px;}
+  .rechead{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-dim);margin:0;padding:0;width:100%;background:none;border:0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:8px;text-align:left;}
+  .recres{font-family:'Inter',sans-serif;font-size:12px;letter-spacing:0;text-transform:none;color:var(--text-muted);white-space:nowrap;}
   .recrow{display:flex;justify-content:space-between;align-items:center;gap:8px;}
   .recname{font-size:12.5px;color:var(--text-muted);font-weight:500;}
   .recstatus{font-family:'JetBrains Mono',monospace;font-size:11px;padding:2px 9px;border-radius:12px;font-weight:700;}
@@ -44,8 +45,11 @@
   .recstatus.recovering{background:var(--amber-dim);color:var(--amber);}
   .recstatus.never{background:var(--surface2);color:var(--text-dim);}
 
-  .tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin-bottom:16px;}
-  .tab{flex:0 0 auto;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;padding:9px 13px;border-radius:8px;border:1px solid var(--border);background:var(--surface1);color:var(--text-muted);cursor:pointer;white-space:nowrap;position:relative;}
+  .tabs{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;margin-bottom:14px;}
+  .tab{font-family:'JetBrains Mono',monospace;font-weight:500;padding:7px 0 6px;border-radius:8px;border:1px solid var(--border);background:var(--surface1);color:var(--text-muted);cursor:pointer;white-space:nowrap;position:relative;display:flex;flex-direction:column;align-items:center;gap:2px;line-height:1.1;min-width:0;}
+  .tabdia{font-size:12.5px;font-weight:700;}
+  .tabnum{font-size:10px;opacity:.75;}
+  .tab.hoy .tabdia::after{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--amber);margin-left:3px;vertical-align:2px;}
   .tab.active{border-color:var(--iron);color:var(--iron);background:var(--iron-dim);}
   .tab.legday.active{border-color:var(--steel);color:var(--steel);background:var(--steel-dim);}
   .tab .tick{color:var(--chalk);margin-left:4px;}
@@ -57,6 +61,11 @@
   .daytag.arms{background:var(--iron-dim);color:#f0a29c;}
   .daytag.legs{background:var(--steel-dim);color:#9ecdea;}
   .daynote{font-size:13px;color:var(--text-muted);margin:2px 0 14px;}
+  .dayinfo{background:none;border:0;padding:4px 0;margin:0 0 10px;color:var(--text-muted);font-size:12.5px;cursor:pointer;text-align:left;}
+  .dayinfobody{margin-bottom:6px;}
+  .exver{background:none;border:0;padding:5px 0 0;color:#9ecdea;font-size:12px;font-weight:600;cursor:pointer;}
+  .exdemo .exzona{margin-top:0;}
+  .exdemo .extip{margin-bottom:10px;}
   .muscletab{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-dim);margin:14px 0 4px;}
   .block{border-top:1px solid var(--border);padding-top:10px;margin-top:2px;}
   .ssflag{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--iron);margin-bottom:4px;font-weight:700;letter-spacing:.04em;}
@@ -82,6 +91,7 @@
   .excasas{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--amber);font-weight:500;}
   .excasatip{font-size:12px;color:var(--text-muted);line-height:1.45;margin-bottom:9px;}
   .dayhint{font-size:11.5px;color:var(--text-dim);margin:-8px 0 12px;line-height:1.4;}
+  .dayinfobody .dayhint{margin:0 0 12px;}
   .dayzonas{font-size:12px;color:var(--text-muted);margin:-4px 0 12px;line-height:1.6;}
   .dayzonas b{color:var(--amber);font-weight:600;}
   .exzona{font-size:12px;color:var(--amber);font-weight:600;margin-top:4px;line-height:1.4;}
@@ -289,7 +299,6 @@
 
   <div class="eyebrow">Plan 5 dias &middot; revision 09.09.2026</div>
   <h1>Tu entrenador personal</h1>
-  <p class="sub">Marca cada serie, el temporizador de descanso arranca solo. Tus pesos quedan guardados y la app corona tus nuevos PR.</p>
   <div class="goalbar">
     <div class="goalchip">Grasa: <b>-8.9 kg</b></div>
     <div class="goalchip">Musculo: <b>+2.0 kg</b></div>
@@ -723,10 +732,10 @@ const CASA = {
   'Extension para dorsales con barra': { n:'Pullover en el piso con mochila', t:'Boca arriba con las rodillas flexionadas y la mochila sobre el pecho, sujeta con las dos manos. Llevala detras de la cabeza con los brazos casi rectos hasta sentir el dorsal estirado y regresala tirando con la espalda.' },
   'Cruce de poleas de arriba hacia abajo': { n:'Flexiones con las manos en una silla', t:'Manos en el borde de una silla apoyada contra la pared y cuerpo recto: con el cuerpo inclinado asi trabaja el pecho inferior. Baja en 3 seg hasta tocar la silla con el pecho y llega a 1-2 reps del fallo.' },
   'Press inclinado con mancuernas': { n:'Flexiones con los pies en una silla', t:'Pies en una silla y manos en el piso: ese angulo carga el pecho superior, como el press inclinado. Cuerpo recto y bajada de 3 seg.' },
-  'Flexion de codo en banco inclinado (mancuernas)': { n:'Curl en el marco de la puerta', t:'Agarra el marco con una mano, pies cerca de la puerta y cuerpo inclinado atras con el brazo estirado. Acerca tu cuerpo a la puerta flexionando solo el codo y vuelve hasta estirar del todo. Mas inclinado, mas dificil.' },
+  'Flexion de codo en banco inclinado (mancuernas)': { n:'Curl reclinado con garrafas', t:'Recuestate en un sofa o una silla reclinada con la espalda a unos 45 grados y deja los brazos colgando hacia atras, una garrafa o botella llena en cada mano. Sube sin adelantar el codo y baja hasta estirar del todo: ahi esta el estimulo, como en el banco inclinado.' },
   'Jalon de triceps en polea alta (cuerda)': { n:'Flexiones diamante', t:'Manos juntas bajo el pecho formando un rombo con los dedos y codos pegados al cuerpo al bajar. Si no salen completas, apoya las rodillas.' },
   'Flexion de tronco en colchoneta': { n:'Igual en casa', t:'Lumbar pegada al piso, sube enrollando el tronco y exhala arriba. No tires del cuello.' },
-  'Press vertical de hombros con mancuernas': { n:'Flexiones pica', t:'Cadera arriba formando una V invertida y manos al ancho de hombros. Baja la cabeza hacia el piso entre las manos y empuja. Con los pies en una silla es mas dificil.' },
+  'Press vertical de hombros con mancuernas': { n:'Press de hombros con garrafas o mochila', t:'Sentado con la espalda recta, una garrafa llena en cada mano o la mochila cargada sujeta por las asas, a la altura de las orejas. Empuja hacia arriba sin arquear la lumbar y baja lento. Si salen mas de 15, haz flexiones pica: cadera arriba en V invertida y baja la cabeza entre las manos.' },
   'Abduccion de hombros con mancuernas': { n:'Elevaciones laterales con botellas de agua', t:'Una botella llena o garrafa en cada mano. Sube liderando con los codos hasta la altura del hombro y baja en 3 seg. Con poco peso basta si no descansas arriba ni abajo.' },
   'Extension horizontal de codo con barra (press frances)': { n:'Extension de triceps en el borde de la mesa', t:'Manos en el borde de una mesa firme, cuerpo recto e inclinado. Flexiona solo los codos llevando la frente hacia las manos y empuja para volver. Mientras mas horizontal el cuerpo, mas dificil.' },
   'Flexion de codo en supino con barra Z': { n:'Curl con mochila a dos manos', t:'La mochila cargada sujeta por las asas, palmas hacia arriba. Codos pegados y quietos: sube sin balancearte y baja en 3 seg.' },
@@ -837,8 +846,7 @@ const REEMPLAZO = {
 };
 REEMPLAZO['Jalon frontal en polea (agarre prono) 12-15'] = REEMPLAZO['Jalon frontal en polea (agarre prono)'];
 
-// Gif de la version en casa de cada ejercicio (ver CASA). Faltan los que no tienen
-// una animacion fiel en free-exercise-db: flexiones pica y curl en el marco de la puerta.
+// Gif de la version en casa de cada ejercicio (ver CASA)
 const CASA_GIFS = {
   'Press horizontal con barra libre': 'pushups.gif',
   'Aperturas en maquina': 'bodyweight-flyes.gif',
@@ -876,6 +884,8 @@ const CASA_GIFS = {
   'Sentadilla bulgara libre': 'split-squat-with-dumbbells.gif',
   'Abduccion de cadera en maquina sentado': 'side-leg-raises.gif',
   'Elevacion de talones en maquina sentado': 'calf-raise-on-a-dumbbell.gif',
+  'Flexion de codo en banco inclinado (mancuernas)': 'incline-dumbbell-curl.gif',
+  'Press vertical de hombros con mancuernas': 'dumbbell-shoulder-press.gif',
 };
 // data-src: el gif se descarga solo al abrir el ejercicio, no al pintar el dia
 function gifTag(archivo, nombre){
@@ -978,6 +988,19 @@ let app = {
 // aparte: la app solo los LEE, quien los escribe es el Atajo del iPhone.
 let salud = {};
 let activeDay = 0;
+// La semana real (ver Notas clave): el jueves toca el dia 6 y el viernes el 4
+const SEMANA = [['d1','Lun'],['d2','Mar'],['d3','Mie'],['d6','Jue'],['d4','Vie'],['d5','Sab'],['d7','Dom']];
+const DIA_DE_HOY = ['d7','d1','d2','d3','d6','d4','d5'];   // por getDay(): 0 = domingo
+function indiceDeHoy(){
+  const i = DAYS.findIndex(d=>d.id === DIA_DE_HOY[new Date().getDay()]);
+  return i < 0 ? 0 : i;
+}
+// Paneles "como se hace" abiertos, por dia y ejercicio: siguen abiertos aunque el dia
+// se repinte al marcar una serie (antes se cerraban justo mientras mirabas el gif)
+const panelesAbiertos = new Set();
+let infoDiaAbierta = false;
+let recAbierta = false;
+try{ recAbierta = localStorage.getItem('rec-abierta') === '1'; }catch(e){}
 
 function todayStr(){
   const d = new Date();
@@ -1646,14 +1669,38 @@ function renderRecovery(){
       + '<div class="recname"><b>Tu cuerpo hoy</b>'+(rec.detalle?'<br><span style="font-size:11px;color:var(--text-dim);">'+rec.detalle+'</span>':'')+'</div>'
       + '<div class="recstatus '+rec.cls+'">'+rec.txt+'</div></div>'
     : '';
-  document.getElementById('recovery').innerHTML = '<div class="rechead">Recuperacion muscular (~48h por grupo)</div>' + recHtml + html;
+  // Plegado por defecto: una linea con el resumen, para que el entrenamiento quede arriba
+  const est = GRUPOS_RECUP.map(g=>{
+    let last = null;
+    g.ids.forEach(id=>{ const dt = app.training.lastDone[id]; if(dt && (!last || dt > last)) last = dt; });
+    return !last ? 'never' : (daysSince(last) >= 2 ? 'ready' : 'recovering');
+  });
+  const cuenta = c => est.filter(x=>x===c).length;
+  const partes = [];
+  if(rec) partes.push(rec.txt);
+  if(cuenta('ready')) partes.push(cuenta('ready')+(cuenta('ready') > 1 ? ' listos' : ' listo'));
+  if(cuenta('recovering')) partes.push(cuenta('recovering')+' recuperando');
+  if(cuenta('never')) partes.push(cuenta('never')+' sin registro');
+  const cab = '<button class="rechead" id="recToggle"><span>Recuperacion (~48h)</span><span class="recres">'
+    + partes.join(' &middot; ') + ' <span class="exchev">' + (recAbierta ? '&#9662;' : '&#9656;') + '</span></span></button>';
+  const cont = document.getElementById('recovery');
+  cont.innerHTML = cab + (recAbierta ? recHtml + html : '');
+  document.getElementById('recToggle').addEventListener('click', ()=>{
+    recAbierta = !recAbierta;
+    try{ localStorage.setItem('rec-abierta', recAbierta ? '1' : '0'); }catch(e){}
+    renderRecovery();
+  });
 }
 
 function renderTabs(){
-  document.getElementById('tabs').innerHTML = DAYS.map((d,i)=>{
-    const ds = app.training.days[d.id];
+  const hoy = DIA_DE_HOY[new Date().getDay()];
+  document.getElementById('tabs').innerHTML = SEMANA.map(([id, dia])=>{
+    const i = DAYS.findIndex(d=>d.id === id);
+    const d = DAYS[i];
+    const ds = app.training.days[id];
     const fin = ds && ds.finished;
-    return `<button class="tab ${d.tagClass==='legs'?'legday':''} ${i===activeDay?'active':''}" data-i="${i}">${d.name}${fin?'<span class="tick">v</span>':''}</button>`;
+    const num = d.ex.length ? d.name.replace('Dia ', 'D') : 'libre';
+    return `<button class="tab ${d.tagClass==='legs'?'legday':''} ${i===activeDay?'active':''} ${id===hoy?'hoy':''}" data-i="${i}"><span class="tabdia">${dia}</span><span class="tabnum">${num}${fin?'<span class="tick">v</span>':''}</span></button>`;
   }).join('');
   document.querySelectorAll('.tab').forEach(btn=>{
     btn.addEventListener('click', ()=>{ activeDay = parseInt(btn.dataset.i); renderTraining(); });
@@ -1749,16 +1796,16 @@ function exRow(e, i, ds, ssFirst){
           ${gifTag(CASA_GIFS[e.n], casa.n)}
           <div class="excasatip">${casa.t}</div>
         </div>` : '';
+  // La tarjeta solo lleva lo que se usa entre series; la explicacion va en el panel
   return `
     <div class="ex">
       <div class="exname ${done?'done':''}" data-demo="${i}" style="cursor:pointer;">${e.n} <span class="exchev" id="exchev-${i}">&#9656;</span></div>
       <div class="exsub"><b>${e.s}</b>${falloHtml}${ssFirst?` &middot; sin pausa &rarr; sigue el par`:(e.r?` &middot; descanso ${restLabel(e.r)}`:'')} ${prHtml}</div>
-      ${zonaHtml}
-      ${e.t?`<div class="extip"><b>Tecnica:</b> ${e.t}</div>`:''}
-      <div class="exdemo" id="exdemo-${i}">${gifHtml}${remHtml}${casaHtml}</div>
+      <button class="exver" data-demo="${i}" id="exver-${i}">&#9656; Como se hace</button>
+      <div class="exdemo" id="exdemo-${i}">${zonaHtml}${e.t?`<div class="extip"><b>Tecnica:</b> ${e.t}</div>`:''}${gifHtml}${remHtml}${casaHtml}</div>
       <div class="exrow">
         <div class="setdots">${dots}</div>
-        ${e.r === 0 ? '' : `<div class="wraplabel">${sugHtml}${prevHtml}<span>kg</span><input class="kginput" type="text" inputmode="decimal" placeholder="--" data-wi="${i}" value="${cur||''}"></div>`}
+        ${e.r === 0 || / seg/.test(e.s) ? '' : `<div class="wraplabel">${sugHtml}${prevHtml}<span>kg</span><input class="kginput" type="text" inputmode="decimal" placeholder="--" data-wi="${i}" value="${cur||''}"></div>`}
       </div>
     </div>
   `;
@@ -1794,21 +1841,29 @@ function renderTraining(){
   const doneSets = d.ex.reduce((a,e)=>a+(e.x?0:ds.sets[e.n].filter(Boolean).length),0);
   const allDone = totalSets > 0 && doneSets === totalSets;
 
+  // Nota del dia, zonas y ayuda: plegadas, para que el primer ejercicio se vea sin bajar.
+  // El dia de descanso no tiene ejercicios, asi que su nota va a la vista.
+  const infoHtml = `${d.note?`<div class="daynote">${d.note}</div>`:''}
+      <div class="dayzonas">Hoy trabajas: <b>${[...new Set(d.ex.map(e=>ZONAS[e.n]).filter(Boolean).map(z=>z.split(':')[0]))].join('</b> &middot; <b>')}</b></div>
+      <div class="dayhint">En cada ejercicio, "Como se hace" muestra la tecnica, el gif, un reemplazo si la maquina esta ocupada y su version en casa. Sin equipo: mismas series, reps hasta quedar a 1-2 del fallo y bajadas de 3 seg.</div>`;
   document.getElementById('daycontainer').innerHTML = `
     <div class="daycard">
       <div class="dayhead">
         <div class="dayname">${d.name} <span style="color:var(--text-dim);font-size:16px;">- ${d.tag}</span></div>
         <div class="daytag ${d.tagClass}">${totalSets ? doneSets+'/'+totalSets+' series' : 'off'}</div>
       </div>
-      ${d.note?`<div class="daynote">${d.note}</div>`:''}
-      ${d.ex.length?`<div class="dayzonas">Hoy trabajas: <b>${[...new Set(d.ex.map(e=>ZONAS[e.n]).filter(Boolean).map(z=>z.split(':')[0]))].join('</b> &middot; <b>')}</b></div>`:''}
-      ${d.ex.length?`<div class="dayhint">Toca el nombre de un ejercicio para ver como se hace, otra opcion si la maquina esta ocupada y su version en casa. Sin equipo: mismas series, reps hasta quedar a 1-2 del fallo y bajadas de 3 seg.</div>`:''}
+      ${d.ex.length
+        ? `<button class="dayinfo" id="dayInfoBtn">${infoDiaAbierta?'&#9662;':'&#9656;'} Plan del dia y zonas que trabajas</button>
+      <div class="dayinfobody" style="display:${infoDiaAbierta?'block':'none'};">${infoHtml}</div>`
+        : (d.note?`<div class="daynote">${d.note}</div>`:'')}
       ${bodyHtml}
       ${totalSets ? `<div class="finishrow">${ds.finished
         ? `<span class="finishdone">v Sesion terminada${app.training.lastDone[d.id]?' &middot; '+prettyDate(app.training.lastDone[d.id]):''}</span>`
-        : `<button class="finishbtn" id="finishBtn" ${allDone?'':'disabled'}>Terminar sesion</button><span class="progress">${allDone?'Todo listo - cierra la sesion para guardar pesos':'Completa todas las series para cerrar'}</span>`}</div>` : ''}
+        : `<button class="finishbtn" id="finishBtn" ${doneSets?'':'disabled'}>Terminar sesion</button><span class="progress">${allDone?'Todo listo - cierra la sesion para guardar pesos':(doneSets?'Puedes cerrarla aunque falten series':'Marca tus series para poder cerrar')}</span>`}</div>` : ''}
     </div>
   `;
+  const dib = document.getElementById('dayInfoBtn');
+  if(dib) dib.addEventListener('click', ()=>{ infoDiaAbierta = !infoDiaAbierta; renderTraining(); });
 
   document.querySelectorAll('.setdot').forEach(btn=>{
     btn.addEventListener('click', async ()=>{
@@ -1835,15 +1890,23 @@ function renderTraining(){
       }
     });
   });
-  document.querySelectorAll('.exname[data-demo]').forEach(el=>{
+  const mostrarPanel = (idx, abrir)=>{
+    const p = document.getElementById('exdemo-'+idx);
+    if(!p) return;
+    p.style.display = abrir ? 'block' : 'none';
+    const chev = document.getElementById('exchev-'+idx);
+    if(chev) chev.innerHTML = abrir ? '&#9662;' : '&#9656;';
+    const ver = document.getElementById('exver-'+idx);
+    if(ver) ver.innerHTML = abrir ? '&#9662; Ocultar' : '&#9656; Como se hace';
+    if(abrir) p.querySelectorAll('img[data-src]:not([src])').forEach(img=>{ img.src = img.dataset.src; });
+  };
+  panelesAbiertos.forEach(k=>{ const [id, idx] = k.split(':'); if(id === d.id) mostrarPanel(idx, true); });
+  document.querySelectorAll('.exname[data-demo], .exver[data-demo]').forEach(el=>{
     el.addEventListener('click', ()=>{
-      const p = document.getElementById('exdemo-'+el.dataset.demo);
-      const chev = document.getElementById('exchev-'+el.dataset.demo);
-      if(!p) return;
-      const open = p.style.display === 'block';
-      p.style.display = open ? 'none' : 'block';
-      if(chev) chev.innerHTML = open ? '&#9656;' : '&#9662;';
-      if(!open) p.querySelectorAll('img[data-src]:not([src])').forEach(img=>{ img.src = img.dataset.src; });
+      const clave = d.id + ':' + el.dataset.demo;
+      const abrir = !panelesAbiertos.has(clave);
+      if(abrir) panelesAbiertos.add(clave); else panelesAbiertos.delete(clave);
+      mostrarPanel(el.dataset.demo, abrir);
     });
   });
   document.querySelectorAll('.sugchip').forEach(btn=>{
@@ -1866,11 +1929,14 @@ function renderTraining(){
   const fb = document.getElementById('finishBtn');
   if(fb){
     fb.addEventListener('click', async ()=>{
+      // Se puede cerrar con series pendientes: antes habia que marcar hasta la ultima
+      // serie del abdomen, y por eso casi ninguna sesion se cerraba ni guardaba su historial
+      if(!allDone && !confirm('Cerrar la sesion con '+doneSets+' de '+totalSets+' series?\n\nLos ejercicios sin ninguna serie marcada no cuentan para tu historial.')) return;
       ds.finished = true;
       app.training.lastDone[d.id] = todayStr();
       const nuevos = [];
       d.ex.forEach(e=>{
-        if(!ds.weights[e.n]) return;
+        if(!ds.weights[e.n] || !seriesHechas(ds, e.n)) return;
         app.prevWeights[e.n] = ds.weights[e.n];
         const kg = num(ds.weights[e.n]);
         // Guarda si cerraste TODAS las series con ese peso: de ahi sale la sugerencia
@@ -1889,6 +1955,11 @@ function renderTraining(){
   renderWeekProgress();
 }
 
+function seriesHechas(ds, nombre){
+  const s = (ds.sets || {})[nombre];
+  return Array.isArray(s) ? s.filter(Boolean).length : 0;
+}
+
 function renderWeekProgress(){
   let total=0, done=0;
   DAYS.forEach(d=>{
@@ -1905,7 +1976,8 @@ document.getElementById('resetBtn') && document.getElementById('resetBtn').addEv
     const ds = app.training.days[d.id];
     if(!ds) return;
     d.ex.forEach(e=>{
-      if(!ds.weights[e.n]) return;
+      // Un peso escrito sin ninguna serie marcada no se hizo: no va al historial ni a los PR
+      if(!ds.weights[e.n] || !seriesHechas(ds, e.n)) return;
       app.prevWeights[e.n] = ds.weights[e.n];
       const kg = num(ds.weights[e.n]);
       if(!ds.finished) anotarHistorial(e.n, kg, Array.isArray(ds.sets[e.n]) && ds.sets[e.n].every(Boolean));
@@ -3472,6 +3544,16 @@ function renderAll(){
   try{ renderNutri(); }catch(e){ console.error('renderNutri', e); if(window.__showErr) window.__showErr('renderNutri: '+((e&&e.message)||e)); }
   try{ renderBody(); }catch(e){ console.error('renderBody', e); if(window.__showErr) window.__showErr('renderBody: '+((e&&e.message)||e)); }
 }
+
+// Abre en el entrenamiento que toca hoy; si la app sigue abierta al dia siguiente, salta a ese
+let diaAbierto = todayStr();
+activeDay = indiceDeHoy();
+document.addEventListener('visibilitychange', ()=>{
+  if(document.hidden || todayStr() === diaAbierto) return;
+  diaAbierto = todayStr();
+  activeDay = indiceDeHoy();
+  try{ renderTraining(); }catch(e){}
+});
 
 (async function init(){
   try{ loadLocal(); }catch(e){ console.error('loadLocal', e); try{ normalizeApp(); }catch(e2){ app = { training:{days:{},lastDone:{}}, prevWeights:{}, prs:{}, body:{log:[]}, nutrition:{date:todayStr(),foods:[],water:0,favorites:[],history:[]}, version:5.2 }; } }
