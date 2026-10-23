@@ -168,15 +168,22 @@ Mismo patrón siempre — 3 acciones por dato: **Find Health Samples → Get Val
 | Pulso en reposo | **Resting Heart Rate** | Latest First · Limit **1** | `fcReposo` | media |
 | Variabilidad | **Heart Rate Variability** | Latest First · Limit **1** | `vfc` | media |
 
-Y cuando eso funcione, los de lista (cientos de muestras al día — aquí es donde aparecían los números monstruosos, así que ve con cuidado):
+Y cuando eso funcione, los que se acumulan durante el día. **Energía activa y pasos van igual que en el paso 3: agrupados por día**, para que Salud mande un solo número con el total de hoy:
+
+| Dato | Type | Ajustes | Detail | Campo |
+|---|---|---|---|---|
+| Energía activa | **Active Calories** | **Group By: Day** · Fill Missing **OFF** · Latest First · Limit **1** | Value | `activas` |
+| Pasos | **Step Count** | **Group By: Day** · Fill Missing **OFF** · Latest First · Limit **1** | Value | `pasos` |
+| Sueño | **Sleep Analysis** | **End Date** *is today* | **Duration** | `sueno` (el servidor suma) |
+
+> ⚠️ **Sin *Group By: Day*, la energía activa llega mal.** Con solo *Latest First · Limit 1* el Atajo manda **la última muestra suelta** (un minuto de actividad: 1-5 kcal), no el total del día. Eso es justo lo que pasó en octubre: llegaban 1.4, 1.8, 5.4 kcal, y la app los descarta porque nadie quema menos de 50 kcal en un día entero.
+
+Opcional, para el pulso del cardio (es una lista de cientos de muestras; añádelo al final y solo si lo demás ya funciona):
 
 | Dato | Type | Ajustes | Detail | Campo | El servidor hace |
 |---|---|---|---|---|---|
-| Energía activa | **Active Calories** | Start Date *is today* · sin límite | Value | `activas` | suma |
-| Pasos | **Step Count** | Start Date *is today* · sin límite | Value | `pasos` | suma |
 | Pulso máx. cardio | **Heart Rate** | Start Date *is today* · sin límite | Value | `fcCardioMax` | máximo |
 | Pulso medio cardio | *(la misma lectura de arriba)* | — | Value | `fcCardioMedia` | media |
-| Sueño | **Sleep Analysis** | **End Date** *is today* | **Duration** | `sueno` | suma |
 
 > **El sueño filtra por *End Date*, no Start Date:** anoche empezaste a dormir *ayer* (11 pm). Con Start Date *is today* el Atajo no encontraría nada. Con End Date entra todo lo que terminó esta mañana.
 >
@@ -194,8 +201,20 @@ Shortcuts → pestaña **Automation** → **+** → **Time of Day** → una hora
 ### 6. Compruébalo en la app
 Abre la app → pestaña **Progreso** → tarjeta **Apple Watch · Salud**. Y en Entrenamiento, el panel de recuperación mostrará **"Tu cuerpo hoy"**.
 
+### Si algo no funciona
+La tarjeta **Apple Watch · Salud** revisa sola lo que llega a la nube y te dice qué pasa. Debajo, el botón **"Ver lo que mandó el Atajo"** enseña los últimos envíos tal como llegaron (sin el token).
+
+| La app dice | Qué significa | Qué hacer |
+|---|---|---|
+| *No llega nada desde el …* | La automatización no se está ejecutando | Atajos → **Automation** → tu automatización: que esté activada y en **Run Immediately**. A esa hora el iPhone tiene que estar desbloqueado (ver el paso 5). Ejecuta el Atajo a mano una vez para comprobarlo. |
+| *La energía activa llega como una sola muestra* | Falta agrupar por día | En la acción **Find Health Samples** de Active Calories: **Group By: Day** y **Fill Missing** apagado. |
+| *Envíos vacíos* | La variable del final de la URL no tiene valor | En **Get Contents of URL**, toca la variable después de `activas=` y comprueba que sea la de *Set Variable* (no un texto escrito a mano). Ejecuta el Atajo y mira qué responde. |
+| *Tu nube aún no guarda este registro* | El Code.gs publicado es anterior | Vuelve a pegar [google-apps-script.gs](google-apps-script.gs) en Code.gs y publica una **Nueva versión** (paso 4 de arriba). |
+
+Cuando lo ejecutes a mano, la respuesta debe parecerse a `{"ok":true,"dia":"2026-10-24","recibido":{"activas":"412"},"guardado":{"activas":412}}`. Si en `recibido` ves un número pequeño (menos de 50) o vacío, el problema está en el Atajo, no en la app.
+
 ### Qué hace la app con esto
-- **Energía activa** → muestra tu gasto real del día (basal 1456 + activas) y el déficit verdadero. **La meta sigue fija en 1800 kcal**: el Watch sobreestima el gasto y "comerse" las calorías del ejercicio es la forma clásica de estancar un déficit.
+- **Energía activa** → muestra tu gasto real del día (basal 1491 + activas) y el déficit verdadero. **La meta sigue fija en 1500 kcal**: el Watch sobreestima el gasto y "comerse" las calorías del ejercicio es la forma clásica de estancar un déficit.
 - **Peso** → entra solo al registro y a la gráfica, sin teclearlo. Nunca pisa un peso que hayas escrito tú a mano ese día.
 - **Sueño** → lo compara con las 7 h que indicó la nutricionista.
 - **Pulso en reposo + variabilidad** → el panel de recuperación deja de contar días y te dice cómo viene tu cuerpo hoy comparado con **tu propia media** de 14 días.

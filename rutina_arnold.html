@@ -112,6 +112,7 @@
   .setdot.done{background:var(--chalk-dim);border-color:var(--chalk);color:var(--chalk);}
   .wraplabel{display:flex;align-items:center;gap:6px;margin-left:auto;}
   .wraplabel span{font-size:11px;color:var(--text-dim);}
+  input, textarea{min-width:0;}
   .kginput{width:56px;font-family:'JetBrains Mono',monospace;font-size:12.5px;background:var(--surface2);border:1px solid var(--border-strong);border-radius:6px;color:var(--text);padding:5px 6px;}
   .kginput::placeholder{color:var(--text-dim);}
   .prevkg{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--text-dim);}
@@ -254,6 +255,32 @@
   .pesoitem .up{color:var(--iron);}
   .pritem{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);}
   .pritem:last-child{border-bottom:none;}
+  .prdia{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);padding:10px 0;cursor:pointer;list-style:none;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 6px;border-bottom:1px solid var(--border);}
+  .prdia::-webkit-details-marker{display:none;}
+  .prdia::before{content:'\25B8';}
+  .prgrupo[open] > .prdia::before{content:'\25BE';}
+  .prdia span{text-transform:none;letter-spacing:0;color:var(--text-dim);}
+  .prdia em{margin-left:auto;font-style:normal;text-transform:none;letter-spacing:0;color:var(--amber);}
+  .prsube{color:var(--chalk);}
+  .prnuevo{font-family:'JetBrains Mono',monospace;font-size:10px;padding:1px 6px;border-radius:9px;background:var(--amber-dim);color:var(--amber);vertical-align:1px;}
+  .prsin{font-size:11.5px;color:var(--text-dim);padding:6px 0 2px;line-height:1.4;}
+  details.prviejos, details.objmas, details.ibmas{margin-top:12px;}
+  details.prviejos > summary, details.objmas > summary, details.ibmas > summary{cursor:pointer;color:var(--text-muted);font-size:12.5px;}
+  .pesochart{margin:12px 0 4px;}
+  .pclectura{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-muted);min-height:16px;}
+  .pclectura b{color:var(--text);}
+  .pcsvg{display:block;width:100%;height:auto;touch-action:pan-y;}
+  .pcgrid{stroke:var(--border);stroke-width:1;}
+  .pceje{fill:var(--text-dim);font-family:'JetBrains Mono',monospace;font-size:10px;}
+  .pclinea{fill:none;stroke:var(--steel);stroke-width:2;stroke-linejoin:round;stroke-linecap:round;}
+  .pcpunto{fill:var(--steel);stroke:var(--surface1);stroke-width:2;}
+  .pcpunto.activo{stroke:var(--text);}
+  .pcguia{stroke:var(--border-strong);stroke-width:1;stroke-dasharray:3 3;}
+  .watchdiag:not(:empty){margin-top:10px;padding:10px 12px;border-radius:8px;background:var(--amber-dim);color:var(--text);font-size:12.5px;line-height:1.45;}
+  .watchlogbtn{margin-top:10px;font-size:12px;padding:7px 11px;}
+  .watchlog{margin-top:8px;display:flex;flex-direction:column;gap:6px;font-size:11.5px;color:var(--text-muted);}
+  .watchlogitem{display:flex;flex-direction:column;gap:2px;padding:6px 8px;border-radius:6px;background:var(--surface2);}
+  .watchlogitem code{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text);word-break:break-all;}
   .prname{font-size:13px;font-weight:600;}
   .prdate{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--text-dim);}
   .prkg{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--amber);font-weight:700;white-space:nowrap;}
@@ -499,32 +526,51 @@
   </div>
 
   <div id="viewBody" style="display:none;">
-    <div class="inbody">
-      <div class="ibhead">
-        <h3>InBody &middot; 09 sep 2026</h3>
-        <span class="ibscore">69<small>/100 &middot; jul 66</small></span>
-      </div>
-      <div class="ibgrid">
-        <div class="ibcell"><span>Peso</span><b>70.3 kg</b><em class="ibdelta">+0.5 kg vs julio</em></div>
-        <div class="ibcell"><span>Musculo (MME)</span><b>29.2 kg</b><em class="ibdelta ok">+1.0 kg</em></div>
-        <div class="ibcell"><span>Grasa corporal</span><b>18.4 kg</b><em class="ibdelta ok">-1.1 kg</em></div>
-        <div class="ibcell"><span>% de grasa</span><b>26.2%</b><em class="ibdelta ok">-1.8 puntos</em></div>
-        <div class="ibcell"><span>Grasa visceral</span><b>Nivel 8</b><em class="ibdelta">igual</em></div>
-        <div class="ibcell"><span>Cintura/cadera</span><b>0.97</b><em class="ibdelta">julio 0.96</em></div>
-        <div class="ibcell"><span>TMB</span><b>1491 kcal</b><em class="ibdelta ok">+35 kcal</em></div>
-        <div class="ibcell"><span>Pierna (magra)</span><b>7.9 kg</b><em class="ibdelta warn">91%, casi igual</em></div>
-      </div>
-      <div class="ibtargets">Objetivo del control: grasa <b>-8.9 kg</b> &middot; musculo <b>+2.0 kg</b> &middot; peso ideal <b>63.4 kg</b> <span style="color:var(--text-dim);">(julio: -10.0 / +3.8)</span></div>
-      <div class="ibnote">En 9 semanas: <b>-1.1 kg de grasa y +1.0 kg de musculo</b> con el peso casi igual, eso es recomposicion real. Brazos de 90% a 98% del estandar y tronco magro +1.1 kg; la grasa del tronco bajo de 261.7% a 251%. Lo que no se movio: <b>piernas</b> (91%), grasa visceral (8) y cintura/cadera (0.97). InBody sugiere 2201 kcal de mantenimiento; el plan nuevo es de 1500.</div>
-      <div class="ibnext" id="nextControl"></div>
-    </div>
-
     <div class="inbody" id="objCard">
       <div class="ibhead">
         <h3>Tus objetivos de hoy</h3>
         <span class="ibscore" id="objQuema" style="font-size:13px;"></span>
       </div>
       <div id="objBody"></div>
+    </div>
+
+    <div class="water">
+      <div class="waterhead"><h3>Registro de peso</h3><span id="pesoDiff"></span></div>
+      <div style="display:flex;gap:8px;">
+        <input class="kginput" type="text" inputmode="decimal" id="pesoInput" style="flex:1;width:auto;" placeholder="Peso de hoy (ej. 69.4)">
+        <button class="addbtn" id="pesoAddBtn" style="margin-top:0;width:auto;">Registrar</button>
+      </div>
+      <div class="pesochart" id="pesoChart"></div>
+      <div id="pesoList"></div>
+    </div>
+
+    <div class="histo">
+      <h3>Tus PRs &mdash; records personales</h3>
+      <p class="fotohint">Agrupados por dia de tu rutina. Cuando registras un peso mayor y cierras la sesion, el PR se actualiza solo.</p>
+      <div id="prList"></div>
+    </div>
+
+    <div class="water">
+      <div class="waterhead"><h3>Cintura &mdash; tu medida clave</h3><span id="cinturaResumen"></span></div>
+      <p class="fotohint">Mide a la altura del ombligo, de pie y relajado, sin apretar la cinta. Siempre a la misma hora, mejor en ayunas. La cadera, por la parte mas ancha.</p>
+      <div style="display:flex;gap:8px;">
+        <input class="kginput" type="text" inputmode="decimal" id="cinturaInput" style="flex:1;width:auto;" placeholder="Cintura (cm)">
+        <input class="kginput" type="text" inputmode="decimal" id="caderaInput" style="flex:1;width:auto;" placeholder="Cadera (cm)">
+        <button class="addbtn" id="cinturaAddBtn" style="margin-top:0;width:auto;">Registrar</button>
+      </div>
+      <div id="cinturaList"></div>
+      <div class="ibnote" id="cinturaNota"></div>
+    </div>
+
+    <div class="water">
+      <div class="waterhead"><h3>Brazo &mdash; tu medida de crecimiento</h3><span id="brazoResumen"></span></div>
+      <p class="fotohint">Brazo derecho contraido, en la parte mas ancha del biceps, sin apretar la cinta. Cada 2 semanas y siempre ANTES de entrenar: despues el brazo esta inflado y engana.</p>
+      <div style="display:flex;gap:8px;">
+        <input class="kginput" type="text" inputmode="decimal" id="brazoInput" style="flex:1;width:auto;" placeholder="Brazo contraido (cm)">
+        <button class="addbtn" id="brazoAddBtn" style="margin-top:0;width:auto;">Registrar</button>
+      </div>
+      <div id="brazoList"></div>
+      <div class="ibnote" id="brazoNota"></div>
     </div>
 
     <div class="inbody">
@@ -534,6 +580,9 @@
       </div>
       <div class="ibgrid" id="saludGrid"></div>
       <div class="ibnote" id="saludNota"></div>
+      <div class="watchdiag" id="watchDiag"></div>
+      <button class="watchlogbtn" id="watchLogBtn">Ver lo que mando el Atajo</button>
+      <div class="watchlog" id="watchLog" style="display:none;"></div>
     </div>
 
     <details class="nutriguide">
@@ -561,42 +610,26 @@
       <div id="mateBody"></div>
     </div>
 
-    <div class="water">
-      <div class="waterhead"><h3>Registro de peso</h3><span id="pesoDiff"></span></div>
-      <div style="display:flex;gap:8px;">
-        <input class="kginput" type="text" inputmode="decimal" id="pesoInput" style="flex:1;width:auto;" placeholder="Peso de hoy (ej. 69.4)">
-        <button class="addbtn" id="pesoAddBtn" style="margin-top:0;width:auto;">Registrar</button>
+    <div class="inbody">
+      <div class="ibhead">
+        <h3>InBody &middot; 09 sep 2026</h3>
+        <span class="ibscore">69<small>/100 &middot; jul 66</small></span>
       </div>
-      <div id="pesoList"></div>
-    </div>
-
-    <div class="water">
-      <div class="waterhead"><h3>Cintura &mdash; tu medida clave</h3><span id="cinturaResumen"></span></div>
-      <p class="fotohint">Mide a la altura del ombligo, de pie y relajado, sin apretar la cinta. Siempre a la misma hora, mejor en ayunas. La cadera, por la parte mas ancha.</p>
-      <div style="display:flex;gap:8px;">
-        <input class="kginput" type="text" inputmode="decimal" id="cinturaInput" style="flex:1;width:auto;" placeholder="Cintura (cm)">
-        <input class="kginput" type="text" inputmode="decimal" id="caderaInput" style="flex:1;width:auto;" placeholder="Cadera (cm)">
-        <button class="addbtn" id="cinturaAddBtn" style="margin-top:0;width:auto;">Registrar</button>
+      <div class="ibgrid">
+        <div class="ibcell"><span>Peso</span><b>70.3 kg</b><em class="ibdelta">+0.5 kg vs julio</em></div>
+        <div class="ibcell"><span>Musculo (MME)</span><b>29.2 kg</b><em class="ibdelta ok">+1.0 kg</em></div>
+        <div class="ibcell"><span>Grasa corporal</span><b>18.4 kg</b><em class="ibdelta ok">-1.1 kg</em></div>
+        <div class="ibcell"><span>% de grasa</span><b>26.2%</b><em class="ibdelta ok">-1.8 puntos</em></div>
+        <div class="ibcell"><span>Grasa visceral</span><b>Nivel 8</b><em class="ibdelta">igual</em></div>
+        <div class="ibcell"><span>Cintura/cadera</span><b>0.97</b><em class="ibdelta">julio 0.96</em></div>
+        <div class="ibcell"><span>TMB</span><b>1491 kcal</b><em class="ibdelta ok">+35 kcal</em></div>
+        <div class="ibcell"><span>Pierna (magra)</span><b>7.9 kg</b><em class="ibdelta warn">91%, casi igual</em></div>
       </div>
-      <div id="cinturaList"></div>
-      <div class="ibnote" id="cinturaNota"></div>
-    </div>
-
-    <div class="water">
-      <div class="waterhead"><h3>Brazo &mdash; tu medida de crecimiento</h3><span id="brazoResumen"></span></div>
-      <p class="fotohint">Brazo derecho contraido, en la parte mas ancha del biceps, sin apretar la cinta. Cada 2 semanas y siempre ANTES de entrenar: despues el brazo esta inflado y engana.</p>
-      <div style="display:flex;gap:8px;">
-        <input class="kginput" type="text" inputmode="decimal" id="brazoInput" style="flex:1;width:auto;" placeholder="Brazo contraido (cm)">
-        <button class="addbtn" id="brazoAddBtn" style="margin-top:0;width:auto;">Registrar</button>
-      </div>
-      <div id="brazoList"></div>
-      <div class="ibnote" id="brazoNota"></div>
-    </div>
-
-    <div class="histo">
-      <h3>Tus PRs &mdash; records personales</h3>
-      <p class="fotohint">La ultima serie va al fallo (menos sentadilla, peso muerto y zancada con barra): cuando registras un peso mayor, tu PR se actualiza solo.</p>
-      <div id="prList"></div>
+      <div class="ibtargets">Objetivo del control: grasa <b>-8.9 kg</b> &middot; musculo <b>+2.0 kg</b> &middot; peso ideal <b>63.4 kg</b> <span style="color:var(--text-dim);">(julio: -10.0 / +3.8)</span></div>
+      <details class="ibmas"><summary>Que dice tu InBody</summary>
+        <div class="ibnote">En 9 semanas: <b>-1.1 kg de grasa y +1.0 kg de musculo</b> con el peso casi igual, eso es recomposicion real. Brazos de 90% a 98% del estandar y tronco magro +1.1 kg; la grasa del tronco bajo de 261.7% a 251%. Lo que no se movio: <b>piernas</b> (91%), grasa visceral (8) y cintura/cadera (0.97). InBody sugiere 2201 kcal de mantenimiento; el plan nuevo es de 1500.</div>
+      </details>
+      <div class="ibnext" id="nextControl"></div>
     </div>
 
     <div class="histo" style="margin-top:16px;">
@@ -3021,13 +3054,16 @@ function renderGasto(){
 function renderSalud(){
   const grid = document.getElementById('saludGrid');
   if(!grid) return;
+  const diag = document.getElementById('watchDiag');
+  if(diag) diag.innerHTML = diagnosticoWatch();
   const hoy = saludDe(todayStr()), ayer = saludDe(prevIso(todayStr()));
   const h = hoy || ayer;
   const fechaEl = document.getElementById('saludFecha'), notaEl = document.getElementById('saludNota');
   if(!h || !Object.keys(h).length){
     fechaEl.textContent = '';
     grid.innerHTML = '';
-    notaEl.textContent = 'Aun no llegan datos del Apple Watch. Se conectan con un Atajo del iPhone (pasos en INSTRUCCIONES-NUBE.md): una vez configurado entran solos cada dia.';
+    // Si el diagnostico ya explica que pasa, este texto general sobra
+    notaEl.textContent = (diag && diag.innerHTML) ? '' : 'Aun no llegan datos del Apple Watch. Se conectan con un Atajo del iPhone (pasos en INSTRUCCIONES-NUBE.md): una vez configurado entran solos cada dia.';
     return;
   }
   fechaEl.textContent = hoy ? 'hoy' : prettyDate(prevIso(todayStr()));
@@ -3496,7 +3532,8 @@ function renderObjetivos(){
   // Consecuencia de cumplirlo
   const grasaSem = (DEFICIT_OBJETIVO*7)/KCAL_KG_GRASA;
   const dias = Math.round((GRASA_META*KCAL_KG_GRASA)/DEFICIT_OBJETIVO);
-  h += '<div class="matebig" style="margin-top:14px;">Cumpliendo esto <b>cada dia</b>: deficit de '+DEFICIT_OBJETIVO+' kcal, '
+  h += '<details class="objmas"><summary>Que consigues si lo cumples</summary>'
+     + '<div class="matebig" style="margin-top:10px;">Cumpliendo esto <b>cada dia</b>: deficit de '+DEFICIT_OBJETIVO+' kcal, '
      + '<b>'+grasaSem.toFixed(2)+' kg de grasa por semana</b> y el musculo protegido. '
      + 'Los -'+GRASA_META+' kg de grasa llegan en unos <b>'+Math.round(dias/30)+' meses</b>.</div>';
 
@@ -3506,7 +3543,7 @@ function renderObjetivos(){
      + '<li><b>Cerrar las 5 sesiones</b> con todas las series: el estimulo de las pesas es lo que le dice al cuerpo que conserve el musculo mientras quema grasa.</li>'
      + '<li><b>Subir el peso cuando la app te lo sugiera</b>: si mueves siempre los mismos kg, el musculo no tiene motivo para crecer.</li>'
      + '<li><b>Dormir '+META_SUENO+' h</b>: el musculo se repara durmiendo, no entrenando.</li>'
-     + '</ul>';
+     + '</ul></details>';
 
   cont.innerHTML = h;
 }
@@ -3530,7 +3567,8 @@ function renderBody(){
   } else {
     diffEl.textContent = '';
   }
-  document.getElementById('pesoList').innerHTML = log.slice(-8).reverse().map((e,i,arr)=>{
+  try{ renderPesoChart(log); }catch(e){ console.error('renderPesoChart', e); }
+  document.getElementById('pesoList').innerHTML = log.slice(-5).reverse().map((e,i,arr)=>{
     const prevE = arr[i+1];
     let d = '';
     if(prevE){
@@ -3541,11 +3579,133 @@ function renderBody(){
     return `<div class="pesoitem"><span>${prettyDateY(e.date)}</span><b>${e.kg} kg</b>${d||'<span></span>'}</div>`;
   }).join('') || '<div class="emptyfood">Registra tu primer peso.</div>';
 
-  const prs = Object.keys(app.prs||{}).sort();
-  document.getElementById('prList').innerHTML = prs.length
-    ? prs.map(n=>`<div class="pritem"><div><div class="prname">${n}</div><div class="prdate">${prettyDateY(app.prs[n].date)}</div></div><div class="prkg">${app.prs[n].kg} kg</div></div>`).join('')
+  // PRs agrupados por dia de la rutina actual, con lo que has subido desde tu primer registro.
+  // Los de la rutina anterior quedan plegados al final.
+  const prs = app.prs || {};
+  const enRutina = new Set(DAYS.flatMap(d=>d.ex.map(e=>e.n)));
+  const filaPR = n=>{
+    const pr = prs[n], h = (app.histPesos && app.histPesos[n]) || [];
+    const ini = h.length ? h[0] : null;
+    const sube = ini && pr.kg > ini.kg ? `<span class="prsube">+${Math.round((pr.kg-ini.kg)*10)/10} kg desde ${prettyDateY(ini.d)}</span>` : '';
+    const nuevo = daysSince(pr.date) <= 14 ? ' <span class="prnuevo">nuevo</span>' : '';
+    return `<div class="pritem"><div><div class="prname">${n}${nuevo}</div><div class="prdate">${prettyDateY(pr.date)}${sube ? ' &middot; ' + sube : ''}</div></div><div class="prkg">${pr.kg} kg</div></div>`;
+  };
+  const vistos = new Set();
+  const hoyId = DIA_DE_HOY[new Date().getDay()];
+  let prHtml = '';
+  SEMANA.forEach(([id, dia])=>{
+    const d = DAYS.find(x=>x.id === id);
+    // Sin calentamientos, cardio ni core: ahi no hay kg que batir
+    const nombres = d.ex.filter(e=>!e.x && e.r !== 0 && e.m !== 'Core' && !vistos.has(e.n)).map(e=>e.n);
+    nombres.forEach(n=>vistos.add(n));
+    if(!nombres.length) return;
+    const con = nombres.filter(n=>prs[n]), sin = nombres.filter(n=>!prs[n]);
+    const nuevos = con.filter(n=>daysSince(prs[n].date) <= 14).length;
+    // Cada dia plegado en una linea; abierto solo el que toca hoy
+    prHtml += `<details class="prgrupo" ${id === hoyId ? 'open' : ''}><summary class="prdia">${dia} &middot; ${d.name} <span>${d.tag}</span>`
+      + `<em>${con.length}/${nombres.length} PR${nuevos ? ' &middot; ' + nuevos + ' nuevo' + (nuevos > 1 ? 's' : '') : ''}</em></summary>`
+      + con.map(filaPR).join('')
+      + (sin.length ? `<div class="prsin">Sin PR aun: ${sin.join(' &middot; ')}</div>` : '')
+      + `</details>`;
+  });
+  const viejos = Object.keys(prs).filter(n=>!enRutina.has(n)).sort();
+  if(viejos.length) prHtml += `<details class="prviejos"><summary>Rutina anterior (${viejos.length})</summary>${viejos.map(filaPR).join('')}</details>`;
+  document.getElementById('prList').innerHTML = Object.keys(prs).length ? prHtml
     : '<div class="emptyfood">Aun no hay PRs: registra tus pesos y cierra la sesion.</div>';
 }
+
+// Peso en el tiempo: una linea, sin leyenda (el titulo la nombra). Tocar o arrastrar
+// sobre el grafico muestra la fecha y el peso de cada registro; la lista de abajo es la tabla.
+function renderPesoChart(log){
+  const el = document.getElementById('pesoChart');
+  if(!el) return;
+  const pts = log.slice(-24);
+  if(pts.length < 2){ el.innerHTML = ''; return; }
+  const W = 320, H = 130, iz = 36, de = 10, ar = 10, ab = 22;
+  const t = pts.map(e=>new Date(e.date+'T00:00:00').getTime());
+  const kgs = pts.map(e=>e.kg);
+  let lo = Math.min(...kgs), hi = Math.max(...kgs);
+  if(hi - lo < 1){ const m = (hi + lo) / 2; lo = m - 0.5; hi = m + 0.5; }
+  const x = v=>iz + (v - t[0]) / ((t[t.length-1] - t[0]) || 1) * (W - iz - de);
+  const y = v=>ar + (hi - v) / (hi - lo) * (H - ar - ab);
+  const pxs = pts.map((e,i)=>[x(t[i]), y(e.kg)]);
+  const linea = pxs.map((q,i)=>(i ? 'L' : 'M') + q[0].toFixed(1) + ' ' + q[1].toFixed(1)).join(' ');
+  const eje = v=>`<line x1="${iz}" x2="${W-de}" y1="${y(v).toFixed(1)}" y2="${y(v).toFixed(1)}" class="pcgrid"/>`
+    + `<text x="${iz-6}" y="${(y(v)+3.5).toFixed(1)}" class="pceje" text-anchor="end">${v.toFixed(1)}</text>`;
+  el.innerHTML = `<div class="pclectura" id="pcLectura"></div>
+    <svg viewBox="0 0 ${W} ${H}" class="pcsvg" role="img" aria-label="Peso en el tiempo">
+      ${eje(hi)}${eje(lo)}
+      <text x="${iz}" y="${H-6}" class="pceje">${prettyDateY(pts[0].date)}</text>
+      <text x="${W-de}" y="${H-6}" class="pceje" text-anchor="end">${prettyDateY(pts[pts.length-1].date)}</text>
+      <line id="pcGuia" class="pcguia" y1="${ar}" y2="${H-ab}" x1="0" x2="0"/>
+      <path d="${linea}" class="pclinea"/>
+      ${pxs.map((q,i)=>`<circle cx="${q[0].toFixed(1)}" cy="${q[1].toFixed(1)}" r="4" class="pcpunto" data-i="${i}"/>`).join('')}
+      <rect x="0" y="0" width="${W}" height="${H}" fill="transparent" id="pcToque"/>
+    </svg>`;
+  const lectura = document.getElementById('pcLectura'), guia = document.getElementById('pcGuia');
+  const marcar = i=>{
+    const e = pts[i], prev = pts[i-1];
+    const dif = prev ? e.kg - prev.kg : 0;
+    lectura.innerHTML = '<b>' + e.kg + ' kg</b> &middot; ' + prettyDateY(e.date)
+      + (Math.abs(dif) >= 0.05 ? ' &middot; ' + (dif > 0 ? '+' : '') + dif.toFixed(1) + ' kg' : '');
+    el.querySelectorAll('.pcpunto').forEach(c=>c.classList.toggle('activo', +c.dataset.i === i));
+    guia.setAttribute('x1', pxs[i][0]); guia.setAttribute('x2', pxs[i][0]);
+  };
+  marcar(pts.length - 1);
+  const toque = document.getElementById('pcToque');
+  const mover = ev=>{
+    const r = toque.getBoundingClientRect();
+    const vx = (ev.clientX - r.left) / r.width * W;
+    let mejor = 0;
+    pxs.forEach((q,i)=>{ if(Math.abs(q[0] - vx) < Math.abs(pxs[mejor][0] - vx)) mejor = i; });
+    marcar(mejor);
+  };
+  toque.addEventListener('pointerdown', mover);
+  toque.addEventListener('pointermove', mover);
+}
+
+function escHtml(t){
+  return String(t).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+}
+
+// Que le pasa al Atajo, leido de lo que llega a la nube: asi se arregla sin adivinar
+function diagnosticoWatch(){
+  const dias = Object.keys(salud || {}).sort();
+  if(!dias.length) return '<b>El Atajo aun no ha enviado nada.</b> Montalo con los pasos de "Conectar el Apple Watch" en INSTRUCCIONES-NUBE.md; mientras, puedes escribir los datos a mano aqui abajo.';
+  const ultimo = dias[dias.length-1];
+  const sin = daysSince(ultimo);
+  const avisos = [];
+  if(sin >= 2) avisos.push('<b>No llega nada desde el ' + prettyDateY(ultimo) + '</b> (' + sin + ' dias). La automatizacion no se esta ejecutando: en Atajos &rarr; Automatizacion revisa que este activada y en "Run Immediately", y que a esa hora el iPhone suela estar desbloqueado.');
+  const recientes = dias.slice(-10).map(d=>salud[d] || {});
+  const sueltas = recientes.map(r=>r.activas).filter(v=>typeof v === 'number' && v < 50);
+  if(sueltas.length) avisos.push('<b>La energia activa llega como una sola muestra</b> (' + sueltas.slice(-3).map(v=>v + ' kcal').join(', ') + ') y no como el total del dia, asi que la app la descarta. En "Find Health Samples" de Active Calories pon <b>Group By: Day</b> y Fill Missing apagado.');
+  const vacios = recientes.filter(r=>!Object.keys(r).length).length;
+  if(vacios) avisos.push('<b>' + vacios + (vacios > 1 ? ' envios llegaron vacios' : ' envio llego vacio') + '</b>: la variable del final de la URL no tenia valor. Pulsa "Ver lo que mando el Atajo" para ver que llega.');
+  return avisos.join('<br><br>');
+}
+document.getElementById('watchLogBtn') && document.getElementById('watchLogBtn').addEventListener('click', async ()=>{
+  const box = document.getElementById('watchLog');
+  box.style.display = '';
+  box.textContent = 'Consultando la nube...';
+  try{
+    const res = await fetch(CLOUD_URL + '?token=' + encodeURIComponent(CLOUD_TOKEN) + '&verlog=1');
+    const data = await res.json();
+    if(!data || !Array.isArray(data.log)){
+      box.textContent = 'Tu nube aun no guarda este registro: vuelve a pegar google-apps-script.gs en Code.gs y publica una version nueva.';
+      return;
+    }
+    if(!data.log.length){ box.textContent = 'El Atajo no ha mandado nada todavia.'; return; }
+    // Los ultimos envios, el mas reciente arriba, sin el token
+    box.innerHTML = data.log.slice(-6).reverse().map(l=>{
+      let q = String(l.q || '');
+      try{ q = decodeURIComponent(q.replace(/\+/g, ' ')); }catch(e){}
+      q = q.split('&').filter(x=>x && x.indexOf('token=') !== 0).join('  \u00b7  ');
+      return '<div class="watchlogitem"><span>' + escHtml(l.t || '') + '</span><code>' + escHtml(q || '(vacio)') + '</code></div>';
+    }).join('');
+  }catch(e){
+    box.textContent = 'No se pudo consultar la nube. Revisa tu conexion.';
+  }
+});
 
 /* ---------- Cintura: el indicador mas honesto del abdomen ---------- */
 const ICC_META = 0.90;   // indice cintura/cadera saludable en hombres
