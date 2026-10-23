@@ -80,10 +80,20 @@
   .extip b{color:var(--chalk);font-weight:600;}
   .exchev{color:var(--text-dim);font-size:11px;margin-left:6px;vertical-align:1px;}
   .exdemo{display:none;margin-top:9px;padding:12px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:9px;}
-  .exgif{display:block;max-width:100%;max-height:240px;margin:0 auto;border-radius:8px;background:#fff;}
   .excasa{margin-top:12px;padding-top:12px;border-top:1px dashed var(--border-strong);}
   .exdemo > .excasa:first-child{margin-top:0;padding-top:0;border-top:none;}
-  .excasa .exgif{margin:8px auto;}
+  .anim{margin:8px 0;cursor:pointer;}
+  .animfoto{margin:0 auto;border-radius:8px;background-color:#fff;background-repeat:no-repeat;background-size:100% 200%;background-position:0 0;animation:animfotos 3.6s steps(1) infinite;}
+  .anim.una .animfoto{background-size:100% 100%;animation:none;}
+  .animcap{position:relative;height:40px;margin-top:5px;border-radius:8px;background:var(--surface1);border:1px solid var(--border);font-size:12px;line-height:1.3;color:var(--text);}
+  .animcap span{position:absolute;inset:0;display:flex;align-items:center;gap:7px;padding:0 10px;}
+  .animcap b{flex:0 0 auto;width:18px;height:18px;border-radius:50%;background:var(--amber);color:#111;font-size:11px;display:flex;align-items:center;justify-content:center;}
+  .anim:not(.una) .p1{animation:animp1 3.6s steps(1) infinite;}
+  .anim:not(.una) .p2{animation:animp2 3.6s steps(1) infinite;}
+  .anim.pausa .animfoto, .anim.pausa .animcap span{animation-play-state:paused;}
+  @keyframes animfotos{0%{background-position:0 0}50%{background-position:0 100%}}
+  @keyframes animp1{0%{opacity:1}50%{opacity:0}}
+  @keyframes animp2{0%{opacity:0}50%{opacity:1}}
   .exrem .excasatit{color:#9ecdea;}
   .exremnota{font-size:11.5px;color:var(--text-muted);line-height:1.4;margin-bottom:6px;}
   .excasatit{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--chalk);margin-bottom:5px;}
@@ -234,6 +244,11 @@
   .ibdelta.ok{color:var(--chalk);}
   .ibdelta.warn{color:var(--amber);}
   .favchip.hecho{border-color:var(--chalk);color:var(--chalk);}
+  .favchip.sig{border-color:var(--amber);color:var(--amber);}
+  .macrofalta{font-size:11px;color:var(--text-muted);margin-top:6px;}
+  .addmodos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-bottom:12px;}
+  .addmodos button{font-size:12px;padding:8px 2px;border-radius:8px;border:1px solid var(--border-strong);background:var(--surface2);color:var(--text-muted);cursor:pointer;white-space:nowrap;}
+  .addmodos button.activo{border-color:var(--amber);color:var(--amber);background:var(--amber-dim);}
   .pesoitem{display:flex;justify-content:space-between;align-items:center;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px 12px;margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:12.5px;}
   .pesoitem .down{color:var(--chalk);}
   .pesoitem .up{color:var(--iron);}
@@ -344,19 +359,109 @@
       <div class="kcalsub" id="gastoHoy" style="display:none;margin-top:10px;"></div>
     </div>
     <div class="macros">
-      <div class="macro"><div class="macroname">Proteina</div><div class="macroval"><span id="pVal">0</span><span> / 120 g</span></div><div class="macrotrack"><div class="macrofill" id="pFill" style="background:var(--iron);width:0%;"></div></div></div>
+      <div class="macro"><div class="macroname">Proteina</div><div class="macroval"><span id="pVal">0</span><span> / 120 g</span></div><div class="macrotrack"><div class="macrofill" id="pFill" style="background:var(--iron);width:0%;"></div></div><div class="macrofalta" id="pFalta"></div></div>
       <div class="macro"><div class="macroname">Carbos</div><div class="macroval"><span id="cVal">0</span><span> / 190 g</span></div><div class="macrotrack"><div class="macrofill" id="cFill" style="background:var(--steel);width:0%;"></div></div></div>
       <div class="macro"><div class="macroname">Grasas</div><div class="macroval"><span id="gVal">0</span><span> / 49 g</span></div><div class="macrotrack"><div class="macrofill" id="gFill" style="background:var(--chalk);width:0%;"></div></div></div>
-    </div>
-
-    <div class="water">
-      <div class="waterhead"><h3>Agua &mdash; meta 3 L</h3><span id="waterCount">0 / 12 vasos</span></div>
-      <div class="glasses" id="glasses"></div>
     </div>
 
     <div class="favs" id="planWrap">
       <div class="favhead">Tu plan de 1500 kcal &mdash; un toque al comer cada una</div>
       <div class="favchips" id="planChips"></div>
+    </div>
+
+    <div class="favs" id="favsWrap" style="display:none;">
+      <div class="favhead">Comidas frecuentes &mdash; un toque para agregar</div>
+      <div class="favchips" id="favChips"></div>
+    </div>
+
+    <div class="favhead" style="margin-top:4px;">Lo que comiste hoy</div>
+    <div class="foodlist" id="foodList"></div>
+
+    <div class="addfood">
+      <h3>Agregar otra comida</h3>
+      <div class="addmodos" id="addModos">
+        <button data-modo="escribir">&#9999;&#65039; Escribir</button>
+        <button data-modo="dia">&#128172; Mi dia</button>
+        <button data-modo="foto">&#128247; Foto</button>
+        <button data-modo="codigo">&#128290; Codigo</button>
+      </div>
+      <div class="addmodo" data-modo="escribir">
+      <p class="fotohint">Escribe que comiste y pulsa <b>Buscar</b>: la IA rellena calorias y macros. Puedes poner cantidad ("200 g de arroz").</p>
+      <div class="addgrid">
+        <div style="display:flex;gap:8px;">
+          <input type="text" id="fName" placeholder="Ej. pan con queso" style="flex:1;">
+          <button id="fBuscarBtn" style="white-space:nowrap;">&#128269; Buscar</button>
+        </div>
+        <div class="fotostatus" id="fBuscarEstado" style="display:none;margin-top:0;"></div>
+        <div class="addrow">
+          <input type="text" inputmode="decimal" id="fKcal" placeholder="kcal">
+          <input type="text" inputmode="decimal" id="fP" placeholder="prot g">
+          <input type="text" inputmode="decimal" id="fC" placeholder="carb g">
+          <input type="text" inputmode="decimal" id="fG" placeholder="grasa g">
+        </div>
+      </div>
+      <div class="savefavrow">
+        <input type="checkbox" id="fFav" style="width:16px;height:16px;">
+        <label for="fFav">Guardar como comida frecuente</label>
+      </div>
+      <button class="addbtn" id="addFoodBtn">Agregar al dia</button>
+      </div>
+      <div class="addmodo" data-modo="dia">
+      <p class="fotohint">Cuenta de corrido lo que comiste hoy y la IA lo separa en alimentos. Ej: <i>desayune avena con leche y 3 huevos, almorce pollo con arroz</i>.</p>
+      <textarea id="diaTexto" rows="3" placeholder="Cuentame tu dia..." style="width:100%;font-family:'Inter',sans-serif;font-size:13.5px;background:var(--surface2);border:1px solid var(--border-strong);border-radius:8px;color:var(--text);padding:10px;resize:vertical;"></textarea>
+      <button class="addbtn" id="diaBtn">&#128172; Analizar mi dia</button>
+      <div class="fotostatus" id="diaEstado" style="display:none;"></div>
+      <div id="diaResultado" style="display:none;">
+        <div id="diaItems"></div>
+        <div class="fotoactions">
+          <button class="addbtn" id="diaAddBtn">Agregar todo al dia</button>
+          <button id="diaCancelBtn">Descartar</button>
+        </div>
+      </div>
+      </div>
+      <div class="addmodo" data-modo="foto">
+      <p class="fotohint">Foto de tu plato o de una etiqueta: la IA detecta los alimentos y estima calorias y macros.</p>
+      <input type="file" id="fotoInput" accept="image/*" style="display:none;">
+      <button class="addbtn" id="fotoBtn">&#128247; Analizar foto de comida</button>
+      <div class="fotostatus" id="fotoStatus" style="display:none;"></div>
+      <div id="fotoResult" style="display:none;">
+        <div id="fotoItems"></div>
+        <div class="fotoactions">
+          <button class="addbtn" id="fotoAddBtn">Agregar al dia</button>
+          <button id="fotoCancelBtn">Descartar</button>
+        </div>
+      </div>
+      </div>
+      <div class="addmodo" data-modo="codigo">
+      <p class="fotohint">Foto al codigo de barras de un producto: la app busca sus datos en Open Food Facts.</p>
+      <input type="file" id="barInput" accept="image/*" capture="environment" style="display:none;">
+      <button class="addbtn" id="barBtn">&#128290; Escanear codigo de barras</button>
+      <div class="fotostatus" id="barStatus" style="display:none;"></div>
+      <div id="barManual" style="display:none;">
+        <p class="fotohint" style="margin:10px 0 6px;">O escribe los numeros que salen debajo del codigo de barras:</p>
+        <div style="display:flex;gap:8px;">
+          <input type="text" inputmode="numeric" id="barManualCode" placeholder="Ej. 7501055310838" style="flex:1;">
+          <button id="barManualBtn" style="white-space:nowrap;">Buscar</button>
+        </div>
+      </div>
+      <div id="barResult" style="display:none;">
+        <div id="barItem"></div>
+        <div class="savefavrow" style="margin-top:10px;">
+          <label style="font-size:12px;color:var(--text-muted);">Cantidad (g)</label>
+          <input class="kginput" type="text" inputmode="decimal" id="barGrams" style="width:82px;" placeholder="g">
+          <label style="margin-left:auto;font-size:12px;color:var(--text-muted);"><input type="checkbox" id="barFav" style="width:16px;height:16px;vertical-align:-3px;margin-right:4px;">Frecuente</label>
+        </div>
+        <div class="fotoactions">
+          <button class="addbtn" id="barAddBtn">Agregar al dia</button>
+          <button id="barCancelBtn">Descartar</button>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="water">
+      <div class="waterhead"><h3>Agua &mdash; meta 3 L</h3><span id="waterCount">0 / 12 vasos</span></div>
+      <div class="glasses" id="glasses"></div>
     </div>
 
     <details class="nutriguide">
@@ -386,92 +491,6 @@
       </div>
     </details>
 
-    <div class="favs" id="favsWrap" style="display:none;">
-      <div class="favhead">Comidas frecuentes &mdash; un toque para agregar</div>
-      <div class="favchips" id="favChips"></div>
-    </div>
-
-    <div class="addfood">
-      <h3>Contar el dia entero</h3>
-      <p class="fotohint">Escribe de corrido todo lo que comiste hoy y la IA lo separa en alimentos con sus calorias y macros. Ej: <i>desayune avena con leche y 3 huevos, almorce pollo con arroz y ensalada, cene atun con palta</i>.</p>
-      <textarea id="diaTexto" rows="3" placeholder="Cuentame tu dia..." style="width:100%;font-family:'Inter',sans-serif;font-size:13.5px;background:var(--surface2);border:1px solid var(--border-strong);border-radius:8px;color:var(--text);padding:10px;resize:vertical;"></textarea>
-      <button class="addbtn" id="diaBtn">&#128172; Analizar mi dia</button>
-      <div class="fotostatus" id="diaEstado" style="display:none;"></div>
-      <div id="diaResultado" style="display:none;">
-        <div id="diaItems"></div>
-        <div class="fotoactions">
-          <button class="addbtn" id="diaAddBtn">Agregar todo al dia</button>
-          <button id="diaCancelBtn">Descartar</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="addfood">
-      <h3>Escanear producto</h3>
-      <p class="fotohint">Escanea el codigo de barras de un producto comercial (proteina, barra, yogurt, lacteo...) y la app busca sus datos nutricionales en Open Food Facts.</p>
-      <input type="file" id="barInput" accept="image/*" capture="environment" style="display:none;">
-      <button class="addbtn" id="barBtn">&#128290; Escanear codigo de barras</button>
-      <div class="fotostatus" id="barStatus" style="display:none;"></div>
-      <div id="barManual" style="display:none;">
-        <p class="fotohint" style="margin:10px 0 6px;">O escribe los numeros que salen debajo del codigo de barras:</p>
-        <div style="display:flex;gap:8px;">
-          <input type="text" inputmode="numeric" id="barManualCode" placeholder="Ej. 7501055310838" style="flex:1;">
-          <button id="barManualBtn" style="white-space:nowrap;">Buscar</button>
-        </div>
-      </div>
-      <div id="barResult" style="display:none;">
-        <div id="barItem"></div>
-        <div class="savefavrow" style="margin-top:10px;">
-          <label style="font-size:12px;color:var(--text-muted);">Cantidad (g)</label>
-          <input class="kginput" type="text" inputmode="decimal" id="barGrams" style="width:82px;" placeholder="g">
-          <label style="margin-left:auto;font-size:12px;color:var(--text-muted);"><input type="checkbox" id="barFav" style="width:16px;height:16px;vertical-align:-3px;margin-right:4px;">Frecuente</label>
-        </div>
-        <div class="fotoactions">
-          <button class="addbtn" id="barAddBtn">Agregar al dia</button>
-          <button id="barCancelBtn">Descartar</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="addfood">
-      <h3>Foto con IA</h3>
-      <p class="fotohint">Toma una foto de tu plato o de un producto/etiqueta: la IA detecta los alimentos y estima calorias y macros.</p>
-      <input type="file" id="fotoInput" accept="image/*" style="display:none;">
-      <button class="addbtn" id="fotoBtn">&#128247; Analizar foto de comida</button>
-      <div class="fotostatus" id="fotoStatus" style="display:none;"></div>
-      <div id="fotoResult" style="display:none;">
-        <div id="fotoItems"></div>
-        <div class="fotoactions">
-          <button class="addbtn" id="fotoAddBtn">Agregar al dia</button>
-          <button id="fotoCancelBtn">Descartar</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="addfood">
-      <h3>Agregar comida</h3>
-      <p class="fotohint">Escribe lo que comiste y pulsa <b>Buscar</b>: la IA rellena las calorias y macros. Puedes indicar cantidad ("2 panes con queso", "200 g de arroz").</p>
-      <div class="addgrid">
-        <div style="display:flex;gap:8px;">
-          <input type="text" id="fName" placeholder="Ej. pan con queso" style="flex:1;">
-          <button id="fBuscarBtn" style="white-space:nowrap;">&#128269; Buscar</button>
-        </div>
-        <div class="fotostatus" id="fBuscarEstado" style="display:none;margin-top:0;"></div>
-        <div class="addrow">
-          <input type="text" inputmode="decimal" id="fKcal" placeholder="kcal">
-          <input type="text" inputmode="decimal" id="fP" placeholder="prot g">
-          <input type="text" inputmode="decimal" id="fC" placeholder="carb g">
-          <input type="text" inputmode="decimal" id="fG" placeholder="grasa g">
-        </div>
-      </div>
-      <div class="savefavrow">
-        <input type="checkbox" id="fFav" style="width:16px;height:16px;">
-        <label for="fFav">Guardar como comida frecuente</label>
-      </div>
-      <button class="addbtn" id="addFoodBtn">Agregar al dia</button>
-    </div>
-
-    <div class="foodlist" id="foodList"></div>
 
     <div class="histo">
       <h3>Ultimos 7 dias (kcal vs meta)</h3>
@@ -710,26 +729,26 @@ const GRUPOS_RECUP = [
 // cada ejercicio nuevo necesita su entrada aqui.
 const CASA = {
   'Press horizontal con barra libre': { n:'Flexiones', t:'Manos algo mas anchas que los hombros y cuerpo recto. Baja el pecho casi al piso en 3 seg y empuja. Si salen mas de 20, pon los pies en una silla o una mochila con libros en la espalda.' },
-  'Aperturas en maquina': { n:'Aperturas deslizantes con toallas', t:'En piso liso, apoyado en las rodillas y con una toalla bajo cada mano. Abre los brazos deslizando las toallas hasta sentir el pecho estirado y vuelve a juntarlas apretando el pecho. Codos apenas flexionados.' },
-  'Remo agarre supino en barra T': { n:'Remo invertido bajo la mesa (palmas hacia ti)', t:'Acostado bajo una mesa FIRME, agarra el borde con las palmas hacia ti y sube el pecho hacia la mesa con el cuerpo recto. Comprueba antes que la mesa no se vuelque. Sin mesa segura: remo con la mochila cargada y el torso inclinado.' },
-  'Jalon frontal en polea (agarre prono)': { n:'Remo invertido bajo la mesa con agarre ancho', t:'Acostado bajo una mesa FIRME, agarra el borde con las manos mas abiertas que los hombros y las palmas hacia abajo. Sube el pecho hacia la mesa con el cuerpo recto llevando los codos hacia afuera y abajo. Sin barra es lo que mas se acerca al jalon; comprueba antes que la mesa no se vuelque.' },
-  'Extension vertical de codo en polea (agarre neutro)': { n:'Extension de triceps sobre la cabeza con mochila', t:'Sentado con la espalda recta, sujeta la mochila con libros por el asa con las dos manos detras de la cabeza. Codos apuntando al techo y quietos: baja hasta sentir el estiramiento y extiende arriba.' },
-  'Flexion de codo con mancuernas (agarre supino)': { n:'Curl con mochila cargada', t:'De pie, la mochila colgando de las asas y las palmas hacia arriba. Codos pegados al cuerpo: sube sin balancearte y baja en 3 seg. Quita o pon libros para caer en el rango de reps.' },
-  'Predicador en maquina (agarre supino)': { n:'Curl concentrado con garrafa o mochila', t:'Sentado, codo apoyado en la cara interna del muslo. Sube la garrafa de agua o la mochila con un brazo, aprieta arriba y baja lento hasta estirar casi del todo.' },
+  'Aperturas en maquina': { n:'Aperturas deslizantes con toallas', t:'En piso liso, en posicion de flexion o apoyado en las rodillas, con una toalla bajo cada mano (en la animacion se hace con dos barras que ruedan: es el mismo movimiento). Abre los brazos deslizando las manos hasta sentir el pecho estirado y vuelve a juntarlas apretando el pecho. Codos apenas flexionados.' },
+  'Remo agarre supino en barra T': { n:'Remo invertido bajo la mesa (palmas hacia ti)', t:'Acostado bajo una mesa FIRME, agarra el borde con las palmas hacia ti y sube el pecho hacia la mesa con el cuerpo recto, como en la animacion (ahi bajo una barra). Comprueba antes que la mesa no se vuelque. Sin mesa segura: remo con la mochila cargada y el torso inclinado.' },
+  'Jalon frontal en polea (agarre prono)': { n:'Remo invertido bajo la mesa con agarre ancho', t:'Acostado bajo una mesa FIRME, agarra el borde con las manos mas abiertas que los hombros y las palmas hacia abajo. Sube el pecho hacia la mesa con el cuerpo recto llevando los codos hacia afuera y abajo, como en la animacion (ahi bajo una barra). Sin barra es lo que mas se acerca al jalon; comprueba antes que la mesa no se vuelque.' },
+  'Extension vertical de codo en polea (agarre neutro)': { n:'Extension de triceps sobre la cabeza con mochila', t:'De pie o sentado con la espalda recta, sujeta la mochila con libros por el asa con las dos manos detras de la cabeza, como la mancuerna de la animacion. Codos apuntando al techo y quietos: baja hasta sentir el estiramiento y extiende arriba.' },
+  'Flexion de codo con mancuernas (agarre supino)': { n:'Curl con mochila cargada', t:'De pie, la mochila colgando de las asas sujeta con las dos manos y las palmas hacia arriba, como la barra de la animacion. Codos pegados al cuerpo: sube sin balancearte y baja en 3 seg. Quita o pon libros para caer en el rango de reps.' },
+  'Predicador en maquina (agarre supino)': { n:'Curl concentrado con garrafa o mochila', t:'Sentado, codo apoyado en la cara interna del muslo, como en la animacion. Sube la garrafa de agua o la mochila con un brazo en lugar de la mancuerna, aprieta arriba y baja lento hasta estirar casi del todo.' },
   'Plank isometrico libre': { n:'Igual en casa', t:'Plancha sobre los antebrazos, cuerpo recto y abdomen apretado. Cuando sea facil, levanta un pie o un brazo alternando.' },
-  'Sentadilla libre con barra': { n:'Sentadilla con mochila al pecho', t:'Abraza la mochila cargada contra el pecho. Baja en 3 seg hasta que el muslo quede paralelo, pausa 1 seg abajo y sube. Sin barra el estimulo sale de ir lento y cerca del fallo.' },
+  'Sentadilla libre con barra': { n:'Sentadilla con mochila al pecho', t:'Abraza la mochila cargada contra el pecho, como la mancuerna de la animacion. Baja en 3 seg hasta que el muslo quede paralelo, pausa 1 seg abajo y sube. Sin barra el estimulo sale de ir lento y cerca del fallo.' },
   'Prensa inclinada 45 grados': { n:'Sentadilla bulgara con el pie en una silla', t:'Empeine trasero sobre una silla o el sofa. Baja vertical hasta que la rodilla trasera casi toque el piso y empuja con el talon delantero. Si salen mas de 15 por pierna, carga la mochila.' },
-  'Extension de cuadriceps en maquina': { n:'Sentadilla sissy agarrado a la puerta', t:'Agarrado al marco de una puerta, sube a las puntas y lleva las rodillas al frente mientras el torso va atras en linea recta. Baja solo hasta donde controles. Version suave: sentadilla en la pared 45 seg.' },
+  'Extension de cuadriceps en maquina': { n:'Sentadilla sissy agarrado a la puerta', t:'Agarrado al marco de una puerta (en la animacion, a un rack), sube a las puntas y lleva las rodillas al frente mientras el torso va atras en linea recta. No hace falta el disco: tu peso basta. Baja solo hasta donde controles. Version suave: sentadilla en la pared 45 seg.' },
   'Peso muerto con barra': { n:'Peso muerto rumano a una pierna', t:'Mochila cargada en la mano contraria a la pierna de apoyo, rodilla apenas flexionada. Lleva la cadera atras bajando el torso con la espalda recta hasta sentir el isquio estirado y sube apretando el gluteo.' },
-  'Flexion de isquiotibiales sentado': { n:'Curl femoral deslizante con toalla', s:'3x8-12', t:'Boca arriba en piso liso, talones sobre una toalla y cadera levantada. Desliza los talones hacia el gluteo sin bajar la cadera y estira las piernas lento. Es duro: si no sale, estira con la cadera en el piso y solo recoge subiendola.' },
-  'Elevacion de talones en maquina sentado': { n:'Elevacion de talones a una pierna en un escalon', t:'Punta de un pie en el borde de un escalon, apoyando la mano en la pared. Baja el talon hasta estirar 1 seg y sube al maximo con pausa arriba. A una pierna, tu propio peso ya es carga suficiente.' },
-  'Elevacion de talones en maquina parado': { n:'Elevacion de talones a una pierna en un escalon', t:'Punta de un pie en el borde de un escalon y la rodilla recta, apoyando la mano en la pared. Baja el talon hasta estirar 1 seg y sube al maximo con pausa arriba. Si salen mas de 20, sostiene la mochila cargada.' },
+  'Flexion de isquiotibiales sentado': { n:'Curl femoral con pelota o toalla', s:'3x8-12', t:'Boca arriba con los talones sobre una pelota grande, como en la animacion, o sobre una toalla en piso liso. Levanta la cadera y lleva los talones hacia el gluteo sin bajarla; estira las piernas lento. Es duro: si no sale, estira con la cadera en el piso y solo recoge subiendola.' },
+  'Elevacion de talones en maquina sentado': { n:'Elevacion de talones en un escalon', t:'Puntas de los pies en el borde de un escalon y una mano en la pared, como en la animacion (ahi sobre una mancuerna). Baja los talones hasta estirar 1 seg y sube al maximo con pausa arriba. Cuando salgan 20 faciles, hazlo a una pierna.' },
+  'Elevacion de talones en maquina parado': { n:'Elevacion de talones en un escalon', t:'Puntas de los pies en el borde de un escalon, rodillas rectas y una mano en la pared, como en la animacion (ahi sobre una mancuerna). Baja los talones hasta estirar 1 seg y sube al maximo con pausa arriba. Cuando salgan 20 faciles, hazlo a una pierna o con la mochila.' },
   'Peso muerto rumano con barra': { n:'Peso muerto rumano a una pierna', t:'Mochila cargada en la mano contraria a la pierna de apoyo, rodilla apenas flexionada. Lleva la cadera atras bajando el torso con la espalda recta hasta sentir el isquio estirado y sube apretando el gluteo.' },
   'Sentadilla bulgara libre': { n:'Sentadilla bulgara con el pie en una silla', t:'Empeine trasero sobre una silla o el sofa. Baja vertical hasta que la rodilla trasera casi toque el piso y empuja con el talon delantero. Si salen mas de 15 por pierna, carga la mochila.' },
   'Abduccion de hombros en polea': { n:'Elevaciones laterales con botellas de agua', t:'Una botella llena o garrafa en cada mano. Sube liderando con los codos hasta la altura del hombro y baja en 3 seg. Con poco peso basta si no descansas arriba ni abajo.' },
   'Face pull en polea alta (cuerda)': { n:'Pajaros con botellas de agua', t:'Sentado en el borde de una silla con el torso inclinado sobre los muslos y una botella en cada mano. Abre los brazos hacia los lados con los codos semiflexionados hasta la altura de los hombros y aprieta las escapulas 1 seg. Botellas pequenas bastan.' },
   'Remo agarre neutro con mancuerna': { n:'Remo a una mano con mochila', t:'Una mano y una rodilla apoyadas en una silla, espalda plana. Tira de la mochila cargada hacia la cadera sin girar el torso y baja lento.' },
-  'Extension para dorsales con barra': { n:'Pullover en el piso con mochila', t:'Boca arriba con las rodillas flexionadas y la mochila sobre el pecho, sujeta con las dos manos. Llevala detras de la cabeza con los brazos casi rectos hasta sentir el dorsal estirado y regresala tirando con la espalda.' },
+  'Extension para dorsales con barra': { n:'Pullover con mochila en el sofa', t:'Espalda alta apoyada en el borde del sofa o la cama, como en la animacion, y la mochila sujeta con las dos manos sobre el pecho. Llevala detras de la cabeza con los brazos casi rectos hasta sentir el dorsal estirado y regresala tirando con la espalda.' },
   'Cruce de poleas de arriba hacia abajo': { n:'Flexiones con las manos en una silla', t:'Manos en el borde de una silla apoyada contra la pared y cuerpo recto: con el cuerpo inclinado asi trabaja el pecho inferior. Baja en 3 seg hasta tocar la silla con el pecho y llega a 1-2 reps del fallo.' },
   'Press inclinado con mancuernas': { n:'Flexiones con los pies en una silla', t:'Pies en una silla y manos en el piso: ese angulo carga el pecho superior, como el press inclinado. Cuerpo recto y bajada de 3 seg.' },
   'Flexion de codo en banco inclinado (mancuernas)': { n:'Curl reclinado con garrafas', t:'Recuestate en un sofa o una silla reclinada con la espalda a unos 45 grados y deja los brazos colgando hacia atras, una garrafa o botella llena en cada mano. Sube sin adelantar el codo y baja hasta estirar del todo: ahi esta el estimulo, como en el banco inclinado.' },
@@ -737,14 +756,14 @@ const CASA = {
   'Flexion de tronco en colchoneta': { n:'Igual en casa', t:'Lumbar pegada al piso, sube enrollando el tronco y exhala arriba. No tires del cuello.' },
   'Press vertical de hombros con mancuernas': { n:'Press de hombros con garrafas o mochila', t:'Sentado con la espalda recta, una garrafa llena en cada mano o la mochila cargada sujeta por las asas, a la altura de las orejas. Empuja hacia arriba sin arquear la lumbar y baja lento. Si salen mas de 15, haz flexiones pica: cadera arriba en V invertida y baja la cabeza entre las manos.' },
   'Abduccion de hombros con mancuernas': { n:'Elevaciones laterales con botellas de agua', t:'Una botella llena o garrafa en cada mano. Sube liderando con los codos hasta la altura del hombro y baja en 3 seg. Con poco peso basta si no descansas arriba ni abajo.' },
-  'Extension horizontal de codo con barra (press frances)': { n:'Extension de triceps en el borde de la mesa', t:'Manos en el borde de una mesa firme, cuerpo recto e inclinado. Flexiona solo los codos llevando la frente hacia las manos y empuja para volver. Mientras mas horizontal el cuerpo, mas dificil.' },
-  'Flexion de codo en supino con barra Z': { n:'Curl con mochila a dos manos', t:'La mochila cargada sujeta por las asas, palmas hacia arriba. Codos pegados y quietos: sube sin balancearte y baja en 3 seg.' },
+  'Extension horizontal de codo con barra (press frances)': { n:'Extension de triceps en el borde de la mesa', t:'Manos en el borde de una mesa firme (en la animacion, una barra), cuerpo recto e inclinado. Flexiona solo los codos llevando la frente hacia las manos y empuja para volver. Mientras mas horizontal el cuerpo, mas dificil.' },
+  'Flexion de codo en supino con barra Z': { n:'Curl con mochila a dos manos', t:'La mochila cargada sujeta por las asas con las palmas hacia arriba, como la barra de la animacion. Codos pegados y quietos: sube sin balancearte y baja en 3 seg.' },
   'Extension vertical de codo en polea (agarre supino)': { n:'Patada de triceps con garrafa', t:'Torso inclinado con una mano apoyada en una silla y el codo pegado al costado. Extiende el brazo hacia atras con la garrafa hasta dejarlo recto, aprieta 1 seg y vuelve.' },
   'Flexion de codo con agarre neutro alternado': { n:'Curl martillo con garrafas de agua', t:'Una garrafa o botella en cada mano con las palmas enfrentadas. Alterna los brazos con el codo fijo y baja lento.' },
   'Fondos para triceps en maquina': { n:'Fondos en una silla', t:'Silla apoyada contra la pared, manos en el borde y piernas al frente. Baja hasta codos a 90 grados con la espalda rozando la silla y sube sin encoger los hombros. Piernas estiradas, mas dificil.' },
   'Extension lumbar en banco inclinado': { n:'Superman en el piso', t:'Boca abajo, levanta a la vez pecho, brazos y piernas unos centimetros, sostiene 2 seg y baja lento. Mirada al piso, sin forzar el cuello.' },
   'Zancada con desplazamiento con barra': { n:'Zancadas caminando con mochila', t:'Mochila cargada en la espalda y pasos largos alternando piernas: rodilla trasera casi al piso y torso vertical. Si no hay espacio, zancadas hacia atras en el sitio.' },
-  'Extension de cadera en rack libre': { n:'Hip thrust a una pierna en el sofa', t:'Espalda alta apoyada en el sofa, un pie en el piso y la otra pierna en el aire. Empuja con el talon hasta dejar el tronco recto y aprieta el gluteo 2 seg. Si salen mas de 15, mochila sobre la cadera.' },
+  'Extension de cadera en rack libre': { n:'Puente de gluteo a una pierna', t:'Boca arriba en el piso, un pie apoyado y la otra pierna estirada hacia arriba, como en la animacion. Empuja con el talon hasta alinear rodilla, cadera y hombros y aprieta el gluteo 2 seg. Si salen mas de 15, apoya la espalda alta en el sofa para tener mas recorrido.' },
   'Extension de cadera con patada en maquina': { n:'Patada de gluteo en cuadrupedia', t:'En cuatro apoyos, empuja un talon hacia el techo con la rodilla a 90 grados, aprieta el gluteo 2 seg arriba y baja sin arquear la lumbar.' },
   'Abduccion de cadera en maquina sentado': { n:'Elevacion lateral de pierna de pie', t:'De pie, con una mano en el respaldo de una silla. Sube la pierna de afuera de lado con la rodilla recta y la punta mirando al frente, sin inclinar el torso; pausa 1 seg arriba y baja lento. Las 15 son por pierna.' },
   'Cardio (caminata inclinada o HIIT)': { n:'HIIT en casa o caminata afuera', t:'HIIT 20 min: 30 seg fuerte (rodillas altas, jumping jacks o burpees) y 90 seg marchando en el sitio. O camina 40 min a paso firme, mejor con subidas o escaleras.' },
@@ -758,47 +777,47 @@ const CASA = {
 };
 CASA['Jalon frontal en polea (agarre prono) 12-15'] = CASA['Jalon frontal en polea (agarre prono)'];
 
-// Animacion de cada ejercicio, por nombre: carpeta gifs/ (fotos de free-exercise-db,
+// Animacion de cada ejercicio, por nombre: carpeta anim/ (fotos de free-exercise-db,
 // dominio publico). Los calentamientos y la movilidad no llevan: son una lista de cosas.
 const GIFS = {
-  'Press horizontal con barra libre': 'barbell-bench-press-medium-grip.gif',
-  'Aperturas en maquina': 'butterfly.gif',
-  'Remo agarre supino en barra T': 't-bar-row-with-handle.gif',
-  'Jalon frontal en polea (agarre prono)': 'wide-grip-lat-pulldown.gif',
-  'Extension vertical de codo en polea (agarre neutro)': 'cable-rope-overhead-triceps-extension.gif',
-  'Flexion de codo con mancuernas (agarre supino)': 'dumbbell-alternate-bicep-curl.gif',
-  'Predicador en maquina (agarre supino)': 'machine-preacher-curls.gif',
-  'Abduccion de hombros con mancuernas': 'side-lateral-raise.gif',
-  'Plank isometrico libre': 'plank.gif',
-  'Caminata inclinada final': 'walking-treadmill.gif',
-  'Sentadilla libre con barra': 'barbell-squat.gif',
-  'Prensa inclinada 45 grados': 'leg-press.gif',
-  'Extension de cuadriceps en maquina': 'leg-extensions.gif',
-  'Peso muerto con barra': 'barbell-deadlift.gif',
-  'Flexion de isquiotibiales sentado': 'seated-leg-curl.gif',
-  'Elevacion de talones en maquina parado': 'smith-machine-calf-raise.gif',
-  'Remo agarre neutro con mancuerna': 'one-arm-dumbbell-row.gif',
-  'Extension para dorsales con barra': 'straight-arm-pulldown.gif',
-  'Press inclinado con mancuernas': 'incline-dumbbell-press.gif',
-  'Cruce de poleas de arriba hacia abajo': 'cable-crossover.gif',
-  'Jalon de triceps en polea alta (cuerda)': 'triceps-pushdown-rope-attachment.gif',
-  'Flexion de codo en banco inclinado (mancuernas)': 'incline-dumbbell-curl.gif',
-  'Abduccion de hombros en polea': 'standing-low-pulley-deltoid-raise.gif',
-  'Face pull en polea alta (cuerda)': 'face-pull.gif',
-  'Flexion de tronco en colchoneta': 'crunches.gif',
-  'Press vertical de hombros con mancuernas': 'dumbbell-shoulder-press.gif',
-  'Extension horizontal de codo con barra (press frances)': 'ez-bar-skullcrusher.gif',
-  'Flexion de codo en supino con barra Z': 'ez-bar-curl.gif',
-  'Extension vertical de codo en polea (agarre supino)': 'reverse-grip-triceps-pushdown.gif',
-  'Flexion de codo con agarre neutro alternado': 'alternate-hammer-curl.gif',
-  'Fondos para triceps en maquina': 'dip-machine.gif',
-  'Extension lumbar en banco inclinado': 'hyperextensions-back-extensions.gif',
-  'Peso muerto rumano con barra': 'romanian-deadlift.gif',
-  'Zancada con desplazamiento con barra': 'barbell-walking-lunge.gif',
-  'Extension de cadera en rack libre': 'barbell-hip-thrust.gif',
-  'Sentadilla bulgara libre': 'split-squat-with-dumbbells.gif',
-  'Abduccion de cadera en maquina sentado': 'thigh-abductor.gif',
-  'Elevacion de talones en maquina sentado': 'seated-calf-raise.gif',
+  'Press horizontal con barra libre': 'barbell-bench-press-medium-grip',
+  'Aperturas en maquina': 'butterfly',
+  'Remo agarre supino en barra T': 't-bar-row-with-handle',
+  'Jalon frontal en polea (agarre prono)': 'wide-grip-lat-pulldown',
+  'Extension vertical de codo en polea (agarre neutro)': 'cable-rope-overhead-triceps-extension',
+  'Flexion de codo con mancuernas (agarre supino)': 'dumbbell-alternate-bicep-curl',
+  'Predicador en maquina (agarre supino)': 'machine-preacher-curls',
+  'Abduccion de hombros con mancuernas': 'side-lateral-raise',
+  'Plank isometrico libre': 'plank',
+  'Caminata inclinada final': 'walking-treadmill',
+  'Sentadilla libre con barra': 'barbell-squat',
+  'Prensa inclinada 45 grados': 'leg-press',
+  'Extension de cuadriceps en maquina': 'leg-extensions',
+  'Peso muerto con barra': 'barbell-deadlift',
+  'Flexion de isquiotibiales sentado': 'seated-leg-curl',
+  'Elevacion de talones en maquina parado': 'smith-machine-calf-raise',
+  'Remo agarre neutro con mancuerna': 'one-arm-dumbbell-row',
+  'Extension para dorsales con barra': 'straight-arm-pulldown',
+  'Press inclinado con mancuernas': 'incline-dumbbell-press',
+  'Cruce de poleas de arriba hacia abajo': 'cable-crossover',
+  'Jalon de triceps en polea alta (cuerda)': 'triceps-pushdown-rope-attachment',
+  'Flexion de codo en banco inclinado (mancuernas)': 'incline-dumbbell-curl',
+  'Abduccion de hombros en polea': 'standing-low-pulley-deltoid-raise',
+  'Face pull en polea alta (cuerda)': 'face-pull',
+  'Flexion de tronco en colchoneta': 'crunches',
+  'Press vertical de hombros con mancuernas': 'dumbbell-shoulder-press',
+  'Extension horizontal de codo con barra (press frances)': 'ez-bar-skullcrusher',
+  'Flexion de codo en supino con barra Z': 'ez-bar-curl',
+  'Extension vertical de codo en polea (agarre supino)': 'reverse-grip-triceps-pushdown',
+  'Flexion de codo con agarre neutro alternado': 'alternate-hammer-curl',
+  'Fondos para triceps en maquina': 'dip-machine',
+  'Extension lumbar en banco inclinado': 'hyperextensions-back-extensions',
+  'Peso muerto rumano con barra': 'romanian-deadlift',
+  'Zancada con desplazamiento con barra': 'barbell-walking-lunge',
+  'Extension de cadera en rack libre': 'barbell-hip-thrust',
+  'Sentadilla bulgara libre': 'split-squat-with-dumbbells',
+  'Abduccion de cadera en maquina sentado': 'thigh-abductor',
+  'Elevacion de talones en maquina sentado': 'seated-calf-raise',
 };
 GIFS['Jalon frontal en polea (agarre prono) 12-15'] = GIFS['Jalon frontal en polea (agarre prono)'];
 GIFS['Cardio (caminata inclinada o HIIT)'] = GIFS['Caminata inclinada final'];
@@ -806,90 +825,282 @@ GIFS['Cardio (caminata inclinada o HIIT)'] = GIFS['Caminata inclinada final'];
 // Segunda opcion en el gym por si la maquina esta ocupada: mismo musculo y misma zona,
 // con otro equipo. Los ejercicios sin maquina (plancha, abdomen) no la necesitan.
 const REEMPLAZO = {
-  'Press horizontal con barra libre': { n:'Press con mancuernas en banco plano', g:'dumbbell-bench-press.gif', t:'Mancuernas a la altura del pecho y escapulas juntas. Empuja hasta casi juntarlas arriba y baja en 2 seg. Elige un peso que te deje las reps del rango con buena forma.' },
-  'Aperturas en maquina': { n:'Aperturas con mancuernas en banco plano', g:'dumbbell-flyes.gif', t:'Codos semiflexionados y fijos: abre los brazos en arco hasta sentir el pecho estirado y vuelve apretando, sin chocar las mancuernas arriba. Peso ligero: aqui manda el estiramiento.' },
-  'Remo agarre supino en barra T': { n:'Remo con barra inclinado', g:'bent-over-barbell-row.gif', t:'Torso inclinado a unos 45 grados y espalda recta. Agarra la barra con las palmas hacia arriba, como en la barra T, y llevala al ombligo con los codos pegados; junta las escapulas arriba.' },
-  'Jalon frontal en polea (agarre prono)': { n:'Dominadas asistidas', g:'band-assisted-pull-up.gif', t:'En la maquina de dominadas asistidas o con una banda bajo las rodillas. Agarre algo mas ancho que los hombros: sube hasta pasar la barbilla y baja del todo, sin balancearte.' },
-  'Extension vertical de codo en polea (agarre neutro)': { n:'Extension sobre la cabeza con mancuerna', g:'standing-dumbbell-triceps-extension.gif', t:'Una mancuerna sujeta con las dos manos detras de la cabeza. Codos apuntando al techo y quietos: baja hasta estirar el triceps y extiende. Sentado con respaldo cuidas mas la espalda.' },
-  'Flexion de codo con mancuernas (agarre supino)': { n:'Curl con barra', g:'barbell-curl.gif', t:'Agarre al ancho de hombros con las palmas hacia arriba y codos pegados al cuerpo. Sube sin balancear el torso y baja en 2-3 seg.' },
-  'Predicador en maquina (agarre supino)': { n:'Predicador con barra Z', g:'preacher-curl.gif', t:'Axilas apoyadas en el banco Scott y barra Z por el agarre interno. Baja controlado casi hasta estirar y sube sin despegar los brazos del pad.' },
-  'Abduccion de hombros con mancuernas': { n:'Laterales en polea', g:'standing-low-pulley-deltoid-raise.gif', t:'Polea baja del lado contrario, con el cable por delante del cuerpo. Sube el brazo de lado hasta la altura del hombro y baja lento. Las reps son por brazo.' },
-  'Abduccion de hombros en polea': { n:'Laterales con mancuernas', g:'side-lateral-raise.gif', t:'Sube liderando con los codos hasta la altura del hombro y baja en 2-3 seg, sin impulsarte con el cuerpo.' },
-  'Caminata inclinada final': { n:'Eliptica o bicicleta', g:'elliptical-trainer.gif', t:'Los mismos minutos a un ritmo en el que puedas hablar pero no cantar. La eliptica es la que mas se parece a caminar en subida.' },
-  'Cardio (caminata inclinada o HIIT)': { n:'Bicicleta estatica o eliptica', g:'bicycling-stationary.gif', t:'Los mismos minutos. Para el HIIT la bicicleta es la mas segura: 30 seg fuerte y 90 suave.' },
-  'Sentadilla libre con barra': { n:'Sentadilla en maquina Smith', g:'smith-machine-squat.gif', t:'Pies un poco adelantados respecto a la barra y espalda neutra. Baja hasta que el muslo quede paralelo y sube empujando el piso. Deja 1-2 reps en reserva.' },
-  'Prensa inclinada 45 grados': { n:'Sentadilla hack en maquina', g:'hack-squat.gif', t:'Espalda pegada al respaldo y pies al ancho de hombros en la plataforma. Baja hasta que la rodilla quede a 90 grados y empuja con toda la planta.' },
-  'Extension de cuadriceps en maquina': { n:'Sentadilla goblet', g:'goblet-squat.gif', t:'Una mancuerna pegada al pecho con las dos manos y el torso recto. Baja profundo dejando que las rodillas avancen en la linea de los pies: asi carga mas el cuadriceps.' },
-  'Peso muerto con barra': { n:'Peso muerto con barra hexagonal', g:'trap-bar-deadlift.gif', t:'Dentro de la barra hexagonal, agarra las asas y sube empujando el piso con la espalda neutra. Si no hay, hazlo con dos mancuernas pesadas y la misma tecnica. 1-2 reps en reserva.' },
-  'Flexion de isquiotibiales sentado': { n:'Curl femoral acostado', g:'lying-leg-curls.gif', t:'Boca abajo, con el rodillo sobre los tobillos y la cadera pegada al banco. Lleva los talones hacia el gluteo y baja lento.' },
-  'Elevacion de talones en maquina parado': { n:'Talones en la prensa', g:'calf-press-on-the-leg-press-machine.gif', t:'Solo la punta de los pies en el borde bajo de la plataforma y las rodillas rectas. Empuja con los dedos hasta el maximo y baja hasta estirar 1 seg.' },
-  'Remo agarre neutro con mancuerna': { n:'Remo sentado en polea baja', g:'seated-cable-rows.gif', t:'Agarre neutro (palmas enfrentadas) y espalda recta. Tira hacia el abdomen llevando los codos atras, junta las escapulas y vuelve estirando los brazos sin encorvarte.' },
-  'Extension para dorsales con barra': { n:'Pullover con mancuerna', g:'straight-arm-dumbbell-pullover.gif', t:'Espalda alta apoyada en el banco y una mancuerna sujeta con las dos manos sobre el pecho. Llevala detras de la cabeza con los brazos casi rectos y regresala tirando con el dorsal.' },
-  'Press inclinado con mancuernas': { n:'Press inclinado con barra', g:'barbell-incline-bench-press-medium-grip.gif', t:'Banco a 30-45 grados. Baja la barra a la parte alta del pecho en 2 seg y sube sin rebotar.' },
-  'Cruce de poleas de arriba hacia abajo': { n:'Fondos para pecho', g:'dips-chest-version.gif', t:'En paralelas, inclina el torso hacia adelante y abre un poco los codos: asi trabaja el pecho de abajo. Baja hasta sentir el estiramiento; si no salen 12, usa la maquina asistida.' },
-  'Jalon de triceps en polea alta (cuerda)': { n:'Patada de triceps con mancuerna', g:'tricep-dumbbell-kickback.gif', t:'Torso inclinado con una mano en el banco y el codo alto y pegado al costado. Extiende el brazo hacia atras hasta dejarlo recto y aprieta 1 seg. Las reps son por brazo.' },
-  'Flexion de codo en banco inclinado (mancuernas)': { n:'Curl arrastrado con barra', g:'drag-curl.gif', t:'Sube la barra arrastrandola pegada al torso mientras los codos van hacia atras, no adelante: asi trabaja la cabeza larga, como el curl inclinado. Baja lento hasta estirar del todo.' },
-  'Face pull en polea alta (cuerda)': { n:'Pajaros con mancuernas', g:'seated-bent-over-rear-delt-raise.gif', t:'Sentado en el borde del banco con el torso inclinado sobre los muslos. Abre los brazos hacia los lados con los codos semiflexionados hasta la altura de los hombros y aprieta atras 1 seg. Peso ligero.' },
-  'Press vertical de hombros con mancuernas': { n:'Press de hombros en maquina', g:'machine-shoulder-military-press.gif', t:'Ajusta el asiento para que las manijas queden a la altura de los hombros. Empuja hasta casi extender los brazos y baja controlado, sin arquear la lumbar.' },
-  'Extension horizontal de codo con barra (press frances)': { n:'Press frances con mancuernas', g:'lying-dumbbell-tricep-extension.gif', t:'Acostado, una mancuerna en cada mano con los brazos verticales. Baja las mancuernas junto a la cabeza moviendo solo los codos, que apuntan al techo, y extiende.' },
-  'Flexion de codo en supino con barra Z': { n:'Curl con mancuernas a la vez', g:'dumbbell-bicep-curl.gif', t:'Palmas hacia adelante y codos pegados al cuerpo. Suben las dos a la vez sin balancearte y bajan en 2-3 seg.' },
-  'Extension vertical de codo en polea (agarre supino)': { n:'Press de banca con agarre cerrado', g:'close-grip-barbell-bench-press.gif', t:'Manos al ancho de hombros y codos pegados al cuerpo al bajar. Baja la barra a la parte baja del pecho y empuja con el triceps. Deja 1-2 reps en reserva.' },
-  'Flexion de codo con agarre neutro alternado': { n:'Curl martillo en polea con cuerda', g:'cable-hammer-curls-rope-attachment.gif', t:'Polea baja con la cuerda y las palmas enfrentadas. Codos fijos al costado: sube hasta el pecho y baja lento.' },
-  'Fondos para triceps en maquina': { n:'Fondos en paralelas', g:'dips-triceps-version.gif', t:'Torso recto y codos cerrados hacia atras: asi trabaja el triceps. Baja hasta que los codos queden a 90 grados y sube sin bloquear de golpe. Si no salen 15, usa la maquina asistida.' },
-  'Extension lumbar en banco inclinado': { n:'Superman en colchoneta', g:'superman.gif', t:'Boca abajo, levanta a la vez pecho, brazos y piernas unos centimetros, sostiene 2 seg y baja lento. Mirada al piso, sin forzar el cuello.' },
-  'Peso muerto rumano con barra': { n:'Peso muerto rumano con mancuernas', g:'stiff-legged-dumbbell-deadlift.gif', t:'Mancuernas delante de los muslos y rodillas apenas flexionadas. Lleva la cadera atras bajando hasta media espinilla con la espalda recta y sube apretando el gluteo. 1-2 reps en reserva.' },
-  'Zancada con desplazamiento con barra': { n:'Zancadas con mancuernas', g:'dumbbell-lunges.gif', t:'Una mancuerna en cada mano y pasos largos: la rodilla de atras baja casi al piso con el torso vertical. Es mas estable que con barra. 1-2 reps en reserva.' },
-  'Extension de cadera en rack libre': { n:'Puente de gluteo con barra', g:'barbell-glute-bridge.gif', t:'Espalda en el piso y la barra sobre la cadera con almohadilla. Empuja con los talones hasta alinear rodillas, cadera y hombros, y aprieta el gluteo 1 seg arriba.' },
-  'Sentadilla bulgara libre': { n:'Subida al cajon con mancuernas', g:'dumbbell-step-ups.gif', t:'Cajon o banco a la altura de la rodilla. Sube empujando solo con el pie de arriba, sin impulsarte con el de abajo, y baja controlado. Las reps son por pierna.' },
-  'Abduccion de cadera en maquina sentado': { n:'Elevacion lateral de pierna de pie', g:'side-leg-raises.gif', t:'De pie, con una mano en un apoyo. Sube la pierna de afuera de lado con la rodilla recta y sin inclinar el torso; pausa 1 seg arriba. Con tobillera o polea baja, si hay. Las reps son por pierna.' },
-  'Elevacion de talones en maquina sentado': { n:'Talones sentado con mancuerna', g:'dumbbell-seated-one-leg-calf-raise.gif', t:'Sentado en el banco, con la punta del pie sobre un disco y la mancuerna apoyada en la rodilla. Sube al maximo y baja hasta estirar 1 seg. Las reps son por pierna.' },
+  'Press horizontal con barra libre': { n:'Press con mancuernas en banco plano', g:'dumbbell-bench-press', t:'Mancuernas a la altura del pecho y escapulas juntas. Empuja hasta casi juntarlas arriba y baja en 2 seg. Elige un peso que te deje las reps del rango con buena forma.' },
+  'Aperturas en maquina': { n:'Aperturas con mancuernas en banco plano', g:'dumbbell-flyes', t:'Codos semiflexionados y fijos: abre los brazos en arco hasta sentir el pecho estirado y vuelve apretando, sin chocar las mancuernas arriba. Peso ligero: aqui manda el estiramiento.' },
+  'Remo agarre supino en barra T': { n:'Remo con barra inclinado', g:'bent-over-barbell-row', t:'Torso inclinado a unos 45 grados y espalda recta. Agarra la barra con las palmas hacia arriba, como en la barra T, y llevala al ombligo con los codos pegados; junta las escapulas arriba.' },
+  'Jalon frontal en polea (agarre prono)': { n:'Dominadas asistidas', g:'band-assisted-pull-up', t:'En la maquina de dominadas asistidas o con una banda bajo las rodillas. Agarre algo mas ancho que los hombros: sube hasta pasar la barbilla y baja del todo, sin balancearte.' },
+  'Extension vertical de codo en polea (agarre neutro)': { n:'Extension sobre la cabeza con mancuerna', g:'standing-dumbbell-triceps-extension', t:'Una mancuerna sujeta con las dos manos detras de la cabeza. Codos apuntando al techo y quietos: baja hasta estirar el triceps y extiende. Sentado con respaldo cuidas mas la espalda.' },
+  'Flexion de codo con mancuernas (agarre supino)': { n:'Curl con barra', g:'barbell-curl', t:'Agarre al ancho de hombros con las palmas hacia arriba y codos pegados al cuerpo. Sube sin balancear el torso y baja en 2-3 seg.' },
+  'Predicador en maquina (agarre supino)': { n:'Predicador con barra Z', g:'preacher-curl', t:'Axilas apoyadas en el banco Scott y barra Z por el agarre interno. Baja controlado casi hasta estirar y sube sin despegar los brazos del pad.' },
+  'Abduccion de hombros con mancuernas': { n:'Laterales en polea', g:'standing-low-pulley-deltoid-raise', t:'Polea baja del lado contrario, con el cable por delante del cuerpo. Sube el brazo de lado hasta la altura del hombro y baja lento. Las reps son por brazo.' },
+  'Abduccion de hombros en polea': { n:'Laterales con mancuernas', g:'side-lateral-raise', t:'Sube liderando con los codos hasta la altura del hombro y baja en 2-3 seg, sin impulsarte con el cuerpo.' },
+  'Caminata inclinada final': { n:'Eliptica o bicicleta', g:'elliptical-trainer', t:'Los mismos minutos a un ritmo en el que puedas hablar pero no cantar. La eliptica es la que mas se parece a caminar en subida.' },
+  'Cardio (caminata inclinada o HIIT)': { n:'Bicicleta estatica o eliptica', g:'bicycling-stationary', t:'Los mismos minutos. Para el HIIT la bicicleta es la mas segura: 30 seg fuerte y 90 suave.' },
+  'Sentadilla libre con barra': { n:'Sentadilla en maquina Smith', g:'smith-machine-squat', t:'Pies un poco adelantados respecto a la barra y espalda neutra. Baja hasta que el muslo quede paralelo y sube empujando el piso. Deja 1-2 reps en reserva.' },
+  'Prensa inclinada 45 grados': { n:'Sentadilla hack en maquina', g:'hack-squat', t:'Espalda pegada al respaldo y pies al ancho de hombros en la plataforma. Baja hasta que la rodilla quede a 90 grados y empuja con toda la planta.' },
+  'Extension de cuadriceps en maquina': { n:'Sentadilla goblet', g:'goblet-squat', t:'Una mancuerna pegada al pecho con las dos manos y el torso recto. Baja profundo dejando que las rodillas avancen en la linea de los pies: asi carga mas el cuadriceps.' },
+  'Peso muerto con barra': { n:'Peso muerto con barra hexagonal', g:'trap-bar-deadlift', t:'Dentro de la barra hexagonal, agarra las asas y sube empujando el piso con la espalda neutra. Si no hay, hazlo con dos mancuernas pesadas y la misma tecnica. 1-2 reps en reserva.' },
+  'Flexion de isquiotibiales sentado': { n:'Curl femoral acostado', g:'lying-leg-curls', t:'Boca abajo, con el rodillo sobre los tobillos y la cadera pegada al banco. Lleva los talones hacia el gluteo y baja lento.' },
+  'Elevacion de talones en maquina parado': { n:'Talones en la prensa', g:'calf-press-on-the-leg-press-machine', t:'Solo la punta de los pies en el borde bajo de la plataforma y las rodillas rectas. Empuja con los dedos hasta el maximo y baja hasta estirar 1 seg.' },
+  'Remo agarre neutro con mancuerna': { n:'Remo sentado en polea baja', g:'seated-cable-rows', t:'Agarre neutro (palmas enfrentadas) y espalda recta. Tira hacia el abdomen llevando los codos atras, junta las escapulas y vuelve estirando los brazos sin encorvarte.' },
+  'Extension para dorsales con barra': { n:'Pullover con mancuerna', g:'straight-arm-dumbbell-pullover', t:'Espalda alta apoyada en el banco y una mancuerna sujeta con las dos manos sobre el pecho. Llevala detras de la cabeza con los brazos casi rectos y regresala tirando con el dorsal.' },
+  'Press inclinado con mancuernas': { n:'Press inclinado con barra', g:'barbell-incline-bench-press-medium-grip', t:'Banco a 30-45 grados. Baja la barra a la parte alta del pecho en 2 seg y sube sin rebotar.' },
+  'Cruce de poleas de arriba hacia abajo': { n:'Fondos para pecho', g:'dips-chest-version', t:'En paralelas, inclina el torso hacia adelante y abre un poco los codos: asi trabaja el pecho de abajo. Baja hasta sentir el estiramiento; si no salen 12, usa la maquina asistida.' },
+  'Jalon de triceps en polea alta (cuerda)': { n:'Patada de triceps con mancuerna', g:'tricep-dumbbell-kickback', t:'Torso inclinado con una mano en el banco y el codo alto y pegado al costado. Extiende el brazo hacia atras hasta dejarlo recto y aprieta 1 seg. Las reps son por brazo.' },
+  'Flexion de codo en banco inclinado (mancuernas)': { n:'Curl arrastrado con barra', g:'drag-curl', t:'Sube la barra arrastrandola pegada al torso mientras los codos van hacia atras, no adelante: asi trabaja la cabeza larga, como el curl inclinado. Baja lento hasta estirar del todo.' },
+  'Face pull en polea alta (cuerda)': { n:'Pajaros con mancuernas', g:'seated-bent-over-rear-delt-raise', t:'Sentado en el borde del banco con el torso inclinado sobre los muslos. Abre los brazos hacia los lados con los codos semiflexionados hasta la altura de los hombros y aprieta atras 1 seg. Peso ligero.' },
+  'Press vertical de hombros con mancuernas': { n:'Press de hombros en maquina', g:'machine-shoulder-military-press', t:'Ajusta el asiento para que las manijas queden a la altura de los hombros. Empuja hasta casi extender los brazos y baja controlado, sin arquear la lumbar.' },
+  'Extension horizontal de codo con barra (press frances)': { n:'Press frances con mancuernas', g:'lying-dumbbell-tricep-extension', t:'Acostado, una mancuerna en cada mano con los brazos verticales. Baja las mancuernas junto a la cabeza moviendo solo los codos, que apuntan al techo, y extiende.' },
+  'Flexion de codo en supino con barra Z': { n:'Curl con mancuernas a la vez', g:'dumbbell-bicep-curl', t:'Palmas hacia adelante y codos pegados al cuerpo. Suben las dos a la vez sin balancearte y bajan en 2-3 seg.' },
+  'Extension vertical de codo en polea (agarre supino)': { n:'Press de banca con agarre cerrado', g:'close-grip-barbell-bench-press', t:'Manos al ancho de hombros y codos pegados al cuerpo al bajar. Baja la barra a la parte baja del pecho y empuja con el triceps. Deja 1-2 reps en reserva.' },
+  'Flexion de codo con agarre neutro alternado': { n:'Curl martillo en polea con cuerda', g:'cable-hammer-curls-rope-attachment', t:'Polea baja con la cuerda y las palmas enfrentadas. Codos fijos al costado: sube hasta el pecho y baja lento.' },
+  'Fondos para triceps en maquina': { n:'Fondos en paralelas', g:'dips-triceps-version', t:'Torso recto y codos cerrados hacia atras: asi trabaja el triceps. Baja hasta que los codos queden a 90 grados y sube sin bloquear de golpe. Si no salen 15, usa la maquina asistida.' },
+  'Extension lumbar en banco inclinado': { n:'Superman en colchoneta', g:'superman', t:'Boca abajo, levanta a la vez pecho, brazos y piernas unos centimetros, sostiene 2 seg y baja lento. Mirada al piso, sin forzar el cuello.' },
+  'Peso muerto rumano con barra': { n:'Peso muerto rumano con mancuernas', g:'stiff-legged-dumbbell-deadlift', t:'Mancuernas delante de los muslos y rodillas apenas flexionadas. Lleva la cadera atras bajando hasta media espinilla con la espalda recta y sube apretando el gluteo. 1-2 reps en reserva.' },
+  'Zancada con desplazamiento con barra': { n:'Zancadas con mancuernas', g:'dumbbell-lunges', t:'Una mancuerna en cada mano y pasos largos: la rodilla de atras baja casi al piso con el torso vertical. Es mas estable que con barra. 1-2 reps en reserva.' },
+  'Extension de cadera en rack libre': { n:'Puente de gluteo con barra', g:'barbell-glute-bridge', t:'Espalda en el piso y la barra sobre la cadera con almohadilla. Empuja con los talones hasta alinear rodillas, cadera y hombros, y aprieta el gluteo 1 seg arriba.' },
+  'Sentadilla bulgara libre': { n:'Subida al cajon con mancuernas', g:'dumbbell-step-ups', t:'Cajon o banco a la altura de la rodilla. Sube empujando solo con el pie de arriba, sin impulsarte con el de abajo, y baja controlado. Las reps son por pierna.' },
+  'Abduccion de cadera en maquina sentado': { n:'Elevacion lateral de pierna de pie', g:'side-leg-raises', t:'De pie, con una mano en un apoyo. Sube la pierna de afuera de lado con la rodilla recta y sin inclinar el torso; pausa 1 seg arriba. Con tobillera o polea baja, si hay. Las reps son por pierna.' },
+  'Elevacion de talones en maquina sentado': { n:'Talones sentado con mancuerna', g:'dumbbell-seated-one-leg-calf-raise', t:'Sentado en el banco, con la punta del pie sobre un disco y la mancuerna apoyada en la rodilla. Sube al maximo y baja hasta estirar 1 seg. Las reps son por pierna.' },
 };
 REEMPLAZO['Jalon frontal en polea (agarre prono) 12-15'] = REEMPLAZO['Jalon frontal en polea (agarre prono)'];
 
 // Gif de la version en casa de cada ejercicio (ver CASA)
 const CASA_GIFS = {
-  'Press horizontal con barra libre': 'pushups.gif',
-  'Aperturas en maquina': 'bodyweight-flyes.gif',
-  'Remo agarre supino en barra T': 'inverted-row.gif',
-  'Jalon frontal en polea (agarre prono)': 'inverted-row.gif',
-  'Jalon frontal en polea (agarre prono) 12-15': 'inverted-row.gif',
-  'Extension vertical de codo en polea (agarre neutro)': 'standing-dumbbell-triceps-extension.gif',
-  'Flexion de codo con mancuernas (agarre supino)': 'barbell-curl.gif',
-  'Predicador en maquina (agarre supino)': 'concentration-curls.gif',
-  'Abduccion de hombros con mancuernas': 'side-lateral-raise.gif',
-  'Plank isometrico libre': 'plank.gif',
-  'Sentadilla libre con barra': 'goblet-squat.gif',
-  'Prensa inclinada 45 grados': 'split-squat-with-dumbbells.gif',
-  'Extension de cuadriceps en maquina': 'weighted-sissy-squat.gif',
-  'Peso muerto con barra': 'kettlebell-one-legged-deadlift.gif',
-  'Flexion de isquiotibiales sentado': 'ball-leg-curl.gif',
-  'Elevacion de talones en maquina parado': 'calf-raise-on-a-dumbbell.gif',
-  'Remo agarre neutro con mancuerna': 'one-arm-dumbbell-row.gif',
-  'Extension para dorsales con barra': 'straight-arm-dumbbell-pullover.gif',
-  'Press inclinado con mancuernas': 'decline-push-up.gif',
-  'Cruce de poleas de arriba hacia abajo': 'incline-push-up.gif',
-  'Jalon de triceps en polea alta (cuerda)': 'push-ups-close-triceps-position.gif',
-  'Abduccion de hombros en polea': 'side-lateral-raise.gif',
-  'Face pull en polea alta (cuerda)': 'seated-bent-over-rear-delt-raise.gif',
-  'Flexion de tronco en colchoneta': 'crunches.gif',
-  'Extension horizontal de codo con barra (press frances)': 'body-tricep-press.gif',
-  'Flexion de codo en supino con barra Z': 'barbell-curl.gif',
-  'Extension vertical de codo en polea (agarre supino)': 'tricep-dumbbell-kickback.gif',
-  'Flexion de codo con agarre neutro alternado': 'hammer-curls.gif',
-  'Fondos para triceps en maquina': 'bench-dips.gif',
-  'Extension lumbar en banco inclinado': 'superman.gif',
-  'Peso muerto rumano con barra': 'kettlebell-one-legged-deadlift.gif',
-  'Zancada con desplazamiento con barra': 'bodyweight-walking-lunge.gif',
-  'Extension de cadera en rack libre': 'single-leg-glute-bridge.gif',
-  'Sentadilla bulgara libre': 'split-squat-with-dumbbells.gif',
-  'Abduccion de cadera en maquina sentado': 'side-leg-raises.gif',
-  'Elevacion de talones en maquina sentado': 'calf-raise-on-a-dumbbell.gif',
-  'Flexion de codo en banco inclinado (mancuernas)': 'incline-dumbbell-curl.gif',
-  'Press vertical de hombros con mancuernas': 'dumbbell-shoulder-press.gif',
+  'Press horizontal con barra libre': 'pushups',
+  'Aperturas en maquina': 'bodyweight-flyes',
+  'Remo agarre supino en barra T': 'inverted-row',
+  'Jalon frontal en polea (agarre prono)': 'inverted-row',
+  'Jalon frontal en polea (agarre prono) 12-15': 'inverted-row',
+  'Extension vertical de codo en polea (agarre neutro)': 'standing-dumbbell-triceps-extension',
+  'Flexion de codo con mancuernas (agarre supino)': 'barbell-curl',
+  'Predicador en maquina (agarre supino)': 'concentration-curls',
+  'Abduccion de hombros con mancuernas': 'side-lateral-raise',
+  'Plank isometrico libre': 'plank',
+  'Sentadilla libre con barra': 'goblet-squat',
+  'Prensa inclinada 45 grados': 'split-squat-with-dumbbells',
+  'Extension de cuadriceps en maquina': 'weighted-sissy-squat',
+  'Peso muerto con barra': 'kettlebell-one-legged-deadlift',
+  'Flexion de isquiotibiales sentado': 'ball-leg-curl',
+  'Elevacion de talones en maquina parado': 'calf-raise-on-a-dumbbell',
+  'Remo agarre neutro con mancuerna': 'one-arm-dumbbell-row',
+  'Extension para dorsales con barra': 'straight-arm-dumbbell-pullover',
+  'Press inclinado con mancuernas': 'decline-push-up',
+  'Cruce de poleas de arriba hacia abajo': 'incline-push-up',
+  'Jalon de triceps en polea alta (cuerda)': 'push-ups-close-triceps-position',
+  'Abduccion de hombros en polea': 'side-lateral-raise',
+  'Face pull en polea alta (cuerda)': 'seated-bent-over-rear-delt-raise',
+  'Flexion de tronco en colchoneta': 'crunches',
+  'Extension horizontal de codo con barra (press frances)': 'body-tricep-press',
+  'Flexion de codo en supino con barra Z': 'barbell-curl',
+  'Extension vertical de codo en polea (agarre supino)': 'tricep-dumbbell-kickback',
+  'Flexion de codo con agarre neutro alternado': 'hammer-curls',
+  'Fondos para triceps en maquina': 'bench-dips',
+  'Extension lumbar en banco inclinado': 'superman',
+  'Peso muerto rumano con barra': 'kettlebell-one-legged-deadlift',
+  'Zancada con desplazamiento con barra': 'bodyweight-walking-lunge',
+  'Extension de cadera en rack libre': 'single-leg-glute-bridge',
+  'Sentadilla bulgara libre': 'split-squat-with-dumbbells',
+  'Abduccion de cadera en maquina sentado': 'side-leg-raises',
+  'Elevacion de talones en maquina sentado': 'calf-raise-on-a-dumbbell',
+  'Flexion de codo en banco inclinado (mancuernas)': 'incline-dumbbell-curl',
+  'Press vertical de hombros con mancuernas': 'dumbbell-shoulder-press',
 };
-// data-src: el gif se descarga solo al abrir el ejercicio, no al pintar el dia
-function gifTag(archivo, nombre){
-  return archivo ? `<img class="exgif" data-src="gifs/${archivo}" alt="Como se hace: ${nombre}">` : '';
+// Cada animacion es una tira con sus fotos apiladas (anim/<id>.jpg): [ancho, alto, fotos]
+const ANIM = {
+  'alternate-hammer-curl': [360, 240, 2],
+  'ball-leg-curl': [360, 240, 2],
+  'band-assisted-pull-up': [173, 260, 2],
+  'barbell-bench-press-medium-grip': [360, 240, 2],
+  'barbell-curl': [360, 240, 2],
+  'barbell-deadlift': [360, 240, 2],
+  'barbell-glute-bridge': [360, 240, 2],
+  'barbell-hip-thrust': [360, 240, 2],
+  'barbell-incline-bench-press-medium-grip': [360, 240, 2],
+  'barbell-squat': [360, 240, 2],
+  'barbell-walking-lunge': [360, 240, 2],
+  'bench-dips': [360, 240, 2],
+  'bent-over-barbell-row': [360, 240, 2],
+  'bicycling-stationary': [360, 241, 1],
+  'body-tricep-press': [173, 260, 2],
+  'bodyweight-flyes': [360, 240, 2],
+  'bodyweight-walking-lunge': [360, 240, 2],
+  'butterfly': [360, 240, 2],
+  'cable-crossover': [360, 240, 2],
+  'cable-hammer-curls-rope-attachment': [360, 240, 2],
+  'cable-rope-overhead-triceps-extension': [360, 240, 2],
+  'calf-press-on-the-leg-press-machine': [360, 240, 2],
+  'calf-raise-on-a-dumbbell': [360, 240, 2],
+  'close-grip-barbell-bench-press': [360, 240, 2],
+  'concentration-curls': [360, 240, 2],
+  'crunches': [360, 240, 2],
+  'decline-push-up': [360, 240, 2],
+  'dip-machine': [360, 240, 2],
+  'dips-chest-version': [360, 240, 2],
+  'dips-triceps-version': [360, 240, 2],
+  'drag-curl': [360, 240, 2],
+  'dumbbell-alternate-bicep-curl': [360, 240, 2],
+  'dumbbell-bench-press': [360, 240, 2],
+  'dumbbell-bicep-curl': [360, 240, 2],
+  'dumbbell-flyes': [360, 240, 2],
+  'dumbbell-lunges': [360, 240, 2],
+  'dumbbell-seated-one-leg-calf-raise': [360, 240, 2],
+  'dumbbell-shoulder-press': [360, 240, 2],
+  'dumbbell-step-ups': [360, 240, 2],
+  'elliptical-trainer': [360, 241, 1],
+  'ez-bar-curl': [360, 240, 2],
+  'ez-bar-skullcrusher': [360, 240, 2],
+  'face-pull': [360, 240, 2],
+  'goblet-squat': [360, 241, 2],
+  'hack-squat': [260, 260, 2],
+  'hammer-curls': [360, 240, 2],
+  'hyperextensions-back-extensions': [360, 240, 2],
+  'incline-dumbbell-curl': [360, 240, 2],
+  'incline-dumbbell-press': [360, 240, 2],
+  'incline-push-up': [360, 240, 2],
+  'inverted-row': [360, 240, 2],
+  'kettlebell-one-legged-deadlift': [360, 241, 2],
+  'leg-extensions': [360, 240, 2],
+  'leg-press': [360, 240, 2],
+  'lying-dumbbell-tricep-extension': [360, 240, 2],
+  'lying-leg-curls': [360, 240, 2],
+  'machine-preacher-curls': [360, 240, 2],
+  'machine-shoulder-military-press': [360, 240, 2],
+  'one-arm-dumbbell-row': [360, 240, 2],
+  'plank': [360, 240, 1],
+  'preacher-curl': [360, 240, 2],
+  'push-ups-close-triceps-position': [360, 240, 2],
+  'pushups': [360, 240, 2],
+  'reverse-grip-triceps-pushdown': [360, 240, 2],
+  'romanian-deadlift': [360, 240, 2],
+  'seated-bent-over-rear-delt-raise': [360, 240, 2],
+  'seated-cable-rows': [360, 240, 2],
+  'seated-calf-raise': [360, 240, 2],
+  'seated-leg-curl': [360, 240, 2],
+  'side-lateral-raise': [360, 240, 2],
+  'side-leg-raises': [360, 240, 2],
+  'single-leg-glute-bridge': [360, 240, 2],
+  'smith-machine-calf-raise': [173, 260, 2],
+  'smith-machine-squat': [360, 240, 2],
+  'split-squat-with-dumbbells': [173, 260, 2],
+  'standing-dumbbell-triceps-extension': [360, 240, 2],
+  'standing-low-pulley-deltoid-raise': [360, 240, 2],
+  'stiff-legged-dumbbell-deadlift': [360, 240, 2],
+  'straight-arm-dumbbell-pullover': [360, 240, 2],
+  'straight-arm-pulldown': [360, 240, 2],
+  'superman': [360, 240, 2],
+  't-bar-row-with-handle': [173, 260, 2],
+  'thigh-abductor': [360, 240, 2],
+  'trap-bar-deadlift': [173, 260, 2],
+  'tricep-dumbbell-kickback': [360, 240, 2],
+  'triceps-pushdown-rope-attachment': [360, 240, 2],
+  'walking-treadmill': [360, 241, 1],
+  'weighted-sissy-squat': [360, 240, 2],
+  'wide-grip-lat-pulldown': [360, 240, 2],
+};
+// Lo que dice la tecnica, en el momento de cada foto: el texto 1 va con la primera
+// foto y el 2 con la segunda, y cambian a la vez que la imagen
+const PASOS = {
+  'alternate-hammer-curl': ['Palmas enfrentadas y codo pegado al costado', 'Sube un brazo, baja lento y sigue con el otro'],
+  'ball-leg-curl': ['Cadera arriba y piernas estiradas sobre el apoyo', 'Lleva los talones al gluteo sin bajar la cadera'],
+  'band-assisted-pull-up': ['Cuelga con los brazos estirados', 'Sube hasta pasar la barbilla, sin balancearte'],
+  'barbell-bench-press-medium-grip': ['Arriba: brazos estirados y escapulas juntas', 'Baja la barra al pecho medio en 2 seg y empuja'],
+  'barbell-curl': ['Abajo, con los codos pegados al cuerpo', 'Sube sin balancear el torso y baja en 2-3 seg'],
+  'barbell-deadlift': ['Barra pegada a las piernas y espalda neutra', 'Empuja el piso y cierra con la cadera'],
+  'barbell-glute-bridge': ['Espalda en el piso y barra sobre la cadera', 'Sube con los talones y aprieta el gluteo 1 seg'],
+  'barbell-hip-thrust': ['Espalda alta en el banco, cadera abajo', 'Tronco paralelo al piso: aprieta el gluteo 1 seg'],
+  'barbell-incline-bench-press-medium-grip': ['Arriba: brazos estirados sobre el pecho alto', 'Baja a la parte alta del pecho en 2 seg'],
+  'barbell-squat': ['Barra en los trapecios, pies al ancho de hombros', 'Muslo paralelo y rodillas en la linea de los pies'],
+  'barbell-walking-lunge': ['Torso vertical: da un paso largo', 'La rodilla de atras baja casi al piso'],
+  'bench-dips': ['Manos en el borde y brazos estirados', 'Baja hasta codos a 90 grados, la espalda rozando'],
+  'bent-over-barbell-row': ['Torso inclinado, espalda recta y brazos colgando', 'Al ombligo con los codos pegados; junta escapulas'],
+  'bicycling-stationary': ['Ritmo en el que puedas hablar pero no cantar'],
+  'body-tricep-press': ['Cuerpo recto e inclinado, brazos estirados', 'Dobla solo los codos y lleva la frente a las manos'],
+  'bodyweight-flyes': ['Posicion de flexion con las manos bajo el pecho', 'Abre los brazos deslizando hasta estirar el pecho'],
+  'bodyweight-walking-lunge': ['Torso vertical: da un paso largo', 'La rodilla de atras baja casi al piso'],
+  'butterfly': ['Junta los brazos al frente y aprieta el pecho 1 seg', 'Abre lento hasta sentir el estiramiento'],
+  'cable-crossover': ['Poleas altas, brazos abiertos y codos fijos', 'Cruza las manos frente a la cadera y aprieta'],
+  'cable-hammer-curls-rope-attachment': ['Palmas enfrentadas y codos fijos al costado', 'Sube la cuerda hasta el pecho y baja lento'],
+  'cable-rope-overhead-triceps-extension': ['Codos junto a la cabeza: baja hasta estirar', 'Extiende arriba sin mover los codos'],
+  'calf-press-on-the-leg-press-machine': ['Solo las puntas en la plataforma: estira 1 seg', 'Empuja con los dedos hasta el maximo'],
+  'calf-raise-on-a-dumbbell': ['Puntas en el borde: baja los talones y estira', 'Sube al maximo con pausa arriba'],
+  'close-grip-barbell-bench-press': ['Manos al ancho de hombros, barra al pecho bajo', 'Empuja con el triceps y los codos pegados'],
+  'concentration-curls': ['Codo en el muslo y el brazo casi estirado', 'Sube, aprieta arriba y baja lento'],
+  'crunches': ['Lumbar pegada al piso', 'Sube enrollando el tronco y exhala, sin tirar del cuello'],
+  'decline-push-up': ['Pies elevados, cuerpo recto y brazos estirados', 'Baja el pecho en 3 seg y empuja'],
+  'dip-machine': ['Codos cerrados hacia atras, a 90 grados', 'Empuja hasta extender, sin bloquear de golpe'],
+  'dips-chest-version': ['Arriba, con el torso inclinado hacia adelante', 'Baja con los codos algo abiertos hasta estirar el pecho'],
+  'dips-triceps-version': ['Abajo: codos cerrados a 90 grados', 'Sube con el torso recto hasta extender'],
+  'drag-curl': ['Barra pegada a los muslos', 'Sube arrastrandola por el torso, codos hacia atras'],
+  'dumbbell-alternate-bicep-curl': ['Sube girando la muneca hasta que el menique quede arriba', 'Baja en 2-3 seg y sube el otro brazo'],
+  'dumbbell-bench-press': ['Mancuernas a la altura del pecho, escapulas juntas', 'Empuja hasta casi juntarlas arriba'],
+  'dumbbell-bicep-curl': ['Palmas al frente y codos pegados', 'Suben las dos a la vez, sin balancearte'],
+  'dumbbell-flyes': ['Arriba, con los codos semiflexionados y fijos', 'Abre en arco hasta sentir el pecho estirado'],
+  'dumbbell-lunges': ['Un peso en cada mano y el torso recto', 'Paso largo: la rodilla de atras casi al piso'],
+  'dumbbell-seated-one-leg-calf-raise': ['Punta sobre el disco: baja el talon y estira', 'Sube al maximo con el peso sobre la rodilla'],
+  'dumbbell-shoulder-press': ['Peso a la altura de las orejas', 'Empuja arriba sin arquear la lumbar'],
+  'dumbbell-step-ups': ['Arriba: la pierna de apoyo estirada', 'Todo el pie en el cajon; sube solo con esa pierna'],
+  'elliptical-trainer': ['Mismos minutos, a un ritmo en el que puedas hablar'],
+  'ez-bar-curl': ['Barra abajo y codos pegados al torso', 'Sube sin balancearte y baja en 2-3 seg'],
+  'ez-bar-skullcrusher': ['Brazos verticales con la barra sobre el pecho', 'Baja hacia la frente moviendo solo los codos'],
+  'face-pull': ['Cuerda a la altura de la cara, brazos estirados', 'Tira a la frente con los codos altos; aprieta 1 seg'],
+  'goblet-squat': ['Peso pegado al pecho y torso recto', 'Baja profundo con las rodillas en la linea de los pies'],
+  'hack-squat': ['Espalda pegada al respaldo, piernas estiradas', 'Baja hasta 90 grados y empuja con toda la planta'],
+  'hammer-curls': ['Palmas enfrentadas y codo fijo al costado', 'Sube y baja lento, sin columpiar el torso'],
+  'hyperextensions-back-extensions': ['Cuerpo en linea recta, sin pasarte hacia atras', 'Baja con la espalda neutra y vuelve a subir'],
+  'incline-dumbbell-curl': ['Espalda reclinada y brazos colgando atras', 'Sube sin adelantar el codo; baja hasta estirar'],
+  'incline-dumbbell-press': ['Banco a 30-45 grados, peso junto al pecho', 'Empuja arriba sin chocar las mancuernas'],
+  'incline-push-up': ['Baja el pecho hasta el apoyo en 3 seg', 'Empuja con el cuerpo recto'],
+  'inverted-row': ['Cuerpo recto y brazos estirados', 'Sube el pecho hasta la barra o la mesa'],
+  'kettlebell-one-legged-deadlift': ['De pie sobre una pierna, rodilla apenas flexionada', 'Cadera atras y espalda recta hasta estirar el isquio'],
+  'leg-extensions': ['Espalda pegada y rodillas a 90 grados', 'Extiende, aprieta 1 seg arriba y baja lento'],
+  'leg-press': ['Arriba, sin bloquear las rodillas', 'Baja hasta 90 grados sin despegar la lumbar'],
+  'lying-dumbbell-tricep-extension': ['Codos al techo y peso junto a la cabeza', 'Extiende moviendo solo los codos'],
+  'lying-leg-curls': ['Boca abajo y cadera pegada al banco', 'Talones al gluteo y baja lento'],
+  'machine-preacher-curls': ['Axilas en el pad y brazos casi estirados', 'Sube sin despegar los brazos del pad'],
+  'machine-shoulder-military-press': ['Manijas a la altura de los hombros', 'Empuja hasta casi extender, sin arquear'],
+  'one-arm-dumbbell-row': ['Espalda plana y brazo estirado', 'Tira hacia la cadera sin girar el torso'],
+  'plank': ['Antebrazos bajo los hombros, cuerpo recto y abdomen apretado'],
+  'preacher-curl': ['Axilas en el banco y brazos casi estirados', 'Sube sin despegar los brazos del pad'],
+  'push-ups-close-triceps-position': ['Manos juntas bajo el pecho, brazos estirados', 'Baja con los codos pegados al cuerpo'],
+  'pushups': ['Manos algo mas anchas que los hombros, cuerpo recto', 'Baja el pecho casi al piso en 3 seg'],
+  'reverse-grip-triceps-pushdown': ['Palmas arriba y codos pegados al costado', 'Extiende hasta abajo y aprieta 1 seg'],
+  'romanian-deadlift': ['Cadera atras hasta media espinilla, espalda recta', 'Sube apretando el gluteo'],
+  'seated-bent-over-rear-delt-raise': ['Torso inclinado sobre los muslos', 'Abre los brazos hasta el hombro y aprieta atras'],
+  'seated-cable-rows': ['Espalda recta y brazos estirados', 'Codos atras hasta el abdomen; junta las escapulas'],
+  'seated-calf-raise': ['Baja el talon hasta estirar 1 seg', 'Sube al maximo apretando la pantorrilla'],
+  'seated-leg-curl': ['Pad sobre los tobillos y piernas estiradas', 'Talones abajo y atras; regresa lento'],
+  'side-lateral-raise': ['Brazos a los lados, torso apenas inclinado', 'Sube con los codos hasta el hombro; baja en 2-3 seg'],
+  'side-leg-raises': ['De pie, con una mano en el apoyo', 'Sube la pierna de lado sin inclinar el torso'],
+  'single-leg-glute-bridge': ['Un pie apoyado y la otra pierna arriba', 'Empuja con el talon y aprieta el gluteo 2 seg'],
+  'smith-machine-calf-raise': ['Rodillas rectas: baja los talones y estira', 'Sube al maximo con pausa arriba'],
+  'smith-machine-squat': ['Abajo: muslo paralelo y espalda neutra', 'Sube empujando el piso; 1-2 reps en reserva'],
+  'split-squat-with-dumbbells': ['Pie de atras sobre el banco y torso recto', 'Baja vertical hasta el muslo delantero paralelo'],
+  'standing-dumbbell-triceps-extension': ['Arriba: brazos estirados, codos al techo', 'Baja detras de la cabeza hasta estirar el triceps'],
+  'standing-low-pulley-deltoid-raise': ['Sube el brazo de lado hasta el hombro', 'Baja lento, con el cable cruzando por delante'],
+  'stiff-legged-dumbbell-deadlift': ['De pie, con el peso delante de los muslos', 'Cadera atras hasta media espinilla, espalda recta'],
+  'straight-arm-dumbbell-pullover': ['Peso sobre el pecho y brazos casi rectos', 'Llevalo detras de la cabeza hasta estirar el dorsal'],
+  'straight-arm-pulldown': ['Brazos casi rectos al frente', 'Empuja la barra hasta la cadera con el dorsal'],
+  'superman': ['Boca abajo, con la mirada al piso', 'Sube pecho, brazos y piernas y sostiene 2 seg'],
+  't-bar-row-with-handle': ['Torso inclinado y fijo, brazos estirados', 'Tira al ombligo y junta las escapulas 1 seg'],
+  'thigh-abductor': ['Espalda pegada y rodillas juntas', 'Abre contra los pads con pausa de 1 seg afuera'],
+  'trap-bar-deadlift': ['Dentro de la barra, con la espalda neutra', 'Sube empujando el piso hasta quedar de pie'],
+  'tricep-dumbbell-kickback': ['Extiende el brazo atras hasta dejarlo recto', 'Codo alto y quieto: baja solo el antebrazo'],
+  'triceps-pushdown-rope-attachment': ['Codos pegados al costado, cuerda arriba', 'Empuja abajo y separa las puntas 1 seg'],
+  'walking-treadmill': ['Inclinacion 10-12% y sin agarrarte de las barras'],
+  'weighted-sissy-squat': ['De pie, agarrado a un apoyo', 'Rodillas al frente y torso atras en linea recta'],
+  'wide-grip-lat-pulldown': ['Agarre ancho y pecho arriba', 'Barra a la clavicula tirando con los codos'],
+};
+// data-bg: la tira se descarga solo al abrir el ejercicio, no al pintar el dia
+function animTag(id, nombre){
+  const a = id && ANIM[id];
+  if(!a) return '';
+  const p = PASOS[id] || [];
+  const dos = a[2] > 1;
+  return `<div class="anim ${dos?'':'una'}" data-bg="anim/${id}.jpg" role="img" aria-label="Como se hace: ${nombre}">
+    <div class="animfoto" style="max-width:${a[0]}px;aspect-ratio:${a[0]}/${a[1]};"></div>
+    ${p.length ? `<div class="animcap"><span class="p1">${dos?'<b>1</b>':''}${p[0]}</span>${dos && p[1] ? `<span class="p2"><b>2</b>${p[1]}</span>` : ''}</div>` : ''}
+  </div>`;
 }
 
 // Parte exacta del musculo que trabaja cada ejercicio, por nombre. Formato 'Zona: explicacion':
@@ -1778,12 +1989,12 @@ function exRow(e, i, ds, ssFirst){
   const dots = ds.sets[e.n].map((v,si)=>`<button class="setdot ${v?'done':''}" data-ex="${i}" data-set="${si}">${v?'v':si+1}</button>`).join('');
   const casa = CASA[e.n];
   const rem = REEMPLAZO[e.n];
-  const gifHtml = gifTag(GIFS[e.n], e.n);
+  const gifHtml = animTag(GIFS[e.n], e.n);
   const remHtml = rem ? `
         <div class="excasa exrem">
           <div class="excasatit">&#128260; Reemplazo si la maquina esta ocupada</div>
           <div class="excasanom">${rem.n}</div>
-          ${gifTag(rem.g, rem.n)}
+          ${animTag(rem.g, rem.n)}
           <div class="excasatip">${rem.t}</div>
           <div class="exremnota">Mismas series y reps. Marca las series, pero deja el kg en blanco: es otro peso y desordenaria tus sugerencias.</div>
         </div>` : '';
@@ -1793,7 +2004,7 @@ function exRow(e, i, ds, ssFirst){
         <div class="excasa">
           <div class="excasatit">&#127968; En casa, sin equipo</div>
           <div class="excasanom">${casa.n}${casa.s ? ` <span class="excasas">${casa.s}</span>` : ''}</div>
-          ${gifTag(CASA_GIFS[e.n], casa.n)}
+          ${animTag(CASA_GIFS[e.n], casa.n)}
           <div class="excasatip">${casa.t}</div>
         </div>` : '';
   // La tarjeta solo lleva lo que se usa entre series; la explicacion va en el panel
@@ -1845,7 +2056,7 @@ function renderTraining(){
   // El dia de descanso no tiene ejercicios, asi que su nota va a la vista.
   const infoHtml = `${d.note?`<div class="daynote">${d.note}</div>`:''}
       <div class="dayzonas">Hoy trabajas: <b>${[...new Set(d.ex.map(e=>ZONAS[e.n]).filter(Boolean).map(z=>z.split(':')[0]))].join('</b> &middot; <b>')}</b></div>
-      <div class="dayhint">En cada ejercicio, "Como se hace" muestra la tecnica, el gif, un reemplazo si la maquina esta ocupada y su version en casa. Sin equipo: mismas series, reps hasta quedar a 1-2 del fallo y bajadas de 3 seg.</div>`;
+      <div class="dayhint">En cada ejercicio, "Como se hace" muestra la tecnica paso a paso sobre la animacion (tocala para pausarla), un reemplazo si la maquina esta ocupada y su version en casa. Sin equipo: mismas series, reps hasta quedar a 1-2 del fallo y bajadas de 3 seg.</div>`;
   document.getElementById('daycontainer').innerHTML = `
     <div class="daycard">
       <div class="dayhead">
@@ -1898,9 +2109,14 @@ function renderTraining(){
     if(chev) chev.innerHTML = abrir ? '&#9662;' : '&#9656;';
     const ver = document.getElementById('exver-'+idx);
     if(ver) ver.innerHTML = abrir ? '&#9662; Ocultar' : '&#9656; Como se hace';
-    if(abrir) p.querySelectorAll('img[data-src]:not([src])').forEach(img=>{ img.src = img.dataset.src; });
+    if(abrir) p.querySelectorAll('.anim[data-bg]').forEach(el=>{
+      el.querySelector('.animfoto').style.backgroundImage = 'url(' + el.dataset.bg + ')';
+      el.removeAttribute('data-bg');
+    });
   };
   panelesAbiertos.forEach(k=>{ const [id, idx] = k.split(':'); if(id === d.id) mostrarPanel(idx, true); });
+  // Tocar la animacion la congela en esa foto para leer el paso con calma
+  document.querySelectorAll('#daycontainer .anim').forEach(el=>el.addEventListener('click', ()=>el.classList.toggle('pausa')));
   document.querySelectorAll('.exname[data-demo], .exver[data-demo]').forEach(el=>{
     el.addEventListener('click', ()=>{
       const clave = d.id + ':' + el.dataset.demo;
@@ -2013,6 +2229,8 @@ function renderNutri(){
     document.getElementById(fillId).style.width = Math.min(100, val/goal*100).toFixed(0)+'%';
   };
   setMacro('pVal','pFill', tot.p, GOALS.p);
+  const faltaProt = Math.round(GOALS.p - tot.p);
+  document.getElementById('pFalta').textContent = faltaProt > 0 ? 'faltan ' + faltaProt + ' g' : 'meta cumplida';
   setMacro('cVal','cFill', tot.c, GOALS.c);
   setMacro('gVal','gFill', tot.g, GOALS.g);
 
@@ -2032,9 +2250,10 @@ function renderNutri(){
   const planChips = document.getElementById('planChips');
   if(planChips){
     const nombrePlan = pc => pc.m + ' (plan): ' + pc.n;
+    const siguiente = PLAN_COMIDAS.findIndex(pc=>!nu.foods.some(f=>f.n === nombrePlan(pc)));
     planChips.innerHTML = PLAN_COMIDAS.map((pc,i)=>{
       const hecho = nu.foods.some(f=>f.n === nombrePlan(pc));
-      return `<button class="favchip ${hecho?'hecho':''}" data-pc="${i}" title="${pc.n}">${hecho?'v ':''}${pc.m}<small>${pc.kcal} kcal</small></button>`;
+      return `<button class="favchip ${hecho?'hecho':''} ${i===siguiente?'sig':''}" data-pc="${i}" title="${pc.n}">${hecho?'v ':''}${pc.m}<small>${pc.kcal} kcal</small></button>`;
     }).join('');
     planChips.querySelectorAll('.favchip').forEach(btn=>{
       btn.addEventListener('click', async ()=>{
@@ -2283,6 +2502,19 @@ document.getElementById('diaAddBtn') && document.getElementById('diaAddBtn').add
 document.getElementById('diaCancelBtn') && document.getElementById('diaCancelBtn').addEventListener('click', ()=>{
   diaDetectados = []; diaRender(); diaEstado('');
 });
+
+// Escribir, Mi dia, Foto o Codigo: una sola tarjeta, se ve solo la forma elegida
+function elegirModo(modo){
+  document.querySelectorAll('#addModos button').forEach(b=>b.classList.toggle('activo', b.dataset.modo === modo));
+  document.querySelectorAll('.addmodo').forEach(el=>{ el.style.display = el.dataset.modo === modo ? '' : 'none'; });
+  try{ localStorage.setItem('modo-comida', modo); }catch(e){}
+}
+document.querySelectorAll('#addModos button').forEach(b=>b.addEventListener('click', ()=>elegirModo(b.dataset.modo)));
+(function(){
+  let m = 'escribir';
+  try{ m = localStorage.getItem('modo-comida') || m; }catch(e){}
+  elegirModo(document.querySelector('.addmodo[data-modo="'+m+'"]') ? m : 'escribir');
+})();
 
 function num2(id){ return num(document.getElementById(id).value); }
 document.getElementById('addFoodBtn') && document.getElementById('addFoodBtn').addEventListener('click', async ()=>{
@@ -2588,6 +2820,7 @@ async function barRespaldoIA(file, motivo){
       barEstado(motivo+' La IA tampoco pudo estimarlo: agregalo a mano abajo (mira la etiqueta).', true);
       return;
     }
+    elegirModo('foto');
     fotoDetectados=detectados;
     fotoRender();
     fotoEstado('Estimado por IA desde la foto del producto: revisa los valores y pulsa "Agregar al dia".');
@@ -3531,6 +3764,8 @@ function switchView(v){
   document.getElementById('viewTrain').style.display = v==='train'?'':'none';
   document.getElementById('viewNutri').style.display = v==='nutri'?'':'none';
   document.getElementById('viewBody').style.display = v==='body'?'':'none';
+  const tips = document.querySelector('.tips');
+  if(tips) tips.style.display = v==='train'?'':'none';
   if(vtTrain) vtTrain.classList.toggle('active', v==='train');
   if(vtNutri) vtNutri.classList.toggle('active', v==='nutri');
   if(vtBody) vtBody.classList.toggle('active', v==='body');

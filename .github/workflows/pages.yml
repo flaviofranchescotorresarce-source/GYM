@@ -1,11 +1,11 @@
-# Publica la app en GitHub Pages cada vez que cambia rutina_arnold.html o un gif.
-# Solo se publica la app (como index.html) y sus gifs: ni las copias de seguridad ni el script.
+# Publica la app en GitHub Pages cada vez que cambia rutina_arnold.html o una animacion.
+# Solo se publica la app (como index.html) y sus animaciones: ni las copias de seguridad ni el script.
 name: Publicar app
 
 on:
   push:
     branches: [mainbkb]
-    paths: ['rutina_arnold.html', 'gifs/**', '.github/workflows/pages.yml']
+    paths: ['rutina_arnold.html', 'anim/**', '.github/workflows/pages.yml']
   workflow_dispatch:
 
 permissions:
@@ -29,8 +29,8 @@ jobs:
         run: |
           mkdir _site
           cp rutina_arnold.html _site/index.html
-          mkdir _site/gifs
-          cp gifs/*.gif _site/gifs/
+          mkdir _site/anim
+          cp anim/*.jpg _site/anim/
           touch _site/.nojekyll
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
